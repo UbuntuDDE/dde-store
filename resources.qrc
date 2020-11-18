@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>resources/settings.json</file>
-        <file>resources/featuredapps.json</file>
         <file>resources/featuredbanners.json</file>
         <file>resources/banners/firefox.jpg</file>
         <file>resources/banners/kdenlive.jpg</file>
