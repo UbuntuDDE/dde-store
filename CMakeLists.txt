@@ -1,0 +1,72 @@
+cmake_minimum_required(VERSION 3.0)
+
+project(dde-store)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_CCX_STANDARD 11)
+set(CMAKE_CCX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
+find_package(PkgConfig REQUIRED)
+find_package(Qt5 REQUIRED Core Widgets Network DBus Gui)
+find_package(Dtk REQUIRED Widget Gui)
+find_package(PackageKitQt5 REQUIRED)
+find_package(AppStreamQt REQUIRED)
+find_package(PkgConfig REQUIRED)
+include(FindPkgConfig)
+
+include_directories(
+    ${PackageKitQt5_INCLUDE_DIR}
+    ${AppStreamQt_INCLUDE_DIRS}
+)
+
+add_executable(dde-store
+    main.cpp
+    mainwindow.cpp
+    mainwindow.h
+    pages/homepage.cpp
+    pages/homepage.h
+    pages/itempage.cpp
+    pages/itempage.h
+    pages/categorypage.cpp
+    pages/categorypage.h
+    pages/updatespage.cpp
+    pages/updatespage.h
+    backend/appstreamhelper.cpp
+    backend/appstreamhelper.h
+    backend/packagekithelper.cpp
+    backend/packagekithelper.h 
+    backend/ratingshelper.cpp
+    backend/ratingshelper.h
+    backend/settings.cpp
+    backend/settings.h
+    widgets/gallery.cpp
+    widgets/gallery.h
+    widgets/stars.cpp
+    widgets/stars.h
+    widgets/list.cpp
+    widgets/list.h
+    resources.qrc
+)
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+    ${PackageKitQt5_INCLUDE_DIR}
+    ${AppStreamQt_INCLUDE_DIRS}
+)
+
+target_link_libraries(${PROJECT_NAME}
+    ${DtkWidget_LIBRARIES}
+    ${DtkCore_LIBRARIES}
+    ${DtkGui_LIBRARIES}
+    ${Qt5Widgets_LIBRARIES}
+    ${Qt5Network_LIBRARIES}
+    ${PackageKitQt5_LIBRARIES}
+    AppStreamQt
+)
+
+set(CMAKE_INSTALL_PREFIX /usr)
+
+install(TARGETS dde-store DESTINATION bin)
+install(FILES dde-store.desktop DESTINATION share/applications)

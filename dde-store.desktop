@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=DDE Store
+Comment=An app store for DDE built with DTK
+Icon=deepin-app-store
+Exec=/usr/bin/dde-store
+Terminal=false
+Type=Application

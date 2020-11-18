@@ -1,0 +1,61 @@
+{
+    "groups": [
+        {
+            "key": "basic",
+            "name": "Basic",
+            "groups": [
+                {
+                    "key": "view",
+                    "name": "View",
+                    "options": [
+                        {
+                            "key": "nonapps",
+                            "name": "Show non-app updates as",
+                            "type": "combobox",
+                            "items": ["\"System Updates\"","Individual Packages"],
+                            "default": 0
+                        },
+                        {
+                            "key": "maxitems",
+                            "name": "Max apps per list",
+                            "type": "spinbutton",
+                            "min": 20,
+                            "max": 100,
+                            "default": 50
+                        }
+                    ]
+                },
+                {
+                    "key": "notifications",
+                    "name": "Notifications",
+                    "options": [
+                        {
+                            "key": "install",
+                            "name": "App installed",
+                            "type": "switchbutton",
+                            "default": true
+                        },
+                        {
+                            "key": "uninstall",
+                            "name": "App uninstalled",
+                            "type": "switchbutton",
+                            "default": true
+                        },
+                        {
+                            "key": "availableupdates",
+                            "name": "Available updates",
+                            "type": "switchbutton",
+                            "default": true
+                        },
+                        {
+                            "key": "finishedupdates",
+                            "name": "Finished updates",
+                            "type": "switchbutton",
+                            "default": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
