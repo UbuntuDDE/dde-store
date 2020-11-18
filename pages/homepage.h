@@ -2,6 +2,7 @@
 #define HOMEPAGE_H
 
 #include <QWidget>
+#include <QVBoxLayout>
 #include "mainwindow.h"
 
 class HomePage : public QWidget
@@ -10,6 +11,9 @@ class HomePage : public QWidget
 
 public:
     HomePage(MainWindow *parent);
+private:
+    void addCategory(QString name, QString category, MainWindow *parent);
+    QVBoxLayout *layout;
 };
 
 #endif // HOMEPAGE_H
