@@ -124,3 +124,15 @@ bool AppStreamHelper::hasAppData(QString package)
         return false;
     }
 }
+
+QString AppStreamHelper::packageFromID(QString ID)
+{
+    QString package = QString();
+    for (const QString &key : appList.keys()) {
+        AppStream::Component component = appList.value(key);
+        if (component.id() == ID) {
+            package = key;
+        }
+    }
+    return package;
+}

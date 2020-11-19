@@ -36,10 +36,14 @@ HomePage::HomePage(MainWindow *parent)
     bannerFile.open(QIODevice::ReadOnly | QIODevice::Text);
     QJsonObject bannerData = QJsonDocument::fromJson(bannerFile.readAll()).object();
     QList<QPixmap> bannerImages;
+    QStringList bannerApps;
     for (const QString &key : bannerData.keys()) {
-        bannerImages << QPixmap(bannerData.value(key).toString());
+        if (!AppStreamHelper::instance()->packageFromID(key).isEmpty()) {
+            bannerImages << QPixmap(bannerData.value(key).toString());
+            bannerApps << AppStreamHelper::instance()->packageFromID(key);
+        }
     }
-    gallery *featuredGallery = new gallery(bannerImages, bannerData.keys(), parent);
+    gallery *featuredGallery = new gallery(bannerImages, bannerApps, parent);
     layout->addWidget(featuredGallery);
 
     connect(RatingsHelper::instance(), &RatingsHelper::fetched, this, [ = ] {

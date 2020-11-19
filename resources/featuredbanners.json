@@ -1,5 +1,5 @@
 {
-    "firefox": "://resources/banners/firefox.jpg",
-    "kdenlive": "://resources/banners/kdenlive.jpg",
-    "gimp": "://resources/banners/gimp.jpg"
+    "firefox.desktop": "://resources/banners/firefox.jpg",
+    "org.kde.kdenlive.desktop": "://resources/banners/kdenlive.jpg",
+    "org.gimp.GIMP": "://resources/banners/gimp.jpg"
 }

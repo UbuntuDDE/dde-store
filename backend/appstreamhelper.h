@@ -31,6 +31,7 @@ public:
     QStringList category(QString category);
     QStringList search(QString query);
     bool hasAppData(QString package);
+    QString packageFromID(QString ID);
 private:
     static AppStreamHelper *currentInstance;
     AppStreamHelper();
