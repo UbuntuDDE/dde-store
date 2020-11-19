@@ -117,6 +117,13 @@ void MainWindow::initNav()
                 }
             }
             stackedWidget->setCurrentIndex(navView->currentIndex().row());
+        } else {
+            if (previous.row() != -1) {
+                auto selectedItem = navModel->itemFromIndex(previous);
+                if (DGuiApplicationHelper::instance()->themeType() == DGuiApplicationHelper::LightType) {
+                    selectedItem->setIcon(QIcon("://resources/icons/light/" + pageIcons.value(selectedItem->text())));
+                }
+            }
         }
     });
 
@@ -164,10 +171,6 @@ void MainWindow::openItem(QString app)
         stackedWidget->addWidget(widget);
         stackedWidget->setCurrentWidget(widget);
         itemPageList.insert(app, widget);
-    }
-    auto currentItem = navModel->itemFromIndex(navView->currentIndex());
-    if (DGuiApplicationHelper::instance()->themeType() == DGuiApplicationHelper::LightType) {
-        currentItem->setIcon(QIcon("://resources/icons/light/" + pageIcons.value(currentItem->text())));
     }
     navView->setCurrentIndex(QModelIndex());
     navView->clearSelection();
