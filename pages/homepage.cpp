@@ -56,6 +56,8 @@ HomePage::HomePage(MainWindow *parent)
 
 void HomePage::addCategory(QString name, QString category, MainWindow *parent)
 {
+    categories << category;
+
     QStringList appList = AppStreamHelper::instance()->category(category);
     QMultiMap<double, QString> map;
     appList.sort();
@@ -72,10 +74,12 @@ void HomePage::addCategory(QString name, QString category, MainWindow *parent)
     list->listView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     list->listView->setFixedHeight(168);
     list->listView->verticalScrollBar()->setEnabled(false);
+    list->listView->verticalScrollBar()->setVisible(false);
     list->listView->setOrientation(QListView::LeftToRight, true);
     
     DSuggestButton *moreBtn = new DSuggestButton("View More");
     connect(moreBtn, &DSuggestButton::clicked, this, [ = ] {
+        parent->navView->setCurrentIndex(parent->navModel->index(categories.indexOf(category) + 1, 0));
     });
     list->addHeaderWidget(moreBtn);
 

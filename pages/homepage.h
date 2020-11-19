@@ -14,6 +14,7 @@ public:
 private:
     void addCategory(QString name, QString category, MainWindow *parent);
     QVBoxLayout *layout;
+    QStringList categories;
 };
 
 #endif // HOMEPAGE_H
