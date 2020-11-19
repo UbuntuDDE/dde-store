@@ -18,6 +18,9 @@ private:
     static RatingsHelper *currentInstance;
     RatingsHelper();
     QHash<QString, QJsonObject> ratingsList;
+
+signals:
+    void fetched();
 };
 
 #endif // RATINGSHELPER_H

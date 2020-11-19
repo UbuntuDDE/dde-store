@@ -27,6 +27,7 @@ RatingsHelper::RatingsHelper()
         for (const QString &key : array.keys()) {
             ratingsList.insert(key, array.value(key).toObject());
         }
+        emit(fetched());
     });
 }
 

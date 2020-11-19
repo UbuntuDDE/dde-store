@@ -42,16 +42,17 @@ HomePage::HomePage(MainWindow *parent)
     gallery *featuredGallery = new gallery(bannerImages, bannerData.keys(), parent);
     layout->addWidget(featuredGallery);
 
-    addCategory("Messaging", "InstantMessaging", parent);
-    addCategory("Internet", "Network", parent);
-    addCategory("Games", "Game", parent);
-    addCategory("Development", "Development", parent);
-    addCategory("Office", "Office", parent);
-    addCategory("Graphics", "Graphics", parent);
-    addCategory("Video", "Video", parent);
-    addCategory("Music", "Music", parent);
-    addCategory("System", "System", parent);
-
+    connect(RatingsHelper::instance(), &RatingsHelper::fetched, this, [ = ] {
+        addCategory("Messaging", "InstantMessaging", parent);
+        addCategory("Internet", "Network", parent);
+        addCategory("Games", "Game", parent);
+        addCategory("Development", "Development", parent);
+        addCategory("Office", "Office", parent);
+        addCategory("Graphics", "Graphics", parent);
+        addCategory("Video", "Video", parent);
+        addCategory("Music", "Music", parent);
+        addCategory("System", "System", parent);
+    });
 }
 
 void HomePage::addCategory(QString name, QString category, MainWindow *parent)
