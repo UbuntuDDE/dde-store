@@ -5,6 +5,9 @@
 #include "pages/categorypage.h"
 #include "pages/itempage.h"
 #include "pages/updatespage.h"
+#include <Daemon>
+
+using namespace PackageKit;
 
 class PackageKitHelper : public QObject
 {
@@ -22,6 +25,8 @@ public:
     bool preventClose = false;
 private:
     static PackageKitHelper *currentInstance;
+private slots:
+    void error(Transaction::Error err, const QString &error);
 };
 
 #endif // PACKAGEKITHEPLER_H

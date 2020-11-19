@@ -1,15 +1,16 @@
 #include "backend/packagekithelper.h"
 #include "backend/appstreamhelper.h"
 #include "backend/settings.h"
-#include <Daemon>
 #include <Details>
 #include <QLocale>
 #include <QStandardPaths>
 #include <QProcess>
 #include <QDebug>
 #include <DNotifySender>
+#include <DDialog>
+#include <DStyle>
 
-using namespace PackageKit;
+DWIDGET_USE_NAMESPACE
 
 PackageKitHelper *PackageKitHelper::currentInstance = nullptr;
 
@@ -25,6 +26,8 @@ void PackageKitHelper::getInstalled(CategoryPage *parent)
 {
     QStringList *pkgList = new QStringList;
     Transaction *transaction = Daemon::getPackages(Transaction::FilterInstalled | Transaction::FilterApplication);
+
+    connect(transaction, &Transaction::errorCode, this, &PackageKitHelper::error);
 
     connect(transaction, &Transaction::package, this, [ = ] (Transaction::Info, const QString &packageId) {
         pkgList->append(Transaction::packageName(packageId));
@@ -42,6 +45,7 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent)
     connect(getupdates, &Transaction::package, this, [ = ] (Transaction::Info, const QString &packageId) {
         pkgList->append(packageId);
     });
+    connect(getupdates, &Transaction::errorCode, this, &PackageKitHelper::error);
     connect(getupdates, &Transaction::finished, this, [ = ] {
         QHash<QString, int> *apps = new QHash<QString, int>;
         
@@ -49,6 +53,7 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent)
         connect(getdetails, &Transaction::details, this, [ = ] (const Details &details) {
             apps->insert(Transaction::packageName(details.packageId()), details.size());
         });
+        connect(getdetails, &Transaction::errorCode, this, &PackageKitHelper::error);
         connect(getdetails, &Transaction::finished, this, [ = ] {
             if (apps->count() != 0 && settings::instance()->notifyAvailableUpdates()) {
                 Dtk::Core::DUtil::DNotifySender(QString("Updates Available")).appIcon("system-updated").call();
@@ -61,6 +66,7 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent)
 void PackageKitHelper::launch(QString packageId)
 {
     Transaction *transaction = Daemon::getFiles(packageId);
+    connect(transaction, &Transaction::errorCode, this, &PackageKitHelper::error);
     connect(transaction, &Transaction::files, this, [ = ] (const QString &, const QStringList &files) {
         AppStreamHelper::appData AppStreamData = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
         QStringList paths = QStandardPaths::locateAll(QStandardPaths::ApplicationsLocation, AppStreamData.id);
@@ -73,6 +79,7 @@ void PackageKitHelper::launch(QString packageId)
 void PackageKitHelper::itemPageData(ItemPage *parent, QString package)
 {
     Transaction *resolve = Daemon::resolve(package);
+    connect(resolve, &Transaction::errorCode, this, &PackageKitHelper::error);
     connect(resolve, &Transaction::package, this, [ = ] (Transaction::Info info, const QString &packageId) {
         if (info == Transaction::InfoAvailable) {
             Transaction *getdetails = Daemon::getDetails(packageId);
@@ -80,8 +87,10 @@ void PackageKitHelper::itemPageData(ItemPage *parent, QString package)
                 QLocale locale;
                 parent->setInstallButton(packageId, "notinstalled", locale.formattedDataSize(details.size()));
             });
+            connect(getdetails, &Transaction::errorCode, this, &PackageKitHelper::error);
         } else if (info == Transaction::InfoInstalled) {
             Transaction *getfiles = Daemon::getFiles(packageId);
+            connect(getfiles, &Transaction::errorCode, this, &PackageKitHelper::error);
             connect(getfiles, &Transaction::files, this, [ = ] (const QString &, const QStringList &files) {
                     AppStreamHelper::appData AppStreamData = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
                     QStringList paths = QStandardPaths::locateAll(QStandardPaths::ApplicationsLocation, AppStreamData.id);
@@ -104,6 +113,7 @@ void PackageKitHelper::install(ItemPage *parent, QString packageId)
             parent->setInstallButton(packageId, "installing", QString::number(transaction->percentage()));
         }
     });
+    connect(transaction, &Transaction::errorCode, this, &PackageKitHelper::error);
     connect(transaction, &Transaction::finished, this, [ = ] {
         if (settings::instance()->notifyInstall()) {
             AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
@@ -123,6 +133,7 @@ void PackageKitHelper::uninstall(ItemPage *parent, QString packageId)
             parent->setInstallButton(packageId, "installing", QString::number(transaction->percentage()));
         }
     });
+    connect(transaction, &Transaction::errorCode, this, &PackageKitHelper::error);
     connect(transaction, &Transaction::finished, this, [ = ] {
         if (settings::instance()->notifyUninstall()) {
             AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
@@ -140,6 +151,7 @@ void PackageKitHelper::update(UpdatesPage *parent)
     connect(getupdates, &Transaction::package, this, [ = ] (Transaction::Info info, const QString &packageId) {
         packages->append(packageId);
     });
+    connect(getupdates, &Transaction::errorCode, this, &PackageKitHelper::error);
     connect(getupdates, &Transaction::finished, this, [ = ] {
         Transaction *update = Daemon::updatePackages(*packages);
         preventClose = true;
@@ -148,9 +160,7 @@ void PackageKitHelper::update(UpdatesPage *parent)
                 parent->updatePercent(Transaction::packageName(packageId), percent);
             }
         });
-        connect(update, &Transaction::errorCode, this, [ = ] (PackageKit::Transaction::Error err, const QString& error) {
-            qDebug() << err << error;
-        });
+        connect(update, &Transaction::errorCode, this, &PackageKitHelper::error);
         connect(update, &Transaction::finished, this, [ = ] {
             getUpdates(parent);
             if (settings::instance()->notifyFinishedUpdates()) {
@@ -159,4 +169,13 @@ void PackageKitHelper::update(UpdatesPage *parent)
             preventClose = false;
         });
     });
+}
+
+void PackageKitHelper::error(Transaction::Error err, const QString &error)
+{
+    qDebug() << "ERROR:" << err << error;
+    DDialog dialog("Error", QString(err) + " - " + error);
+    dialog.setIcon(DStyle().standardIcon(QStyle::SP_MessageBoxCritical));
+    dialog.addButton("OK");
+    dialog.exec();
 }
