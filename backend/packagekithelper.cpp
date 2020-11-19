@@ -6,6 +6,7 @@
 #include <QLocale>
 #include <QStandardPaths>
 #include <QProcess>
+#include <QDebug>
 #include <DNotifySender>
 
 using namespace PackageKit;
