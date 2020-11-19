@@ -99,7 +99,8 @@ void ItemPage::setInstallButton(QString packageId, QString type, QString param)
         installBtn->show();
         installBtn->setDisabled(false);
         installBtn->setText(QString("Install (%1)").arg(param));
-        connect (installBtn, &DSuggestButton::clicked, this, [ = ] {
+        installBtn->disconnect(this);
+        connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
             PackageKitHelper::instance()->install(this, packageId);
         });
     } else if (type == "launchable") {
@@ -107,6 +108,7 @@ void ItemPage::setInstallButton(QString packageId, QString type, QString param)
         installBtn->show();
         installBtn->setDisabled(false);
         installBtn->setText("Open");
+        installBtn->disconnect(this);
         connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
             PackageKitHelper::instance()->launch(packageId);
         });
