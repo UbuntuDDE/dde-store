@@ -173,8 +173,8 @@ void PackageKitHelper::update(UpdatesPage *parent)
 
 void PackageKitHelper::error(Transaction::Error err, const QString &error)
 {
-    qDebug() << "ERROR:" << err << error;
-    DDialog dialog("Error", QString(err) + " - " + error);
+    qDebug() << "PackageKit Error:" << err << error;
+    DDialog dialog("PackageKit Error", QString(QMetaEnum::fromType<Transaction::Error>().valueToKey(err)) + "<br>" + error);
     dialog.setIcon(DStyle().standardIcon(QStyle::SP_MessageBoxCritical));
     dialog.addButton("OK");
     dialog.exec();
