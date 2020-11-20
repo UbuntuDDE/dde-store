@@ -7,7 +7,6 @@
 #include "pages/categorypage.h"
 #include <DTitlebar>
 #include <DSearchEdit>
-#include <DButtonBox>
 #include <DSettingsDialog>
 #include <DDialog>
 #include <QHBoxLayout>
@@ -37,13 +36,33 @@ void MainWindow::initTitlebar()
     DTitlebar *titlebar = this->titlebar();
     titlebar->setIcon(QIcon::fromTheme("deepin-app-store"));
 
-    DButtonBoxButton *backButton = new DButtonBoxButton(DStyle::SP_ArrowLeave);
+    backButton = new DButtonBoxButton(DStyle::SP_ArrowLeave);
     backButton->setDisabled(true);
     backButton->setFixedSize(36, 36);
+    connect(backButton, &DButtonBoxButton::clicked, this, [ = ] {
+        pageHistoryIndex -= 1;
+        buttonNavigated = true;
+        stackedWidget->setCurrentWidget(pageHistory[pageHistoryIndex]);
+        if (pageHistory[pageHistoryIndex]->objectName() != "ItemPage") {
+            navView->setCurrentIndex(navModel->index(stackedWidget->indexOf(pageHistory[pageHistoryIndex]), 0));
+        }
+        pageHistoryIndex -= 1;
+        pageHistory.removeLast();
+    });
 
-    DButtonBoxButton *forwardButton = new DButtonBoxButton(DStyle::SP_ArrowEnter);
+    forwardButton = new DButtonBoxButton(DStyle::SP_ArrowEnter);
     forwardButton->setDisabled(true);
     forwardButton->setFixedSize(36, 36);
+    connect(forwardButton, &DButtonBoxButton::clicked, this, [ = ] {
+        pageHistoryIndex += 1;
+        buttonNavigated = true;
+        stackedWidget->setCurrentWidget(pageHistory[pageHistoryIndex]);
+        if (pageHistory[pageHistoryIndex]->objectName() != "ItemPage") {
+            navView->setCurrentIndex(navModel->index(stackedWidget->indexOf(pageHistory[pageHistoryIndex]), 0));
+        }
+        pageHistoryIndex -= 1;
+        pageHistory.removeLast();
+    });
 
     QList<DButtonBoxButton *> buttonList;
     buttonList << backButton << forwardButton;
@@ -124,6 +143,33 @@ void MainWindow::initNav()
                     selectedItem->setIcon(QIcon("://resources/icons/light/" + pageIcons.value(selectedItem->text())));
                 }
             }
+        }
+        
+        pageHistory << stackedWidget->currentWidget();
+        pageHistoryIndex += 1;
+        
+        if (!buttonNavigated) {
+            if (pageHistoryIndex != pageHistory.length() - 1) {
+                for (int i = 0; i < pageHistory.length() - pageHistoryIndex + 1; i++) {
+                    pageHistory.removeLast();
+                }
+                pageHistory << stackedWidget->currentWidget();
+                pageHistoryIndex = pageHistory.length() - 1;
+            }
+        } else {
+            buttonNavigated = false;
+        }
+
+        if (navView->currentIndex().row() == 0) {
+            backButton->setDisabled(true);
+        } else {
+            backButton->setDisabled(false);
+        }
+
+        if (pageHistoryIndex != pageHistory.length() - 1) {
+            forwardButton->setDisabled(false);
+        } else {
+            forwardButton->setDisabled(true);
         }
     });
 

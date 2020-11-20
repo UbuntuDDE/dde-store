@@ -3,6 +3,7 @@
 
 #include <DMainWindow>
 #include <DListView>
+#include <DButtonBox>
 #include <QStackedWidget>
 #include <QKeyEvent>
 #include "pages/itempage.h"
@@ -28,6 +29,11 @@ private:
     QHash<QString, QString> pageIcons;
     QHash<QString, ItemPage*> itemPageList;
     DViewItemAction *updateIndicator;
+    QList<QWidget*> pageHistory;
+    int pageHistoryIndex = -1;
+    DButtonBoxButton *backButton;
+    DButtonBoxButton *forwardButton;
+    bool buttonNavigated = false;
     
 protected Q_SLOTS:
     void closeEvent(QCloseEvent *event);
