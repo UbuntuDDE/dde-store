@@ -50,7 +50,7 @@ gallery::gallery(QList<QUrl> imageList)
     changeImage(0);
 }
 
-gallery::gallery(QList<QPixmap> imageList, QStringList appList, MainWindow *parent)
+gallery::gallery(QList<QPair<QPixmap, QString>> imageList, MainWindow *parent)
 {
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setAlignment(Qt::AlignTop);
@@ -59,8 +59,7 @@ gallery::gallery(QList<QPixmap> imageList, QStringList appList, MainWindow *pare
     QWidget *widget = new QWidget;
     layout->addWidget(widget);
     widget->setLayout(widgetLayout);
-    localImages = imageList;
-    apps = appList;
+    banners = imageList;
     mainwindow = parent;
 
     widgetLayout->addStretch();
@@ -91,14 +90,14 @@ gallery::gallery(QList<QPixmap> imageList, QStringList appList, MainWindow *pare
     widgetLayout->addStretch();
 
     pageIndicator = new DPageIndicator;
-    pageIndicator->setPageCount(localImages.length());
+    pageIndicator->setPageCount(banners.length());
     layout->addWidget(pageIndicator);
 
     changeLocalImage(0);
 
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, [ = ] {
-        if (localImages.length() - 1 == currentImage) {
+        if (banners.length() - 1 == currentImage) {
             changeLocalImage(0);
         } else {
             changeLocalImage(currentImage + 1);
@@ -109,21 +108,21 @@ gallery::gallery(QList<QPixmap> imageList, QStringList appList, MainWindow *pare
 
 void gallery::changeLocalImage(int index)
 {
-    if (localImages.length() != 1) {
+    if (banners.length() != 1) {
         backButton->setDisabled(false);
         forwardButton->setDisabled(false);
     }
     
     if (index == 0) {
         backButton->setDisabled(true);
-    } else if (index == localImages.length() - 1) {
+    } else if (index == banners.length() - 1) {
         forwardButton->setDisabled(true);
     }
 
     currentImage = index;
     pageIndicator->setCurrentPage(index);
 
-    imageView->setPixmap(localImages[index].scaled(QSize(600, 450), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    imageView->setPixmap(banners[index].first.scaled(QSize(600, 450), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 void gallery::changeImage(int index)
@@ -181,8 +180,8 @@ void gallery::changeImage(int index)
 
 bool gallery::eventFilter(QObject *object, QEvent *event)
 {
-    if (object == imageView && !apps.isEmpty() && event->type() == QEvent::MouseButtonRelease) {
-        mainwindow->openItem(apps[currentImage]);
+    if (object == imageView && !banners.isEmpty() && event->type() == QEvent::MouseButtonRelease) {
+        mainwindow->openItem(banners[currentImage].second);
     }
     return QObject::eventFilter(object, event);
 }

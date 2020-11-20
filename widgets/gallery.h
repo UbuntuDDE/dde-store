@@ -18,7 +18,7 @@ class gallery : public QWidget
 
 public:
     gallery(QList<QUrl> imageList);
-    gallery(QList<QPixmap> imageList, QStringList appList, MainWindow *parent);
+    gallery(QList<QPair<QPixmap, QString>> imageList, MainWindow *parent);
 
 private:
     QLabel *imageView;
@@ -26,8 +26,7 @@ private:
     void changeImage(int index);
     void changeLocalImage(int index);
     QList<QUrl> images;
-    QList<QPixmap> localImages;
-    QStringList apps;
+    QList<QPair<QPixmap, QString>> banners;
     DIconButton *backButton;
     DIconButton *forwardButton;
     DSpinner *spinner;

@@ -35,15 +35,16 @@ HomePage::HomePage(MainWindow *parent)
     QFile bannerFile("://resources/featuredbanners.json");
     bannerFile.open(QIODevice::ReadOnly | QIODevice::Text);
     QJsonObject bannerData = QJsonDocument::fromJson(bannerFile.readAll()).object();
-    QList<QPixmap> bannerImages;
-    QStringList bannerApps;
+    QList<QPair<QPixmap, QString>> banners;
     for (const QString &key : bannerData.keys()) {
         if (!AppStreamHelper::instance()->packageFromID(key).isEmpty()) {
-            bannerImages << QPixmap(bannerData.value(key).toString());
-            bannerApps << AppStreamHelper::instance()->packageFromID(key);
+            QPair<QPixmap, QString> banner;
+            banner.first = QPixmap(bannerData.value(key).toString());
+            banner.second = AppStreamHelper::instance()->packageFromID(key);
+            banners << banner;
         }
     }
-    gallery *featuredGallery = new gallery(bannerImages, bannerApps, parent);
+    gallery *featuredGallery = new gallery(banners, parent);
     layout->addWidget(featuredGallery);
 
     addCategory("Messaging", "InstantMessaging", parent);
