@@ -5,6 +5,10 @@
         <file>resources/banners/firefox.jpg</file>
         <file>resources/banners/kdenlive.jpg</file>
         <file>resources/banners/gimp.jpg</file>
+        <file>resources/banners/inkscape.jpg</file>
+        <file>resources/banners/krita.jpg</file>
+        <file>resources/banners/vlc.jpg</file>
+        <file>resources/banners/audacity.jpg</file>
         <file>resources/icons/star.png</file>
         <file>resources/icons/starhalf.png</file>
         <file>resources/icons/indicator.svg</file>

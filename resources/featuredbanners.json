@@ -1,5 +1,9 @@
 {
     "firefox.desktop": "://resources/banners/firefox.jpg",
     "org.kde.kdenlive.desktop": "://resources/banners/kdenlive.jpg",
-    "org.gimp.GIMP": "://resources/banners/gimp.jpg"
+    "org.gimp.GIMP": "://resources/banners/gimp.jpg",
+    "org.inkscape.Inkscape": "://resources/banners/inkscape.jpg",
+    "org.kde.krita": "://resources/banners/krita.jpg",
+    "org.videolan.vlc": "://resources/banners/vlc.jpg",
+    "audacity.desktop": "://resources/banners/audacity.jpg"
 }
