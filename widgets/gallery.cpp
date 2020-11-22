@@ -122,7 +122,7 @@ void gallery::changeLocalImage(int index)
     currentImage = index;
     pageIndicator->setCurrentPage(index);
 
-    imageView->setPixmap(banners[index].first.scaled(QSize(600, 450), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    imageView->setPixmap(banners[index].first.scaled(imageView->width(), imageView->width() * 9/16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 void gallery::changeImage(int index)
@@ -172,7 +172,7 @@ void gallery::changeImage(int index)
                 changeImage(0);
             }
         } else {
-            imageView->setPixmap(pixmap.scaled(QSize(600, 450), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            imageView->setPixmap(pixmap.scaled(imageView->width(), imageView->width() * 9/16, Qt::AspectRatioMode::KeepAspectRatio, Qt::SmoothTransformation));
             imageView->show();
         }
     });
