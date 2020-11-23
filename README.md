@@ -33,6 +33,15 @@ sudo pacman -S dde-store
 - libpackagekitqt5-dev
 - libappstreamqt-dev
 
+**Building on Ubuntu**
+
+To build on Ubuntu, the UbuntuDDE PPA is needed because `libdtkgui-dev` is unavailable on the main repos.
+```
+sudo add-apt-repository ppa:ubuntudde-dev/stable
+sudo apt-get update
+```
+
+**Building**
 ```
 git clone https://github.com/dekzi/dde-store.git
 cd dde-store
