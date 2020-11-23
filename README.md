@@ -18,6 +18,11 @@ sudo apt-get update
 sudo apt-get install dde-store
 ```
 
+### Arch/Manjaro (AUR)
+```
+sudo pacman -S dde-store
+```
+
 ### Building from source
 **Dependencies (Ubuntu)**
 - cmake
