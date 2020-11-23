@@ -9,20 +9,22 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(0, 0, 0, 0);
     this->setLayout(layout);
-    list = new List("Updates");
-    list->setEmptyText("Up to date!");
+    list = new List(tr("Updates"));
+    list->setEmptyText(tr("Up to date"));
+
+    systemUpdatesItem = tr("System Updates");
 
     mainwindow = parent;
 
     connect(list, &List::currentItemChanged, this, [ = ] (QString package) {
-        if (package == "System Updates") {
+        if (package == systemUpdatesItem) {
             systemUpdatesPopup->exec();
         } else {
             parent->openItem(package);
         }
     });
 
-    updateButton = new DSuggestButton("Update All");
+    updateButton = new DSuggestButton(tr("Update All"));
     updateButton->setDisabled(true);
     list->addHeaderWidget(updateButton);
 
@@ -45,10 +47,10 @@ void UpdatesPage::loadData(QHash<QString, int> apps)
 
     connect(updateButton, &DSuggestButton::clicked, this, [ = ] {
         updateButton->setDisabled(true);
-        updateButton->setText("Updating...");
+        updateButton->setText(tr("Updating..."));
         PackageKitHelper::instance()->update(this);
     });
-    updateButton->setText(QString("Update All (%1)").arg(locale.formattedDataSize(totalSize)));
+    updateButton->setText(tr("Update All (%1)").arg(locale.formattedDataSize(totalSize)));
     updateButton->setDisabled(false);
 
     if (apps.size() == 0) {
@@ -77,12 +79,12 @@ void UpdatesPage::loadData(QHash<QString, int> apps)
     }
 
     if (systemUpdates.length() > 0) {
-        list->addItem("System Updates", QIcon::fromTheme("application-x-executable"));
+        list->addItem(systemUpdatesItem, QIcon::fromTheme("application-x-executable"));
         QString popupText;
         for (QString app : systemUpdates) {
             popupText.append("<br><b>" + app + "</b> - " + locale.formattedDataSize(apps.value(app)));
         }
-        systemUpdatesPopup = new DDialog("System Updates", popupText);
+        systemUpdatesPopup = new DDialog(systemUpdatesItem, popupText);
         systemUpdatesPopup->setIcon(style()->standardIcon(QStyle::SP_MessageBoxInformation));
     }
 
@@ -94,6 +96,6 @@ void UpdatesPage::updatePercent(QString package, uint percent)
     if (appUpdates.contains(package)) {
         list->editItemText(package, QString::number(percent) + "%");
     } else {
-        list->editItemText("System Updates", QString::number(percent) + "%");
+        list->editItemText(systemUpdatesItem, QString::number(percent) + "%");
     }
 }

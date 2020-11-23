@@ -10,7 +10,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 find_package(PkgConfig REQUIRED)
-find_package(Qt5 REQUIRED Core Widgets Network DBus Gui)
+find_package(Qt5 REQUIRED Core Widgets Network DBus Gui LinguistTools)
 find_package(Dtk REQUIRED Widget Gui)
 find_package(PackageKitQt5 REQUIRED)
 find_package(AppStreamQt REQUIRED)
@@ -21,6 +21,9 @@ include_directories(
     ${PackageKitQt5_INCLUDE_DIR}
     ${AppStreamQt_INCLUDE_DIRS}
 )
+
+file(GLOB TS_FILES ./translations/*.ts)
+qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 
 add_executable(dde-store
     main.cpp
@@ -49,6 +52,8 @@ add_executable(dde-store
     widgets/list.cpp
     widgets/list.h
     resources.qrc
+    ${TS_FILES}
+    ${QM_FILES}
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -69,4 +74,5 @@ target_link_libraries(${PROJECT_NAME}
 set(CMAKE_INSTALL_PREFIX /usr)
 
 install(TARGETS dde-store DESTINATION bin)
+install(FILES ${QM_FILES} DESTINATION share/dde-store/translations)
 install(FILES dde-store.desktop DESTINATION share/applications)

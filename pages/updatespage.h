@@ -23,6 +23,7 @@ private:
     QStringList systemUpdates;
     DSuggestButton *updateButton;
     MainWindow *mainwindow;
+    QString systemUpdatesItem;
 };
 
 #endif // UPDATEVIEW_H

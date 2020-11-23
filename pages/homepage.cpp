@@ -47,15 +47,15 @@ HomePage::HomePage(MainWindow *parent)
     gallery *featuredGallery = new gallery(banners, parent);
     layout->addWidget(featuredGallery);
 
-    addCategory("Messaging", "InstantMessaging", parent);
-    addCategory("Internet", "Network", parent);
-    addCategory("Games", "Game", parent);
-    addCategory("Development", "Development", parent);
-    addCategory("Office", "Office", parent);
-    addCategory("Graphics", "Graphics", parent);
-    addCategory("Video", "Video", parent);
-    addCategory("Music", "Music", parent);
-    addCategory("System", "System", parent);
+    addCategory(tr("Messaging"), "InstantMessaging", parent);
+    addCategory(tr("Internet"), "Network", parent);
+    addCategory(tr("Games"), "Game", parent);
+    addCategory(tr("Development"), "Development", parent);
+    addCategory(tr("Office"), "Office", parent);
+    addCategory(tr("Graphics"), "Graphics", parent);
+    addCategory(tr("Video"), "Video", parent);
+    addCategory(tr("Music"), "Music", parent);
+    addCategory(tr("System"), "System", parent);
 }
 
 void HomePage::addCategory(QString name, QString category, MainWindow *parent)
@@ -88,7 +88,7 @@ void HomePage::addCategory(QString name, QString category, MainWindow *parent)
         list->load();
     });
     
-    DSuggestButton *moreBtn = new DSuggestButton("View More");
+    DSuggestButton *moreBtn = new DSuggestButton(tr("View More"));
     connect(moreBtn, &DSuggestButton::clicked, this, [ = ] {
         parent->navView->setCurrentIndex(parent->navModel->index(categories.indexOf(category) + 1, 0));
     });

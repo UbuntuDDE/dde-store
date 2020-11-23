@@ -56,7 +56,7 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent)
         connect(getdetails, &Transaction::errorCode, this, &PackageKitHelper::error);
         connect(getdetails, &Transaction::finished, this, [ = ] {
             if (apps->count() != 0 && settings::instance()->notifyAvailableUpdates()) {
-                Dtk::Core::DUtil::DNotifySender(QString("Updates Available")).appIcon("system-updated").call();
+                Dtk::Core::DUtil::DNotifySender(tr("Updates Available")).appIcon("system-updated").call();
             }
             parent->loadData(*apps);
         });
@@ -117,7 +117,7 @@ void PackageKitHelper::install(ItemPage *parent, QString packageId)
     connect(transaction, &Transaction::finished, this, [ = ] {
         if (settings::instance()->notifyInstall()) {
             AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
-            Dtk::Core::DUtil::DNotifySender(QString("Installed \"%1\"").arg(data.name)).appIcon("dialog-ok").call();
+            Dtk::Core::DUtil::DNotifySender(tr("Installed \"%1\"").arg(data.name)).appIcon("dialog-ok").call();
         }
         preventClose = false;
         itemPageData(parent, Transaction::packageName(packageId));
@@ -137,7 +137,7 @@ void PackageKitHelper::uninstall(ItemPage *parent, QString packageId)
     connect(transaction, &Transaction::finished, this, [ = ] {
         if (settings::instance()->notifyUninstall()) {
             AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
-            Dtk::Core::DUtil::DNotifySender(QString("Uninstalled \"%1\"").arg(data.name)).appIcon("dialog-ok").call();
+            Dtk::Core::DUtil::DNotifySender(tr("Uninstalled \"%1\"").arg(data.name)).appIcon("dialog-ok").call();
         }
         preventClose = false;
         itemPageData(parent, Transaction::packageName(packageId));
@@ -164,7 +164,7 @@ void PackageKitHelper::update(UpdatesPage *parent)
         connect(update, &Transaction::finished, this, [ = ] {
             getUpdates(parent);
             if (settings::instance()->notifyFinishedUpdates()) {
-                Dtk::Core::DUtil::DNotifySender(QString("Updates Installed")).appIcon("system-updated").call();
+                Dtk::Core::DUtil::DNotifySender(tr("Updates Installed")).appIcon("system-updated").call();
             }
             preventClose = false;
         });
@@ -173,8 +173,9 @@ void PackageKitHelper::update(UpdatesPage *parent)
 
 void PackageKitHelper::error(Transaction::Error err, const QString &error)
 {
-    qDebug() << "PackageKit Error:" << err << error;
-    DDialog dialog("PackageKit Error", QString(QMetaEnum::fromType<Transaction::Error>().valueToKey(err)) + "<br>" + error);
+    QString errorText = tr("PackageKit Error");
+    qDebug() << errorText << err << error;
+    DDialog dialog(errorText, QString(QMetaEnum::fromType<Transaction::Error>().valueToKey(err)) + "<br>" + error);
     dialog.setIcon(DStyle().standardIcon(QStyle::SP_MessageBoxCritical));
     dialog.addButton("OK");
     dialog.exec();

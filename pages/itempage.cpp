@@ -59,7 +59,7 @@ ItemPage::ItemPage(QString app)
     headerSectionLayout->addStretch();
 
     removeBtn = new DWarningButton;
-    removeBtn->setText("Uninstall");
+    removeBtn->setText(tr("Uninstall"));
     removeBtn->hide();
     headerSectionLayout->addWidget(removeBtn, 0, Qt::AlignVCenter);
     headerSectionLayout->addSpacing(10);
@@ -83,7 +83,7 @@ ItemPage::ItemPage(QString app)
     description->setAlignment(Qt::AlignHCenter);
     description->setMargin(15);
     if (data.description.isNull()) {
-        description->setText("<i>No description provided.</i>");
+        description->setText(QString("<i>%1</i>").arg(tr("No description provided.")));
     } else {
         description->setText(data.description);
     }
@@ -98,7 +98,7 @@ void ItemPage::setInstallButton(QString packageId, QString type, QString param)
         progressBar->hide();
         installBtn->show();
         installBtn->setDisabled(false);
-        installBtn->setText(QString("Install (%1)").arg(param));
+        installBtn->setText(tr("Install (%1)").arg(param));
         installBtn->disconnect(this);
         connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
             PackageKitHelper::instance()->install(this, packageId);
@@ -107,7 +107,7 @@ void ItemPage::setInstallButton(QString packageId, QString type, QString param)
         progressBar->hide();
         installBtn->show();
         installBtn->setDisabled(false);
-        installBtn->setText("Open");
+        installBtn->setText(tr("Open"));
         installBtn->disconnect(this);
         connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
             PackageKitHelper::instance()->launch(packageId);

@@ -112,17 +112,17 @@ void MainWindow::initNav()
     navView->setModel(navModel);
     navView->setEditTriggers(QListView::NoEditTriggers);
 
-    addPage("Home", "home.svg", new HomePage(this));
-    addPage("Messaging", "chat.svg", new CategoryPage(this, "Messaging", "InstantMessaging"));
-    addPage("Internet", "internet.svg", new CategoryPage(this, "Internet", "Network"));
-    addPage("Games", "games.svg", new CategoryPage(this, "Games", "Game"));
-    addPage("Development", "development.svg", new CategoryPage(this, "Development"));
-    addPage("Office", "office.svg", new CategoryPage(this, "Office"));
-    addPage("Graphics", "graphics.svg", new CategoryPage(this, "Graphics"));
-    addPage("Video", "video.svg", new CategoryPage(this, "Video"));
-    addPage("Music", "music.svg", new CategoryPage(this, "Music"));
-    addPage("System", "system.svg", new CategoryPage(this, "System"));
-    addPage("Installed", "installed.svg", new CategoryPage(this, "Installed"));
+    addPage(tr("Home"), "home.svg", new HomePage(this));
+    addPage(tr("Messaging"), "chat.svg", new CategoryPage(this, tr("Messaging"), "InstantMessaging"));
+    addPage(tr("Internet"), "internet.svg", new CategoryPage(this, tr("Internet"), "Network"));
+    addPage(tr("Games"), "games.svg", new CategoryPage(this, tr("Games"), "Game"));
+    addPage(tr("Development"), "development.svg", new CategoryPage(this, tr("Development"), "Development"));
+    addPage(tr("Office"), "office.svg", new CategoryPage(this, tr("Office"), "Office"));
+    addPage(tr("Graphics"), "graphics.svg", new CategoryPage(this, tr("Graphics"), "Graphics"));
+    addPage(tr("Video"), "video.svg", new CategoryPage(this, tr("Video"), "Video"));
+    addPage(tr("Music"), "music.svg", new CategoryPage(this, tr("Music"), "Music"));
+    addPage(tr("System"), "system.svg", new CategoryPage(this, tr("System"), "System"));
+    addPage(tr("Installed"), "installed.svg", new CategoryPage(this, tr("Installed"), "Installed"));
     addPage("Updates", "updates.svg", new UpdatesPage(this));
 
     connect(navView, qOverload<const QModelIndex &>(&DListView::currentChanged), this, [ = ] (const QModelIndex &previous) {
@@ -227,8 +227,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
     if (PackageKitHelper::instance()->preventClose) {
         DDialog dialog;
         dialog.setIcon(style()->standardIcon(QStyle::SP_MessageBoxCritical));
-        dialog.setTitle("Cannot close while app is being installed");
-        dialog.addButton("OK");
+        dialog.setTitle(tr("Cannot close while app is being installed"));
+        dialog.addButton(tr("OK"));
         dialog.exec();
         event->ignore();
     }

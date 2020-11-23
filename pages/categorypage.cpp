@@ -15,11 +15,13 @@ CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
     DLabel *sortLabel = new DLabel(tr("Sort by "));
     list->addHeaderWidget(sortLabel);
     QComboBox *sortBox = new QComboBox;
-    sortBox->addItems(QStringList() << "Alphabetical" << "Ratings");
+    QString sortAlphabetical = tr("Alphabetical");
+    QString sortRatings = tr("Ratings");
+    sortBox->addItems(QStringList() << sortAlphabetical << sortRatings);
     connect(sortBox, &QComboBox::currentTextChanged, this, [ = ] (const QString &text) {
-        if (text == "Alphabetical") {
+        if (text == sortAlphabetical) {
             sort = "alphabetical";
-        } else if (text == "Ratings") {
+        } else if (text == sortRatings) {
             sort = "ratings";
         }
         loadData(apps);
@@ -30,15 +32,11 @@ CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
         parent->openItem(package);
     });
 
-    if (category.isEmpty()) {
-        category = name;
-    }
-
     if (category == "Installed") {
         PackageKitHelper::instance()->getInstalled(this);
     } else if (name.startsWith("\"")) {
         loadData(AppStreamHelper::instance()->search(category));
-        list->setEmptyText(QString("No results for %1.").arg(name));
+        list->setEmptyText(tr("No results for %1").arg(name));
     } else {
         loadData(AppStreamHelper::instance()->category(category));
     }

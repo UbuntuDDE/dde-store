@@ -20,6 +20,6 @@ stars::stars(QString app)
         halfstar->setPixmap(QPixmap("://resources/icons/starhalf.png"));
         layout->addWidget(halfstar);
     }
-    QLabel *total = new QLabel(QString("(%1 ratings)").arg(RatingsHelper::instance()->totalRatings(app)));
+    QLabel *total = new QLabel(tr("(%1 ratings)").arg(RatingsHelper::instance()->totalRatings(app)));
     layout->addWidget(total);
 }

@@ -13,7 +13,7 @@ class CategoryPage : public QWidget
 {
     Q_OBJECT
 public:
-    CategoryPage(MainWindow *parent, QString name, QString category = nullptr);
+    CategoryPage(MainWindow *parent, QString name, QString category);
     void loadData(QStringList appList);
 private:
     QString sort = "alphabetical";
