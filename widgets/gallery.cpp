@@ -16,6 +16,7 @@ gallery::gallery(QList<QUrl> imageList)
     layout->addWidget(widget);
     widget->setLayout(widgetLayout);
     images = imageList;
+    layout->setContentsMargins(0, 0, 0, 0);
 
     widgetLayout->addStretch();
 
@@ -61,6 +62,7 @@ gallery::gallery(QList<QPair<QPixmap, QString>> imageList, MainWindow *parent)
     widget->setLayout(widgetLayout);
     banners = imageList;
     mainwindow = parent;
+    layout->setContentsMargins(0, 0, 0, 0);
 
     widgetLayout->addStretch();
 
