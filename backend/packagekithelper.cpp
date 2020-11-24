@@ -49,17 +49,21 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent)
     connect(getupdates, &Transaction::finished, this, [ = ] {
         QHash<QString, int> *apps = new QHash<QString, int>;
         
-        Transaction *getdetails = Daemon::getDetails(*pkgList);
-        connect(getdetails, &Transaction::details, this, [ = ] (const Details &details) {
-            apps->insert(Transaction::packageName(details.packageId()), details.size());
-        });
-        connect(getdetails, &Transaction::errorCode, this, &PackageKitHelper::error);
-        connect(getdetails, &Transaction::finished, this, [ = ] {
-            if (apps->count() != 0 && settings::instance()->notifyAvailableUpdates()) {
-                Dtk::Core::DUtil::DNotifySender(tr("Updates Available")).appIcon("system-updated").call();
-            }
+        if (apps->count() > 0) {
+            Transaction *getdetails = Daemon::getDetails(*pkgList);
+            connect(getdetails, &Transaction::details, this, [ = ] (const Details &details) {
+                apps->insert(Transaction::packageName(details.packageId()), details.size());
+            });
+            connect(getdetails, &Transaction::errorCode, this, &PackageKitHelper::error);
+            connect(getdetails, &Transaction::finished, this, [ = ] {
+                if (settings::instance()->notifyAvailableUpdates()) {
+                    Dtk::Core::DUtil::DNotifySender(tr("Updates Available")).appIcon("system-updated").call();
+                }
+                parent->loadData(*apps);
+            });
+        } else {
             parent->loadData(*apps);
-        });
+        }
     });
 }
 
