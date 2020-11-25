@@ -1,6 +1,8 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/56656996/99621835-b2d8dc80-29dd-11eb-8183-987e80f8b3a7.png"></p>
 <h1 align="center">DDE Store</h1>
 <h3 align="center">Una tienda de aplicaciones para DDE hecha con DTK</h3>
+<p align="center"><a href="README.md"> 🇺🇲 English</a> | <a href="README.de.md">🇩🇪 Deutsche</a></p>
+
 
 ## Qué es esto?
 
