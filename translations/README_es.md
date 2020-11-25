@@ -4,7 +4,7 @@
 
 ## Qué es esto?
 
-Esta tienda de aplicaciones está diseñada para el uso con el Entorno de Escritorio de Deepin (Deepin Desktop Envoirment, or DDE) en otras distribuciones. La tienda oficial de Deepin está hecha a base de Debian y una vista web con los repositorios de Deepin, haciéndola incompatible con otras distribuciones. ¡Esta tienda está hecha con PackageKit y AppStream así que debería trabajar perfecto con [almost](#deepin-distro) cualquier distribución!
+Esta tienda de aplicaciones está diseñada para el uso con el Entorno de Escritorio de Deepin (Deepin Desktop Envoirment, o DDE) en otras distribuciones. La tienda oficial de Deepin está hecha a base de Debian y una vista web con los repositorios de Deepin, haciéndola incompatible con otras distribuciones. ¡Esta tienda está hecha con PackageKit y AppStream así que debería trabajar perfecto con [casi](#deepin-distro) cualquier distribución!
 
 ## Deepin Distro
 
