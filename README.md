@@ -1,7 +1,7 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/56656996/99621835-b2d8dc80-29dd-11eb-8183-987e80f8b3a7.png"></p>
 <h1 align="center">DDE Store</h1>
 <h3 align="center">An app store for DDE built with DTK</h3>
-<p align="center"><a href="README.es.md">🇪🇸 Español</a></p>
+<p align="center"><a href="README.es.md">🇪🇸 Español</a> | <a href="README.de.md">🇩🇪 Deutsche</a></p>
 
 ## What is this?
 
