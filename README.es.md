@@ -2,7 +2,7 @@
 <h1 align="center">DDE Store</h1>
 <h3 align="center">Una tienda de aplicaciones para DDE hecha con DTK</h3>
 <p align="center"><a href="README.md"> 🇺🇲 English</a></p>
-<p align="centar">It has all the others languages translated in the same place as here</p>
+<p align="center">It has all the others languages translated in the same place as here</p>
 
 
 ## Qué es esto?
