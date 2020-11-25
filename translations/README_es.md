@@ -52,5 +52,5 @@ sudo make install
 ## Contribuciones
 ¡Pull requests son siempre bienvenidas para arreglo de bugs, mejoras, traducciones, o cualquier otra cosa!
 
-## License
+## Licencia
 [GPLv3](LICENSE)
