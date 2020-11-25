@@ -4,11 +4,11 @@
 
 ## Qué es esto?
 
-Esta tienda de aplicaciones está diseñada para el uso con el Entorno de Escritorio de Deepin (Deepin Desktop Envoirment, o DDE) en otras distribuciones. La tienda oficial de Deepin está hecha a base de Debian y una vista web con los repositorios de Deepin, haciéndola incompatible con otras distribuciones. ¡Esta tienda está hecha con PackageKit y AppStream así que debería trabajar perfecto con [casi](#distribuciones-de-deepin) cualquier distribución!
+Esta tienda de aplicaciones está diseñada para el uso con el Entorno de Escritorio de Deepin (Deepin Desktop Envoirment, o DDE) en otras distribuciones. La tienda oficial de Deepin está hecha a base de Debian y una vista web con los repositorios de Deepin, haciéndola incompatible con otras distribuciones. ¡Esta tienda está hecha con PackageKit y AppStream así que debería trabajar perfecto con [casi](#distribución-deepin) cualquier distribución!
 
-## Distribuciones de Deepin
+## Distribución Deepin
 
-This only applies to the official Deepin distro, not DDE in general. Deepin does not support AppStream, which provides this app with all the needed data. **This store is not supported on the Deepin distribution.** This was intended for other distros running DDE anyways, so I have no plans on ever supporting it. If Deepin starts using AppStream, I may consider it. If you're running Deepin and looking for an alternative app store, check out some other awesome projects like [Spark Store](https://www.spark-app.store) or [Deepines Store](https://deepines.com)!
+Esto solo aplica a la distribución oficial de Deepin, no DDE en general. Deepin no es compatible con AppStream, lo que provee a DDE Store de todos los datos necesarios.. **Esta tienda no es compatible con la distribución Deepin** De todas formas, DDE Store fue diseñada para otras distribuciones con DDE, así que no tengo planes de hacerla compatible con Deepin. Si Deepin empieza a usar AppStream, podría considerarlo. ¡Si estás usando Deepin y estás buscando una tienda de aplicaciones, prueba otros proyectos muy buenos como [Spark Store](https://www.spark-app.store) o [Deepines Store](https://deepines.com)!
 
 ## Installation
 ### Ubuntu
