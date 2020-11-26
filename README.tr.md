@@ -5,11 +5,11 @@
 
 ## Bu nedir?
  
-Bu uygulama mağazası, Deepin Masaüstü Ortamı'nın (Deepin Desktop Environment, DDE) diğer dağıtımlar üzerinde kullanılması amacıyla tasarlanmıştır. Resmi Deepin mağazası Debian ve üzerinde Deepin depolarının bulunduğu bir web görünümü kapsamında inşa edilmiştir, bu da Deepin mağazasını diğer dağıtımlarla uyumsuz hale getirir. Bu mağaza, PackageKit ve AppStream ile oluşturulmuştur, bu nedenle herhangi bir dağıtım üzerinde [almost](#deepin-distro) mükemmel çalışmalıdır!
+Bu uygulama mağazası, Deepin Masaüstü Ortamı'nın (Deepin Desktop Environment, DDE) diğer dağıtımlar üzerinde kullanılması amacıyla tasarlanmıştır. Resmi Deepin mağazası Debian ve üzerinde Deepin depolarının bulunduğu bir web görünümü kapsamında inşa edilmiştir, bu da Deepin mağazasını diğer dağıtımlarla uyumsuz hale getirir. Bu mağaza, PackageKit ve AppStream ile oluşturulmuştur, bu nedenle herhangi bir dağıtım üzerinde [neredeyse](#deepin-distro) mükemmel çalışmalıdır!
 
 ## Deepin Dağıtımı
 
-Bu sadece resmi Deepin dağıtımı için geçerlidir, genel olarak DDE için geçerli değildir. Deepin, bu uygulamaya gerekli tüm verileri sağlayan AppStream'i desteklemez. **Bu mağaza, Deepin dağıtımında desteklenmiyor.** Bu, yine de DDE'yi çalıştıran diğer dağıtımlar için tasarlandı, bu yüzden onu desteklemeye dair hiçbir planım yok. Deepin AppStream'i kullanmaya başlarsa, düşünebilirim. Deepin kullanıyor ve alternatif bir uygulama mağazası arıyorsanız, [Spark Store] (https://www.spark-app.store) veya [Deepines Store] (https: // deepines. com) gibi diğer harika projelere göz atın!
+Bu sadece resmi Deepin dağıtımı için geçerlidir, genel olarak DDE için geçerli değildir. Deepin, bu uygulamaya gerekli tüm verileri sağlayan AppStream'i desteklemez. **Bu mağaza, Deepin dağıtımında desteklenmiyor.** Bu, yine de DDE'yi çalıştıran diğer dağıtımlar için tasarlandı, bu yüzden onu desteklemeye dair hiçbir planım yok. Deepin AppStream'i kullanmaya başlarsa, düşünebilirim. Deepin kullanıyor ve alternatif bir uygulama mağazası arıyorsanız, [Spark Store](https://www.spark-app.store) veya [Deepines Store](https://deepines.com) gibi diğer harika projelere göz atın!
 
 ## Kurulum
 ### Ubuntu
@@ -53,5 +53,5 @@ sudo make install
 ## Katkılar
 Hata düzeltmeleri, iyileştirmeler, çeviriler veya başka herhangi bir şey için çekme talepleri (pull requests) her zaman memnuniyetle karşılanır!
 
-## License
+## Lisans
 [GPLv3](LICENSE)

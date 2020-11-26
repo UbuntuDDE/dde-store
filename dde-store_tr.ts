@@ -105,7 +105,7 @@
         <message>
             <location filename="../pages/categorypage.cpp" line="39"/>
             <source>No results for %1</source>
-            <translation>%1 için sonuç bulunamadı/translation>
+            <translation>%1 için sonuç bulunamadı</translation>
         </message>
     </context>
     <context>
