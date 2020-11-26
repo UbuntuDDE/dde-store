@@ -20,7 +20,7 @@
 
             <source>Created by %1</source>
 
-            <translation>Created by %1</translation>
+            <translation>بواسطة %1</translation>
 
         </message>
 
@@ -36,7 +36,7 @@
 
             <source>Settings</source>
 
-            <translation>Settings</translation>
+            <translation>الإعدادات</translation>
 
         </message>
 
@@ -46,7 +46,7 @@
 
             <source>Home</source>
 
-            <translation>Home</translation>
+            <translation>الرئيسية</translation>
 
         </message>
 
@@ -56,7 +56,7 @@
 
             <source>Messaging</source>
 
-            <translation>Messaging</translation>
+            <translation>المراسلة</translation>
 
         </message>
 
@@ -66,7 +66,7 @@
 
             <source>Internet</source>
 
-            <translation>Internet</translation>
+            <translation>الإنترنت</translation>
 
         </message>
 
@@ -76,7 +76,7 @@
 
             <source>Games</source>
 
-            <translation>Games</translation>
+            <translation>الألعاب</translation>
 
         </message>
 
@@ -86,7 +86,7 @@
 
             <source>Development</source>
 
-            <translation>Development</translation>
+            <translation>التطوير</translation>
 
         </message>
 
@@ -96,7 +96,7 @@
 
             <source>Office</source>
 
-            <translation>Office</translation>
+            <translation>المكتب</translation>
 
         </message>
 
@@ -106,7 +106,7 @@
 
             <source>Graphics</source>
 
-            <translation>Graphics</translation>
+            <translation>الصور</translation>
 
         </message>
 
@@ -116,7 +116,7 @@
 
             <source>Video</source>
 
-            <translation>Video</translation>
+            <translation>الفيديو</translation>
 
         </message>
 
@@ -126,7 +126,7 @@
 
             <source>Music</source>
 
-            <translation>Music</translation>
+            <translation>الموسيقى</translation>
 
         </message>
 
@@ -136,7 +136,7 @@
 
             <source>System</source>
 
-            <translation>System</translation>
+            <translation>النظام</translation>
 
         </message>
 
@@ -146,7 +146,7 @@
 
             <source>Installed</source>
 
-            <translation>Installed</translation>
+            <translation>البرامج المثبتة</translation>
 
         </message>
 
@@ -166,7 +166,7 @@
 
             <source>OK</source>
 
-            <translation>OK</translation>
+            <translation>موافق</translation>
 
         </message>
 
@@ -182,7 +182,7 @@
 
             <source>Sort by</source>
 
-            <translation>Sort by</translation>
+            <translation>فرز حسب</translation>
 
         </message>
 
@@ -192,7 +192,7 @@
 
             <source>Alphabetical</source>
 
-            <translation>Alphabetical</translation>
+            <translation>الأبجدية</translation>
 
         </message>
 
@@ -202,7 +202,7 @@
 
             <source>Ratings</source>
 
-            <translation>Ratings</translation>
+            <translation>التقييم</translation>
 
         </message>
 
@@ -212,7 +212,7 @@
 
             <source>No results for %1</source>
 
-            <translation>No results for %1</translation>
+            <translation>لم يتم العثور على نتائج حول %1</translation>
 
         </message>
 
@@ -228,7 +228,7 @@
 
             <source>Messaging</source>
 
-            <translation>Messaging</translation>
+            <translation>المراسلة</translation>
 
         </message>
 
@@ -238,7 +238,7 @@
 
             <source>Internet</source>
 
-            <translation>Internet</translation>
+            <translation>الإنترنت</translation>
 
         </message>
 
@@ -248,7 +248,7 @@
 
             <source>Games</source>
 
-            <translation>Games</translation>
+            <translation>الألعاب</translation>
 
         </message>
 
@@ -258,7 +258,7 @@
 
             <source>Development</source>
 
-            <translation>Development</translation>
+            <translation>التطوير</translation>
 
         </message>
 
@@ -268,7 +268,7 @@
 
             <source>Office</source>
 
-            <translation>Office</translation>
+            <translation>المكتب</translation>
 
         </message>
 
@@ -278,7 +278,7 @@
 
             <source>Graphics</source>
 
-            <translation>Graphics</translation>
+            <translation>الصور</translation>
 
         </message>
 
@@ -288,7 +288,7 @@
 
             <source>Video</source>
 
-            <translation>Video</translation>
+            <translation>الفديو</translation>
 
         </message>
 
@@ -298,7 +298,7 @@
 
             <source>Music</source>
 
-            <translation>Music</translation>
+            <translation>الموسيقى</translation>
 
         </message>
 
@@ -308,7 +308,7 @@
 
             <source>System</source>
 
-            <translation>System</translation>
+            <translation>النظام</translation>
 
         </message>
 
@@ -318,7 +318,7 @@
 
             <source>View More</source>
 
-            <translation>View More</translation>
+            <translation>عرض المزيد</translation>
 
         </message>
 
@@ -334,7 +334,7 @@
 
             <source>Uninstall</source>
 
-            <translation>Uninstall</translation>
+            <translation>إلغاء التثبيت</translation>
 
         </message>
 
@@ -344,7 +344,7 @@
 
             <source>No description provided.</source>
 
-            <translation>No description provided.</translation>
+            <translation>لا يتوفر وصف.</translation>
 
         </message>
 
@@ -354,7 +354,7 @@
 
             <source>Install (%1)</source>
 
-            <translation>Install (%1)</translation>
+            <translation>تثبيت (%1)</translation>
 
         </message>
 
@@ -364,7 +364,7 @@
 
             <source>Open</source>
 
-            <translation>Open</translation>
+            <translation>فتح</translation>
 
         </message>
 
@@ -380,7 +380,7 @@
 
             <source>Updates</source>
 
-            <translation>Updates</translation>
+            <translation>التحديثات</translation>
 
         </message>
 
@@ -390,7 +390,7 @@
 
             <source>Up to date</source>
 
-            <translation>Up to date</translation>
+            <translation>لا يوجد تحديثات</translation>
 
         </message>
 
@@ -400,7 +400,7 @@
 
             <source>System Updates</source>
 
-            <translation>System Updates</translation>
+            <translation>تحديثات النظام</translation>
 
         </message>
 
@@ -410,7 +410,7 @@
 
             <source>Update All</source>
 
-            <translation>Update All</translation>
+            <translation>جميع التحديثات</translation>
 
         </message>
 
@@ -420,7 +420,7 @@
 
             <source>Updating...</source>
 
-            <translation>Updating...</translation>
+            <translation>يتم التحديث...</translation>
 
         </message>
 
@@ -430,7 +430,7 @@
 
             <source>Update All (%1)</source>
 
-            <translation>Update All (%1)</translation>
+            <translation>تحديث جميع (%1)</translation>
 
         </message>
 
@@ -446,7 +446,7 @@
 
             <source>(%1 ratings)</source>
 
-            <translation>(%1 ratings)</translation>
+            <translation>(%1 تقييم)</translation>
 
         </message>
 
@@ -472,7 +472,7 @@
 
             <source>OK</source>
 
-            <translation>OK</translation>
+            <translation>موافق</translation>
 
         </message>
 
@@ -488,7 +488,7 @@
 
             <source>Updates Available</source>
 
-            <translation>Updates Available</translation>
+            <translation>يتوفر تحديثات جديدة</translation>
 
         </message>
 
@@ -498,7 +498,7 @@
 
             <source>Installed \"%1\"</source>
 
-            <translation>Installed \"%1\"</translation>
+            <translation>تم تثبيت\"%1\"</translation>
 
         </message>
 
@@ -508,7 +508,7 @@
 
             <source>Uninstalled \"%1\"</source>
 
-            <translation>Uninstalled \"%1\"</translation>
+            <translation>تم إزالة تثبيت \"%1\"</translation>
 
         </message>
 
@@ -518,7 +518,7 @@
 
             <source>Updates Installed</source>
 
-            <translation>Updates Installed</translation>
+            <translation>تم تثبيت التحديثات</translation>
 
         </message>
 
@@ -528,7 +528,7 @@
 
             <source>PackageKit Error</source>
 
-            <translation>PackageKit Error</translation>
+            <translation>خطأ في PackageKit</translation>
 
         </message>
 
