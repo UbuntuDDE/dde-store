@@ -2,9 +2,11 @@
 Name=App Store
 Name[es]=Tienda de Aplicaciones
 Name[de]=App Store
+Name[tr]=Uygulama Mağazası
 Comment=An app store for DDE built with DTK
 Comment[es]=Una tienda de aplicaciones para DDE hecha con DTK
 Comment[de]=Ein App Store für DDE erstellt mit DTK
+Comment[tr]=DTK ile oluşturulmuş DDE için bir uygulama mağazası
 Icon=deepin-app-store
 Exec=/usr/bin/dde-store
 Terminal=false
