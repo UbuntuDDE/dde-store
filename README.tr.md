@@ -5,7 +5,7 @@
 
 ## Bu nedir?
  
-Bu uygulama mağazası, Deepin Masaüstü Ortamı'nın (Deepin Desktop Environment, DDE) diğer dağıtımlar üzerinde kullanılması amacıyla tasarlanmıştır. Resmi Deepin mağazası Debian ve üzerinde Deepin depolarının bulunduğu bir web görünümü kapsamında inşa edilmiştir, bu da Deepin mağazasını diğer dağıtımlarla uyumsuz hale getirir. Bu mağaza, PackageKit ve AppStream ile oluşturulmuştur, bu nedenle herhangi bir dağıtım üzerinde [neredeyse](#deepin-distro) mükemmel çalışmalıdır!
+Bu uygulama mağazası, Deepin Masaüstü Ortamı'nın (Deepin Desktop Environment, DDE) diğer dağıtımlar üzerinde kullanılması amacıyla tasarlanmıştır. Resmi Deepin mağazası Debian ve üzerinde Deepin depolarının bulunduğu bir web görünümü kapsamında inşa edilmiştir, bu da Deepin mağazasını diğer dağıtımlarla uyumsuz hale getirir. Bu mağaza, PackageKit ve AppStream ile oluşturulmuştur, bu nedenle herhangi bir dağıtım üzerinde [neredeyse](#deepin-dağıtımı) mükemmel çalışmalıdır!
 
 ## Deepin Dağıtımı
 
