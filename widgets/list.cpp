@@ -110,3 +110,10 @@ void List::load()
         layout->addWidget(listView);
     }
 }
+
+void List::unload()
+{
+    loadingBox->show();
+    emptyLabel->hide();
+    layout->removeWidget(listView);
+}

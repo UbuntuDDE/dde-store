@@ -3,6 +3,7 @@
 #include "backend/appstreamhelper.h"
 #include "backend/settings.h"
 #include <QVBoxLayout>
+#include <DGuiApplicationHelper>
 
 UpdatesPage::UpdatesPage(MainWindow *parent)
 {
@@ -23,6 +24,18 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
             parent->openItem(package);
         }
     });
+
+    refreshButton = new DIconButton(this);
+    connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ] {
+        if (DGuiApplicationHelper::instance()->themeType() == DGuiApplicationHelper::DarkType) {
+            refreshButton->setIcon(QIcon::fromTheme("refresh"));
+        } else {
+            refreshButton->setIcon(QIcon::fromTheme("refresh_dark"));
+        }
+    });
+    refreshButton->setIconSize(QSize(20, 20));
+    refreshButton->setDisabled(true);
+    list->addHeaderWidget(refreshButton);
 
     updateButton = new DSuggestButton(tr("Update All"));
     updateButton->setDisabled(true);
@@ -48,10 +61,20 @@ void UpdatesPage::loadData(QHash<QString, int> apps)
     connect(updateButton, &DSuggestButton::clicked, this, [ = ] {
         updateButton->setDisabled(true);
         updateButton->setText(tr("Updating..."));
+        refreshButton->setDisabled(true);
         PackageKitHelper::instance()->update(this);
     });
+
+    connect(refreshButton, &DIconButton::clicked, this, [ = ] {
+        updateButton->setDisabled(true);
+        refreshButton->setDisabled(true);
+        list->unload();
+        PackageKitHelper::instance()->getUpdates(this);
+    });
+
     updateButton->setText(tr("Update All (%1)").arg(locale.formattedDataSize(totalSize)));
     updateButton->setDisabled(false);
+    refreshButton->setDisabled(false);
 
     if (apps.size() == 0) {
         updateButton->setDisabled(true);

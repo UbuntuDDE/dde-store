@@ -6,6 +6,7 @@
 #include <QWidget>
 #include <DDialog>
 #include <DSuggestButton>
+#include <DIconButton>
 
 DWIDGET_USE_NAMESPACE
 
@@ -24,6 +25,7 @@ private:
     DSuggestButton *updateButton;
     MainWindow *mainwindow;
     QString systemUpdatesItem;
+    DIconButton *refreshButton;
 };
 
 #endif // UPDATEVIEW_H

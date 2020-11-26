@@ -21,6 +21,7 @@ public:
     void editItemText(QString package, QString text);
     void clear();
     void load();
+    void unload();
     DListView *listView;
 private:
     QHBoxLayout *headerLayout;
