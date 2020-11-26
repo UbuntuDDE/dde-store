@@ -53,4 +53,4 @@ sudo make install
 Pull-Anfragen sind für Fehlerbehebungen, Verbesserungen, Übersetzungen oder andere Dinge immer gerne gesehen!
 
 ## License
-[GPLv3](LICENSE)
+[GPLv3](../../LICENSE)

@@ -54,4 +54,4 @@ sudo make install
 Hata düzeltmeleri, iyileştirmeler, çeviriler veya başka herhangi bir şey için çekme talepleri (pull requests) her zaman memnuniyetle karşılanır!
 
 ## Lisans
-[GPLv3](LICENSE)
+[GPLv3](../../LICENSE)
