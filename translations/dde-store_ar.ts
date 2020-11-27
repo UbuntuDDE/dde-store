@@ -10,7 +10,7 @@
 
             <source>An app store for DDE built with DTK</source>
 
-            <translation>An app store for DDE built with DTK</translation>
+            <translation>متجر تطبيقات مخصص لـ DDE مبني على DTK</translation>
 
         </message>
 
@@ -156,7 +156,7 @@
 
             <source>Cannot close while app is being installed</source>
 
-            <translation>Cannot close while app is being installed</translation>
+            <translation>يتعذر الإغلاق خلال تثبيت البرامج</translation>
 
         </message>
 
@@ -462,7 +462,7 @@
 
             <source>ERROR: Unable to open AppStream metadata pool</source>
 
-            <translation>ERROR: Unable to open AppStream metadata pool</translation>
+            <translation>خطأ: تعذر فتح مستودع معلومات AppStream</translation>
 
         </message>
 
