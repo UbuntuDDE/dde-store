@@ -64,4 +64,4 @@ sudo make install
 
 <h1 dir='rtl' align="right">الترخيص</h1>
 
-[GPLv3](LICENSE)
+[GPLv3](../../LICENSE)
