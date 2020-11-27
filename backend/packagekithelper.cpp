@@ -49,7 +49,7 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent)
     connect(getupdates, &Transaction::finished, this, [ = ] {
         QHash<QString, int> *apps = new QHash<QString, int>;
         
-        if (apps->count() > 0) {
+        if (pkgList->length() > 0) {
             Transaction *getdetails = Daemon::getDetails(*pkgList);
             connect(getdetails, &Transaction::details, this, [ = ] (const Details &details) {
                 apps->insert(Transaction::packageName(details.packageId()), details.size());
