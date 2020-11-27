@@ -1,3 +1,10 @@
+dde-store (1.0.2) groovy; urgency=medium
+
+  * Added Turkish translation (by @candancelik)
+  * Bug fixes
+
+ -- dekzi <dekzidev@protonmail.com>  Thu, 26 Nov 2020 23:07:38 -0800
+
 dde-store (1.0.1) groovy; urgency=low
 
   * Added Spanish translation (by @Eboon-05)
