@@ -2,17 +2,17 @@
 <h1 align="center">DDE Store</h1>
 <h3 dir='rtl' align="center">متجر تطبيقات لـ DDE مبني على DTK</h3>
 
-<h1 dir='rtl' align="right">ما هذا؟</h1>
+<h2 dir='rtl' align="right">ما هذا؟</h2>
 
 <p dir='rtl' align="right">هذا المتجر صمم ليعمل على واجهة Deepin في توزيعات اخرى. المتجر الاصلي في Deepin مبنى بطرقة عرض ويب ويحتوي على مستوداعات Deepin مما يجعله غير متوافق مع التوزيعات الأخرى. هذا المتجر مبنى على PackageKit و AppStream مما يجعله متوافق مع تقريبا جميع التوزيعات التي تحمل واجهة Deepin</p>
 
-<h1 dir='rtl' align="right">Deepin</h1>
-<p dir='rtl' align="right">هذا ينطبق على توزيعة Deepin فقط وليس على واجهة Deepin بشكل عام. توزيعة Deepin لا تدعم AppStream بشكل رسمي وهو ما يزود هذا المتجر بجميع البيانات اللازمة. **هذا المتجر غير مدعوم في توزيعة Deepin.** هذا المتجر مخصص ليعمل على التوزيعات التي تعمل بواجهة Deepin وليس على التوزيعة Deepin نفسها وبالتالي ليس لدي أي خطة لدعم توزيعة Deepin في هذا المتجر. في حال بدات Deepin بإستخدام AppStream، قد أقوم بتوفير الدعم. في حال كنت من مستخدمي Deepin وترغب في إستخدام متجر اخر، يمكنك تفقد مشارع رائعة أخرى مثل <a href="https://www.spark-app.store">Spark Store</a> أو <a href="https://deepines.com">Deepines Store!</a></p>
+<h2 dir='rtl' align="right">Deepin</h2>
+<p dir='rtl' align="right">هذا ينطبق على توزيعة Deepin فقط وليس على واجهة Deepin بشكل عام. توزيعة Deepin لا تدعم AppStream بشكل رسمي وهو ما يزود هذا المتجر بجميع البيانات اللازمة. **هذا المتجر غير مدعوم في توزيعة Deepin.** هذا المتجر مخصص ليعمل على التوزيعات التي تعمل بواجهة Deepin وليس على التوزيعة Deepin نفسها وبالتالي ليس لدي أي خطة لدعم توزيعة Deepin في هذا المتجر. في حال بدات Deepin بإستخدام AppStream، قد أقوم بتوفير الدعم. في حال كنت من مستخدمي Deepin وترغب في إستخدام متجر اخر، يمكنك تفقد مشارع رائعة أخرى مثل <a href="https://www.spark-app.store">Spark Store</a> أو <a href="https://deepines.com">Deepines Store</a>!</p>
 
 
 
-<h3 dir='rtl' align="right">التثبيت</h3>
-<h5 dir='rtl' align="right">Ubuntu</h5>
+<h2 dir='rtl' align="right">التثبيت</h2>
+<h3 dir='rtl' align="right">Ubuntu</h3>
 
 ```
 sudo add-apt-repository ppa:dekzi/ppa
@@ -20,13 +20,13 @@ sudo apt-get update
 sudo apt-get install dde-store
 ```
 
-<h5 dir='rtl' align="right">Arch/Manjaro (AUR)</h5>
+<h3 dir='rtl' align="right">Arch/Manjaro (AUR)</h3>
 
 ```
 sudo pacman -S dde-store
 ```
 
-<h5 dir='rtl' align="right">البناء من الكود المصدري</h5>
+<h3 dir='rtl' align="right">البناء من الكود المصدري</h3>
 
 <p dir='rtl' align="right"><b>إعتماديات (Ubuntu)</b></p>
 
@@ -43,7 +43,7 @@ sudo pacman -S dde-store
 
 <p dir='rtl' align="right"><b>البناء في Ubuntu</b></p>
 
-<p dir='rtl' align="right">للبناء في Ubuntu، يجب تثبيت مستودع البرمجيات UbuntuDDE وذلك لأن الحزمة `libdtkgui-dev` غير متوفرة في المستودعات الرسمية.</p>
+<p dir='rtl' align="right">للبناء في Ubuntu، يجب تثبيت مستودع البرمجيات UbuntuDDE وذلك لأن الحزمة <code>libdtkgui-dev</code> غير متوفرة في المستودعات الرسمية.</p>
 
 ```
 sudo add-apt-repository ppa:ubuntudde-dev/stable
@@ -59,9 +59,9 @@ cmake .
 sudo make install
 ```
 
-<h1 dir='rtl' align="right">المساهمة</h1>
+<h2 dir='rtl' align="right">المساهمة</h2>
 <p dir='rtl' align="right">المساهمة في المشروع مرحب بها دائما سواء أكانت لإصلاح العيوب البرمجية، التحسينات، الترجمات أو أي شيء آخر!</p>
 
-<h1 dir='rtl' align="right">الترخيص</h1>
+<h2 dir='rtl' align="right">الترخيص</h2>
 
-[GPLv3](../../LICENSE)
+<p dir='rtl' align="right"><a href="../../LICENSE">GPLv3</a></p>
