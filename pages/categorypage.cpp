@@ -11,8 +11,8 @@ CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
     layout->setContentsMargins(0, 0, 0, 0);
     this->setLayout(layout);
     list = new List(name);
-
-    DLabel *sortLabel = new DLabel(tr("Sort by "));
+    DLabel *sortLabel = new DLabel;
+    sortLabel->setText(tr("Sort by "));
     list->addHeaderWidget(sortLabel);
     QComboBox *sortBox = new QComboBox;
     QString sortAlphabetical = tr("Alphabetical");
