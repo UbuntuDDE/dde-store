@@ -62,7 +62,7 @@ void UpdatesPage::loadData(QHash<QString, int> apps)
         updateButton->setDisabled(true);
         updateButton->setText(tr("Updating..."));
         refreshButton->setDisabled(true);
-        PackageKitHelper::instance()->update(this);
+        PackageKitHelper::instance()->update(this, apps.keys());
     });
 
     connect(refreshButton, &DIconButton::clicked, this, [ = ] {

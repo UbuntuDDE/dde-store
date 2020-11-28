@@ -148,30 +148,22 @@ void PackageKitHelper::uninstall(ItemPage *parent, QString packageId)
     });
 }
 
-void PackageKitHelper::update(UpdatesPage *parent)
+void PackageKitHelper::update(UpdatesPage *parent, QStringList updates)
 {
-    QStringList *packages = new QStringList;
-    Transaction *getupdates = Daemon::getUpdates();
-    connect(getupdates, &Transaction::package, this, [ = ] (Transaction::Info info, const QString &packageId) {
-        packages->append(packageId);
+    Transaction *update = Daemon::updatePackages(updates);
+    preventClose = true;
+    connect(update, &Transaction::itemProgress, this, [ = ] (const QString &packageId, Transaction::Status status, uint percent) {
+        if (percent <= 100) {
+            parent->updatePercent(Transaction::packageName(packageId), percent);
+        }
     });
-    connect(getupdates, &Transaction::errorCode, this, &PackageKitHelper::error);
-    connect(getupdates, &Transaction::finished, this, [ = ] {
-        Transaction *update = Daemon::updatePackages(*packages);
-        preventClose = true;
-        connect(update, &Transaction::itemProgress, this, [ = ] (const QString &packageId, Transaction::Status status, uint percent) {
-            if (percent <= 100) {
-                parent->updatePercent(Transaction::packageName(packageId), percent);
-            }
-        });
-        connect(update, &Transaction::errorCode, this, &PackageKitHelper::error);
-        connect(update, &Transaction::finished, this, [ = ] {
-            getUpdates(parent);
-            if (settings::instance()->notifyFinishedUpdates()) {
-                Dtk::Core::DUtil::DNotifySender(tr("Updates Installed")).appIcon("system-updated").call();
-            }
+    connect(update, &Transaction::errorCode, this, &PackageKitHelper::error);
+    connect(update, &Transaction::finished, this, [ = ] {
+        getUpdates(parent);
+        if (settings::instance()->notifyFinishedUpdates()) {
+            Dtk::Core::DUtil::DNotifySender(tr("Updates Installed")).appIcon("system-updated").call();
+        }
             preventClose = false;
-        });
     });
 }
 

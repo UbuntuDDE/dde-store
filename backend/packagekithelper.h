@@ -21,7 +21,7 @@ public:
     void itemPageData(ItemPage *parent, QString package);
     void install(ItemPage *parent, QString packageId);
     void uninstall(ItemPage *parent, QString packageId);
-    void update(UpdatesPage *parent);
+    void update(UpdatesPage *parent, QStringList updates);
     bool preventClose = false;
 private:
     static PackageKitHelper *currentInstance;
