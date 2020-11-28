@@ -1,9 +1,11 @@
 [Desktop Entry]
 Name=App Store
+Name[ar]=متجر التطبيقات
 Name[es]=Tienda de Aplicaciones
 Name[de]=App Store
 Name[tr]=Uygulama Mağazası
 Comment=An app store for DDE built with DTK
+Comment[ar]=متجر تطبيقات لـ DDE مبني على DTK
 Comment[es]=Una tienda de aplicaciones para DDE hecha con DTK
 Comment[de]=Ein App Store für DDE erstellt mit DTK
 Comment[tr]=DTK ile oluşturulmuş DDE için bir uygulama mağazası
