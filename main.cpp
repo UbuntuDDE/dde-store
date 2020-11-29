@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     about.setProductIcon(QIcon::fromTheme("deepin-app-store"));
     about.setProductName("DDE Store");
     about.setDescription(qApp->translate("main", "An app store for DDE built with DTK") + "<br/>" + qApp->translate("main", "Created by %1").arg("<a href='https://github.com/dekzi'>Dekzi</a>") + "<br/><br/><a href='https://github.com/dekzi/dde-store'>https://github.com/dekzi/dde-store</a>");
-    about.setVersion("0.0.1");
+    about.setVersion("1.0.2");
     MainWindow w;
     w.show();
     return a.exec();
