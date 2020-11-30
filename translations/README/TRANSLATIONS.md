@@ -1,8 +1,6 @@
 # Translation Guide
 
-This guide is meant for those who've never translated Qt apps before. If you have, just read the [README](#README.md) section.
-
-To start, just create a fork of this repository. You need to translate two files, the app's translation `.ts` file, and the README.
+To start translating, create a fork of this repository.
 
 ## .ts file
 In the `/translations` folder, you'll see several files with the extension `.ts`. Make a copy of `dde-store.ts` or `dde-store_en.ts` and rename it to `dde-store_yourlanguagecode.ts` (Spanish = `dde-store_es.ts`, German = `dde-store_de.ts`, etc). Open the file and change the `language="en"` in the first line to match the same language code.
@@ -29,7 +27,10 @@ Some things may be repeated, like the categories or "OK". You can just copy the 
 Make sure to not translate anything else like the `<context></context>` tags!
 
 ## README.md
-Create a copy of `README.md` and rename it to `README.languagecode.md`. Delete the language selector at the top (the flags and languages) and the rest is pretty simple. Just translate it! Just don't change `DDE Store`. The name needs to stay.
+Create a copy of `README.md` and rename it to `README.languagecode.md`. Delete the language selector at the top (the flags and languages) and the rest is pretty simple. Just translate it! Just don't change `DDE Store`. The name needs to stay. Once you're done, move it to `translations/README/`, and add the flag, name, and link to the main README's language selector formatted the same way as the rest.
+
+## .desktop file
+Edit `dde-store.desktop` and 2 new lines: `Name[languagecode]=` and the translation of "App Store", and `Comment[languagecode]=` and the same translation of "An app store for DDE built with DTK" you put in the README. Make sure the lines are inserted alphabetically by language code.
 
 
 If you're confused about anything, take a look at another translation to see what they changed, or just ask me. Once you're done with both files, just submit a pull request. I'll make sure everything looks fine and merge it. Thank you for taking interest in contributing!
