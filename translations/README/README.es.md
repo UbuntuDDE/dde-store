@@ -27,6 +27,7 @@ sudo pacman -S dde-store
 **Dependencias (Ubuntu)**
 - cmake
 - qtbase5-dev
+- qttools5-dev
 - libdtkwidget-dev
 - libdtkcore-dev
 - libdtkgui-dev

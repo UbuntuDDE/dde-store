@@ -33,6 +33,7 @@ sudo pacman -S dde-store
 <ul dir='rtl' align="right">
   <li dir='rtl' align="right">cmake</li>
   <li dir='rtl' align="right">qtbase5-dev</li>
+  <li dir='rtl' align="right">qttools5-dev</li>
   <li dir='rtl' align="right">libdtkwidget-dev</li>
   <li dir='rtl' align="right">libdtkcore-dev</li>
   <li dir='rtl' align="right">libdtkgui-dev</li>
