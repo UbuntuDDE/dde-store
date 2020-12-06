@@ -46,8 +46,6 @@ void MainWindow::initTitlebar()
         if (pageHistory[pageHistoryIndex]->objectName() != "ItemPage") {
             navView->setCurrentIndex(navModel->index(stackedWidget->indexOf(pageHistory[pageHistoryIndex]), 0));
         }
-        pageHistoryIndex -= 1;
-        pageHistory.removeLast();
     });
 
     forwardButton = new DButtonBoxButton(DStyle::SP_ArrowEnter);
@@ -60,8 +58,6 @@ void MainWindow::initTitlebar()
         if (pageHistory[pageHistoryIndex]->objectName() != "ItemPage") {
             navView->setCurrentIndex(navModel->index(stackedWidget->indexOf(pageHistory[pageHistoryIndex]), 0));
         }
-        pageHistoryIndex -= 1;
-        pageHistory.removeLast();
     });
 
     QList<DButtonBoxButton *> buttonList;
@@ -144,11 +140,10 @@ void MainWindow::initNav()
                 }
             }
         }
-        
-        pageHistory << stackedWidget->currentWidget();
-        pageHistoryIndex += 1;
-        
+                
         if (!buttonNavigated) {
+            pageHistory << stackedWidget->currentWidget();
+            pageHistoryIndex += 1;
             if (pageHistoryIndex != pageHistory.length() - 1) {
                 for (int i = 0; i < pageHistory.length() - pageHistoryIndex + 1; i++) {
                     pageHistory.removeLast();
@@ -160,7 +155,7 @@ void MainWindow::initNav()
             buttonNavigated = false;
         }
 
-        if (navView->currentIndex().row() == 0) {
+        if (pageHistoryIndex < 1) {
             backButton->setDisabled(true);
         } else {
             backButton->setDisabled(false);

@@ -30,7 +30,7 @@ private:
     QHash<QString, ItemPage*> itemPageList;
     DViewItemAction *updateIndicator;
     QList<QWidget*> pageHistory;
-    int pageHistoryIndex = -1;
+    int pageHistoryIndex = 0;
     DButtonBoxButton *backButton;
     DButtonBoxButton *forwardButton;
     bool buttonNavigated = false;
