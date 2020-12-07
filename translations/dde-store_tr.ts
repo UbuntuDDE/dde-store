@@ -22,17 +22,17 @@
         <translation>Sıralama türü</translation>
     </message>
     <message>
-        <location filename="../pages/categorypage.cpp" line="18"/>
+        <location filename="../pages/categorypage.cpp" line="17"/>
         <source>Alphabetical</source>
         <translation>Alfabetık</translation>
     </message>
     <message>
-        <location filename="../pages/categorypage.cpp" line="19"/>
+        <location filename="../pages/categorypage.cpp" line="18"/>
         <source>Ratings</source>
         <translation>Derecelendirmeye göre</translation>
     </message>
     <message>
-        <location filename="../pages/categorypage.cpp" line="39"/>
+        <location filename="../pages/categorypage.cpp" line="38"/>
         <source>No results for %1</source>
         <translation>%1 için sonuç bulunamadı</translation>
     </message>

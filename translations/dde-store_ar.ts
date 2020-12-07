@@ -22,17 +22,17 @@
         <translation>فرز حسب</translation>
     </message>
     <message>
-        <location filename="../pages/categorypage.cpp" line="18"/>
+        <location filename="../pages/categorypage.cpp" line="17"/>
         <source>Alphabetical</source>
         <translation>الأبجدية</translation>
     </message>
     <message>
-        <location filename="../pages/categorypage.cpp" line="19"/>
+        <location filename="../pages/categorypage.cpp" line="18"/>
         <source>Ratings</source>
         <translation>التقييم</translation>
     </message>
     <message>
-        <location filename="../pages/categorypage.cpp" line="39"/>
+        <location filename="../pages/categorypage.cpp" line="38"/>
         <source>No results for %1</source>
         <translation>لم يتم العثور على نتائج حول %1</translation>
     </message>

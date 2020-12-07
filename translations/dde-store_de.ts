@@ -22,17 +22,17 @@
         <translation>Sortieren nach</translation>
     </message>
     <message>
-        <location filename="../pages/categorypage.cpp" line="18"/>
+        <location filename="../pages/categorypage.cpp" line="17"/>
         <source>Alphabetical</source>
         <translation>Alphabetisch</translation>
     </message>
     <message>
-        <location filename="../pages/categorypage.cpp" line="19"/>
+        <location filename="../pages/categorypage.cpp" line="18"/>
         <source>Ratings</source>
         <translation>Bewertungen</translation>
     </message>
     <message>
-        <location filename="../pages/categorypage.cpp" line="39"/>
+        <location filename="../pages/categorypage.cpp" line="38"/>
         <source>No results for %1</source>
         <translation>Kein Ergebnis für %1</translation>
     </message>
