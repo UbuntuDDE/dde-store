@@ -25,7 +25,7 @@ AppStreamHelper::AppStreamHelper()
 
     QString error;
     if (!pool->load(&error)) {
-        QString errorText = "ERROR: Unable to open AppStream metadata pool";
+        QString errorText = tr("ERROR: Unable to open AppStream metadata pool");
         DDialog dialog(errorText, error);
         qDebug() << errorText << error;
         dialog.setIcon(DStyle().standardIcon(QStyle::SP_MessageBoxCritical));
