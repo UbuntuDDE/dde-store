@@ -58,7 +58,7 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent)
         if (pkgList->length() > 0) {
             Transaction *getdetails = Daemon::getDetails(*pkgList);
             connect(getdetails, &Transaction::details, this, [ = ] (const Details &details) {
-                apps->insert(Transaction::packageName(details.packageId()), details.size());
+                apps->insert(details.packageId(), details.size());
             });
             connect(getdetails, &Transaction::errorCode, this, &PackageKitHelper::error);
             connect(getdetails, &Transaction::finished, this, [ = ] {
