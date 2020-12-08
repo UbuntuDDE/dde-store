@@ -66,12 +66,11 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent)
                     Dtk::Core::DUtil::DNotifySender(tr("Updates Available")).appIcon("system-updated").call();
                 }
                 parent->loadData(*apps);
+                qDebug() << "[ UPDATES ] Updates found:" << apps->size();
             });
         } else {
             parent->loadData(*apps);
         }
-
-        qDebug() << "[ UPDATES ] Updates found:" << apps->size();
     });
 }
 
