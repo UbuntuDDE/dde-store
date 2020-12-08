@@ -5,6 +5,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QtMath>
+#include <QDebug>
 
 RatingsHelper *RatingsHelper::currentInstance = nullptr;
 
@@ -21,6 +22,7 @@ RatingsHelper::RatingsHelper()
     QNetworkAccessManager *networkManager = new QNetworkAccessManager;
     QNetworkRequest request(QUrl("https://odrs.gnome.org/1.0/reviews/api/ratings"));
     networkManager->get(request);
+    qDebug() << "[ RATINGS ] Fetching ratings...";
     connect(networkManager, &QNetworkAccessManager::finished, this, [ = ] (QNetworkReply *reply) {
         QByteArray data = reply->readAll();
         QJsonObject array = QJsonDocument::fromJson(data).object();
@@ -28,6 +30,7 @@ RatingsHelper::RatingsHelper()
             ratingsList.insert(key, array.value(key).toObject());
         }
         emit(fetched());
+        qDebug() << "[ RATINGS ] Ratings fetched";
     });
 }
 

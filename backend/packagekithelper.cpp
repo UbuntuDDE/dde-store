@@ -29,12 +29,16 @@ void PackageKitHelper::getInstalled(CategoryPage *parent)
 
     connect(transaction, &Transaction::errorCode, this, &PackageKitHelper::error);
 
+    qDebug() << "[ INSTALLED ] Getting installed applications...";
+
     connect(transaction, &Transaction::package, this, [ = ] (Transaction::Info, const QString &packageId) {
         pkgList->append(Transaction::packageName(packageId));
+        qDebug() << "[ INSTALLED ] Found installed app" << Transaction::packageName(packageId);
     });
 
     connect(transaction, &Transaction::finished, this, [ = ] {
         parent->loadData(*pkgList);
+        qDebug() << "[ INSTALLED ] Retrieved installed apps";
     });
 }
 
@@ -42,8 +46,10 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent)
 {
     QStringList *pkgList = new QStringList;
     Transaction *getupdates = Daemon::getUpdates();
+    qDebug() << "[ UPDATES ] Checking for updates...";
     connect(getupdates, &Transaction::package, this, [ = ] (Transaction::Info, const QString &packageId) {
         pkgList->append(packageId);
+        qDebug() << "[ UPDATES ] Update found for app" << Transaction::packageName(packageId);
     });
     connect(getupdates, &Transaction::errorCode, this, &PackageKitHelper::error);
     connect(getupdates, &Transaction::finished, this, [ = ] {
@@ -64,6 +70,8 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent)
         } else {
             parent->loadData(*apps);
         }
+
+        qDebug() << "[ UPDATES ] Updates found:" << apps->size();
     });
 }
 
@@ -112,8 +120,10 @@ void PackageKitHelper::install(ItemPage *parent, QString packageId)
 {
     Transaction *transaction = Daemon::installPackage(packageId);
     preventClose = true;
+    qDebug() << "[ INSTALL ] Installing app" << Transaction::packageName(packageId);
     connect(transaction, &Transaction::percentageChanged, this, [ = ] {
         if (transaction->percentage() <= 100) {
+            qDebug() << "[ INSTALL ]" << transaction->percentage();
             parent->setInstallButton(packageId, "installing", QString::number(transaction->percentage()));
         }
     });
@@ -125,6 +135,7 @@ void PackageKitHelper::install(ItemPage *parent, QString packageId)
         }
         preventClose = false;
         itemPageData(parent, Transaction::packageName(packageId));
+        qDebug() << "[ INSTALL ] App installed";
     });
 }
 
@@ -132,8 +143,10 @@ void PackageKitHelper::uninstall(ItemPage *parent, QString packageId)
 {
     Transaction *transaction = Daemon::removePackage(packageId);
     preventClose = true;
+    qDebug() << "[ UNINSTALL ] Uninstalling app" << Transaction::packageName(packageId);
     connect(transaction, &Transaction::percentageChanged, this, [ = ] {
         if (transaction->percentage() <= 100) {
+            qDebug() << "[ UNINSTALL ]" << transaction->percentage();
             parent->setInstallButton(packageId, "installing", QString::number(transaction->percentage()));
         }
     });
@@ -145,6 +158,7 @@ void PackageKitHelper::uninstall(ItemPage *parent, QString packageId)
         }
         preventClose = false;
         itemPageData(parent, Transaction::packageName(packageId));
+        qDebug() << "[ UNINSTALL ] App uninstalled";
     });
 }
 
@@ -152,8 +166,10 @@ void PackageKitHelper::update(UpdatesPage *parent, QStringList updates)
 {
     Transaction *update = Daemon::updatePackages(updates);
     preventClose = true;
+    qDebug() << "[ UPDATES ] Updating apps";
     connect(update, &Transaction::itemProgress, this, [ = ] (const QString &packageId, Transaction::Status status, uint percent) {
         if (percent <= 100) {
+            qDebug() << "[ UPDATES ]" << Transaction::packageName(packageId) << percent;
             parent->updatePercent(Transaction::packageName(packageId), percent);
         }
     });
@@ -163,14 +179,15 @@ void PackageKitHelper::update(UpdatesPage *parent, QStringList updates)
         if (settings::instance()->notifyFinishedUpdates()) {
             Dtk::Core::DUtil::DNotifySender(tr("Updates Installed")).appIcon("system-updated").call();
         }
-            preventClose = false;
+        preventClose = false;
+        qDebug() << "[ UPDATES ] Updates complete";
     });
 }
 
 void PackageKitHelper::error(Transaction::Error err, const QString &error)
 {
     QString errorText = tr("PackageKit Error");
-    qDebug() << errorText << err << error;
+    qDebug() << "[ ERROR ]" << errorText << err << error;
     DDialog dialog(errorText, QString(QMetaEnum::fromType<Transaction::Error>().valueToKey(err)) + "<br>" + error);
     dialog.setIcon(DStyle().standardIcon(QStyle::SP_MessageBoxCritical));
     dialog.addButton("OK");

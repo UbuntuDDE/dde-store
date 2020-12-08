@@ -23,11 +23,13 @@ AppStreamHelper::AppStreamHelper()
 {
     AppStream::Pool *pool = new AppStream::Pool;
 
+    qDebug() << "[ APPSTREAM ] Loading metadata pool";
+
     QString error;
     if (!pool->load(&error)) {
         QString errorText = tr("ERROR: Unable to open AppStream metadata pool");
         DDialog dialog(errorText, error);
-        qDebug() << errorText << error;
+        qDebug() << "[ ERROR ]" << errorText << error;
         dialog.setIcon(DStyle().standardIcon(QStyle::SP_MessageBoxCritical));
         dialog.addButton(tr("OK"));
         dialog.exec();
@@ -41,6 +43,8 @@ AppStreamHelper::AppStreamHelper()
             appList.insert(pkgName, app);
         }
     }
+
+    qDebug() << "[ APPSTREAM ] Loaded metadata pool";
 }
 
 AppStreamHelper::appData AppStreamHelper::getAppData(QString package)
