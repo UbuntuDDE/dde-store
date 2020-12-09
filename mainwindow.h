@@ -6,6 +6,7 @@
 #include <DButtonBox>
 #include <QStackedWidget>
 #include <QKeyEvent>
+#include <QSystemTrayIcon>
 #include "pages/itempage.h"
 
 DWIDGET_USE_NAMESPACE
@@ -34,6 +35,8 @@ private:
     DButtonBoxButton *backButton;
     DButtonBoxButton *forwardButton;
     bool buttonNavigated = false;
+    QSystemTrayIcon *trayIcon = new QSystemTrayIcon(QIcon::fromTheme("deepin-app-store"));
+    QWidget *updatesPage;
     
 protected Q_SLOTS:
     void closeEvent(QCloseEvent *event);

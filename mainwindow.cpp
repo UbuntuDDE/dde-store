@@ -9,6 +9,7 @@
 #include <DSearchEdit>
 #include <DSettingsDialog>
 #include <DDialog>
+#include <DMenu>
 #include <QHBoxLayout>
 #include <QLabel>
 
@@ -21,11 +22,38 @@ MainWindow::MainWindow(QWidget *parent)
     layout->setContentsMargins(0, 0, 0, 0);
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
-    
+
+    UpdatesPage *updates = new UpdatesPage(this);
+    updatesPage = updates;
+
+    DMenu *trayIconMenu = new DMenu;
+    QAction *checkUpdatesAction = new QAction("Check for updates");
+    trayIconMenu->addAction(checkUpdatesAction);
+    QAction *quitAction = new QAction("Quit");
+    trayIconMenu->addAction(quitAction);
+    trayIcon->setContextMenu(trayIconMenu);
+    trayIcon->setToolTip("DDE Store");
+
+    connect(quitAction, &QAction::triggered, this, &MainWindow::close);
+
+    connect(updates, &UpdatesPage::cantRefresh, this, [ = ] {
+        checkUpdatesAction->setDisabled(true);
+    });
+
+    connect(updates, &UpdatesPage::canRefresh, this, [ = ] {
+        checkUpdatesAction->setDisabled(false);
+    });
+
+    connect(checkUpdatesAction, &QAction::triggered, updates, &UpdatesPage::refresh);
+
+    connect(trayIcon, &QSystemTrayIcon::activated, this, [ = ] {
+        show();
+        trayIcon->hide();
+    });
+
+        
     initTitlebar();
     initNav();
-
-    RatingsHelper::instance();
 
     layout->addWidget(navView, 1);
     layout->addWidget(stackedWidget, 7);
@@ -119,7 +147,7 @@ void MainWindow::initNav()
     addPage(tr("Music"), "music.svg", new CategoryPage(this, tr("Music"), "Music"));
     addPage(tr("System"), "system.svg", new CategoryPage(this, tr("System"), "System"));
     addPage(tr("Installed"), "installed.svg", new CategoryPage(this, tr("Installed"), "Installed"));
-    addPage("Updates", "updates.svg", new UpdatesPage(this));
+    addPage("Updates", "updates.svg", updatesPage);
 
     connect(navView, qOverload<const QModelIndex &>(&DListView::currentChanged), this, [ = ] (const QModelIndex &previous) {
         if (navView->currentIndex().row() != -1) {
@@ -219,6 +247,13 @@ void MainWindow::openItem(QString app)
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    if (!trayIcon->isVisible()) {
+        event->ignore();
+        trayIcon->show();
+        hide();
+        return;
+    }
+
     if (PackageKitHelper::instance()->preventClose) {
         DDialog dialog;
         dialog.setIcon(style()->standardIcon(QStyle::SP_MessageBoxCritical));

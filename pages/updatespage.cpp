@@ -35,6 +35,7 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
     });
     refreshButton->setIconSize(QSize(20, 20));
     refreshButton->setDisabled(true);
+    Q_EMIT(cantRefresh());
     list->addHeaderWidget(refreshButton);
 
     updateButton = new DSuggestButton(tr("Update All"));
@@ -62,20 +63,16 @@ void UpdatesPage::loadData(QHash<QString, int> apps)
         updateButton->setDisabled(true);
         updateButton->setText(tr("Updating..."));
         refreshButton->setDisabled(true);
+        Q_EMIT(cantRefresh());
         PackageKitHelper::instance()->update(this, apps.keys());
     });
 
-    connect(refreshButton, &DIconButton::clicked, this, [ = ] {
-        updateButton->setDisabled(true);
-        refreshButton->setDisabled(true);
-        list->clear();
-        list->unload();
-        PackageKitHelper::instance()->getUpdates(this);
-    });
+    connect(refreshButton, &DIconButton::clicked, this, &UpdatesPage::refresh);
 
     updateButton->setText(tr("Update All (%1)").arg(locale.formattedDataSize(totalSize)));
     updateButton->setDisabled(false);
     refreshButton->setDisabled(false);
+    Q_EMIT(canRefresh());
 
     if (apps.size() == 0) {
         updateButton->setDisabled(true);
@@ -122,4 +119,14 @@ void UpdatesPage::updatePercent(QString package, uint percent)
     } else {
         list->editItemText(systemUpdatesItem, QString::number(percent) + "%");
     }
+}
+
+void UpdatesPage::refresh()
+{
+    updateButton->setDisabled(true);
+    refreshButton->setDisabled(true);
+    Q_EMIT(cantRefresh());
+    list->clear();
+    list->unload();
+    PackageKitHelper::instance()->getUpdates(this);
 }
