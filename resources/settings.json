@@ -26,6 +26,18 @@
                     ]
                 },
                 {
+                    "key": "behaviour",
+                    "name": "Behaviour",
+                    "options": [
+                        {
+                            "key": "tray",
+                            "text": "Minimize to tray on exit",
+                            "type": "checkbox",
+                            "default": true
+                        }
+                    ]
+                },
+                {
                     "key": "notifications",
                     "name": "Notifications",
                     "options": [

@@ -247,11 +247,13 @@ void MainWindow::openItem(QString app)
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    if (!trayIcon->isVisible()) {
-        event->ignore();
-        trayIcon->show();
-        hide();
-        return;
+    if (settings::instance()->tray()) {
+        if (!trayIcon->isVisible()) {
+            event->ignore();
+            trayIcon->show();
+            hide();
+            return;
+        }
     }
 
     if (PackageKitHelper::instance()->preventClose) {

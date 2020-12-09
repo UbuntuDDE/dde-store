@@ -19,6 +19,7 @@ public:
     bool notifyUninstall();
     bool notifyAvailableUpdates();
     bool notifyFinishedUpdates();
+    bool tray();
 
 private:
     static settings *currentInstance;

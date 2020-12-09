@@ -57,3 +57,8 @@ bool settings::notifyFinishedUpdates()
 {
     return appsettings->option("basic.notifications.finishedupdates")->value().toBool();
 }
+
+bool settings::tray()
+{
+    return appsettings->option("basic.behaviour.tray")->value().toBool();
+}
