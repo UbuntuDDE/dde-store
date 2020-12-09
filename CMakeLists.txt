@@ -25,33 +25,20 @@ include_directories(
 file(GLOB TS_FILES ./translations/*.ts)
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 
-add_executable(dde-store
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    pages/homepage.cpp
-    pages/homepage.h
-    pages/itempage.cpp
-    pages/itempage.h
-    pages/categorypage.cpp
-    pages/categorypage.h
-    pages/updatespage.cpp
-    pages/updatespage.h
-    backend/appstreamhelper.cpp
-    backend/appstreamhelper.h
-    backend/packagekithelper.cpp
-    backend/packagekithelper.h 
-    backend/ratingshelper.cpp
-    backend/ratingshelper.h
-    backend/settings.cpp
-    backend/settings.h
-    widgets/gallery.cpp
-    widgets/gallery.h
-    widgets/stars.cpp
-    widgets/stars.h
-    widgets/list.cpp
-    widgets/list.h
-    resources.qrc
+file(GLOB SRC
+    "*.cpp"
+    "*.h"
+    "*.qrc"
+    "backend/*.cpp"
+    "backend/*.h"
+    "pages/*.cpp"
+    "pages/*.h"
+    "widgets/*.cpp"
+    "widgets/*.h"
+)
+
+add_executable(${PROJECT_NAME}
+    ${SRC}
     ${TS_FILES}
     ${QM_FILES}
 )
