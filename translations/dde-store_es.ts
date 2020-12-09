@@ -4,12 +4,12 @@
 <context>
     <name>AppStreamHelper</name>
     <message>
-        <location filename="../backend/appstreamhelper.cpp" line="28"/>
+        <location filename="../backend/appstreamhelper.cpp" line="30"/>
         <source>ERROR: Unable to open AppStream metadata pool</source>
         <translation>ERROR: No se puede abir Appstream metadata pool</translation>
     </message>
     <message>
-        <location filename="../backend/appstreamhelper.cpp" line="32"/>
+        <location filename="../backend/appstreamhelper.cpp" line="34"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -19,17 +19,17 @@
     <message>
         <location filename="../pages/categorypage.cpp" line="14"/>
         <source>Sort by</source>
-        <translation>Ordenar por</translation>
+        <translation>Ordenar</translation>
     </message>
     <message>
         <location filename="../pages/categorypage.cpp" line="17"/>
         <source>Alphabetical</source>
-        <translation>Alfabeticamente</translation>
+        <translation>Alfabéticamente</translation>
     </message>
     <message>
         <location filename="../pages/categorypage.cpp" line="18"/>
         <source>Ratings</source>
-        <translation>Calificacion</translation>
+        <translation>Calificación</translation>
     </message>
     <message>
         <location filename="../pages/categorypage.cpp" line="38"/>
@@ -42,7 +42,7 @@
     <message>
         <location filename="../pages/homepage.cpp" line="50"/>
         <source>Messaging</source>
-        <translation>Comunicacion</translation>
+        <translation>Comunicación</translation>
     </message>
     <message>
         <location filename="../pages/homepage.cpp" line="51"/>
@@ -62,12 +62,12 @@
     <message>
         <location filename="../pages/homepage.cpp" line="54"/>
         <source>Office</source>
-        <translation>Ofimatica</translation>
+        <translation>Ofimática</translation>
     </message>
     <message>
         <location filename="../pages/homepage.cpp" line="55"/>
         <source>Graphics</source>
-        <translation>Graficos</translation>
+        <translation>Gráficos</translation>
     </message>
     <message>
         <location filename="../pages/homepage.cpp" line="56"/>
@@ -77,7 +77,7 @@
     <message>
         <location filename="../pages/homepage.cpp" line="57"/>
         <source>Music</source>
-        <translation>Musica</translation>
+        <translation>Música</translation>
     </message>
     <message>
         <location filename="../pages/homepage.cpp" line="58"/>
@@ -87,7 +87,7 @@
     <message>
         <location filename="../pages/homepage.cpp" line="91"/>
         <source>View More</source>
-        <translation>Ver mas</translation>
+        <translation>Ver más</translation>
     </message>
 </context>
 <context>
@@ -100,7 +100,7 @@
     <message>
         <location filename="../pages/itempage.cpp" line="86"/>
         <source>No description provided.</source>
-        <translation>Sin descripcion brindada.</translation>
+        <translation>Sin descripción brindada.</translation>
     </message>
     <message>
         <location filename="../pages/itempage.cpp" line="101"/>
@@ -118,7 +118,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="87"/>
         <source>Settings</source>
-        <translation>Configuracion</translation>
+        <translation>Configuración</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="111"/>
@@ -128,7 +128,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="112"/>
         <source>Messaging</source>
-        <translation>Comunicacion</translation>
+        <translation>Comunicación</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="113"/>
@@ -148,12 +148,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="116"/>
         <source>Office</source>
-        <translation>Ofimatica</translation>
+        <translation>Ofimática</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="117"/>
         <source>Graphics</source>
-        <translation>Graficos</translation>
+        <translation>Gráficos</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="118"/>
@@ -163,7 +163,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="119"/>
         <source>Music</source>
-        <translation>Musica</translation>
+        <translation>Música</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="120"/>
@@ -189,27 +189,27 @@
 <context>
     <name>PackageKitHelper</name>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="60"/>
+        <location filename="../backend/packagekithelper.cpp" line="66"/>
         <source>Updates Available</source>
         <translation>Actualizaciones disponibles</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="124"/>
+        <location filename="../backend/packagekithelper.cpp" line="133"/>
         <source>Installed &quot;%1&quot;</source>
         <translation>Instalado &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="144"/>
+        <location filename="../backend/packagekithelper.cpp" line="156"/>
         <source>Uninstalled &quot;%1&quot;</source>
         <translation>Desinstalado &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="164"/>
+        <location filename="../backend/packagekithelper.cpp" line="179"/>
         <source>Updates Installed</source>
         <translation>Actualizaciones instaladas</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="172"/>
+        <location filename="../backend/packagekithelper.cpp" line="188"/>
         <source>PackageKit Error</source>
         <translation>Error de PackageKit</translation>
     </message>

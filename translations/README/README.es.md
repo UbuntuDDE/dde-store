@@ -23,7 +23,7 @@ sudo apt-get install dde-store
 sudo pacman -S dde-store
 ```
 
-### Haciéndolo desde la fuente
+### Construyéndolo desde la fuente
 **Dependencias (Ubuntu)**
 - cmake
 - qtbase5-dev
@@ -34,15 +34,15 @@ sudo pacman -S dde-store
 - libpackagekitqt5-dev
 - libappstreamqt-dev
 
-**Haciéndolo en Ubuntu**
+**Construyéndolo en Ubuntu**
 
-Para hacerlo en Ubuntu, se necesita el PPA de UbuntuDDE porque `libdtkgui-dev` no está disponible en el repositorio principal.
+Para construirlo en Ubuntu, se necesita el PPA de UbuntuDDE porque `libdtkgui-dev` no está disponible en el repositorio principal.
 ```
 sudo add-apt-repository ppa:ubuntudde-dev/stable
 sudo apt-get update
 ```
 
-**Haciéndolo**
+**Construyéndolo**
 ```
 git clone https://github.com/dekzi/dde-store.git
 cd dde-store
