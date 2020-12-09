@@ -116,72 +116,82 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="87"/>
+        <location filename="../mainwindow.cpp" line="30"/>
+        <source>Check for updates</source>
+        <translation>Check for updates</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="32"/>
+        <source>Quit</source>
+        <translation>Quit</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="115"/>
         <source>Settings</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="111"/>
+        <location filename="../mainwindow.cpp" line="139"/>
         <source>Home</source>
         <translation>Home</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="112"/>
+        <location filename="../mainwindow.cpp" line="140"/>
         <source>Messaging</source>
         <translation>Messaging</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="113"/>
+        <location filename="../mainwindow.cpp" line="141"/>
         <source>Internet</source>
         <translation>Internet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="114"/>
+        <location filename="../mainwindow.cpp" line="142"/>
         <source>Games</source>
         <translation>Games</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="115"/>
+        <location filename="../mainwindow.cpp" line="143"/>
         <source>Development</source>
         <translation>Development</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="116"/>
+        <location filename="../mainwindow.cpp" line="144"/>
         <source>Office</source>
         <translation>Office</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="117"/>
+        <location filename="../mainwindow.cpp" line="145"/>
         <source>Graphics</source>
         <translation>Graphics</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="118"/>
+        <location filename="../mainwindow.cpp" line="146"/>
         <source>Video</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="119"/>
+        <location filename="../mainwindow.cpp" line="147"/>
         <source>Music</source>
         <translation>Music</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="120"/>
+        <location filename="../mainwindow.cpp" line="148"/>
         <source>System</source>
         <translation>System</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="121"/>
+        <location filename="../mainwindow.cpp" line="149"/>
         <source>Installed</source>
         <translation>Installed</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="225"/>
+        <location filename="../mainwindow.cpp" line="260"/>
         <source>Cannot close while app is being installed</source>
         <translation>Cannot close while app is being installed</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="226"/>
+        <location filename="../mainwindow.cpp" line="261"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -232,17 +242,17 @@
         <translation>System Updates</translation>
     </message>
     <message>
-        <location filename="../pages/updatespage.cpp" line="40"/>
+        <location filename="../pages/updatespage.cpp" line="41"/>
         <source>Update All</source>
         <translation>Update All</translation>
     </message>
     <message>
-        <location filename="../pages/updatespage.cpp" line="63"/>
+        <location filename="../pages/updatespage.cpp" line="64"/>
         <source>Updating...</source>
         <translation>Updating...</translation>
     </message>
     <message>
-        <location filename="../pages/updatespage.cpp" line="76"/>
+        <location filename="../pages/updatespage.cpp" line="72"/>
         <source>Update All (%1)</source>
         <translation>Update All (%1)</translation>
     </message>

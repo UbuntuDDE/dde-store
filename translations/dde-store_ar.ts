@@ -116,72 +116,82 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="87"/>
+        <location filename="../mainwindow.cpp" line="30"/>
+        <source>Check for updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="32"/>
+        <source>Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="115"/>
         <source>Settings</source>
         <translation>الإعدادات</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="111"/>
+        <location filename="../mainwindow.cpp" line="139"/>
         <source>Home</source>
         <translation>الرئيسية</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="112"/>
+        <location filename="../mainwindow.cpp" line="140"/>
         <source>Messaging</source>
         <translation>المراسلة</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="113"/>
+        <location filename="../mainwindow.cpp" line="141"/>
         <source>Internet</source>
         <translation>الإنترنت</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="114"/>
+        <location filename="../mainwindow.cpp" line="142"/>
         <source>Games</source>
         <translation>الألعاب</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="115"/>
+        <location filename="../mainwindow.cpp" line="143"/>
         <source>Development</source>
         <translation>التطوير</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="116"/>
+        <location filename="../mainwindow.cpp" line="144"/>
         <source>Office</source>
         <translation>المكتب</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="117"/>
+        <location filename="../mainwindow.cpp" line="145"/>
         <source>Graphics</source>
         <translation>الصور</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="118"/>
+        <location filename="../mainwindow.cpp" line="146"/>
         <source>Video</source>
         <translation>الفيديو</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="119"/>
+        <location filename="../mainwindow.cpp" line="147"/>
         <source>Music</source>
         <translation>الموسيقى</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="120"/>
+        <location filename="../mainwindow.cpp" line="148"/>
         <source>System</source>
         <translation>النظام</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="121"/>
+        <location filename="../mainwindow.cpp" line="149"/>
         <source>Installed</source>
         <translation>البرامج المثبتة</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="225"/>
+        <location filename="../mainwindow.cpp" line="260"/>
         <source>Cannot close while app is being installed</source>
         <translation>يتعذر الإغلاق خلال تثبيت البرامج</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="226"/>
+        <location filename="../mainwindow.cpp" line="261"/>
         <source>OK</source>
         <translation>موافق</translation>
     </message>
@@ -232,17 +242,17 @@
         <translation>تحديثات النظام</translation>
     </message>
     <message>
-        <location filename="../pages/updatespage.cpp" line="40"/>
+        <location filename="../pages/updatespage.cpp" line="41"/>
         <source>Update All</source>
         <translation>جميع التحديثات</translation>
     </message>
     <message>
-        <location filename="../pages/updatespage.cpp" line="63"/>
+        <location filename="../pages/updatespage.cpp" line="64"/>
         <source>Updating...</source>
         <translation>يتم التحديث...</translation>
     </message>
     <message>
-        <location filename="../pages/updatespage.cpp" line="76"/>
+        <location filename="../pages/updatespage.cpp" line="72"/>
         <source>Update All (%1)</source>
         <translation>تحديث جميع (%1)</translation>
     </message>

@@ -27,9 +27,9 @@ MainWindow::MainWindow(QWidget *parent)
     updatesPage = updates;
 
     DMenu *trayIconMenu = new DMenu;
-    QAction *checkUpdatesAction = new QAction("Check for updates");
+    QAction *checkUpdatesAction = new QAction(tr("Check for updates"));
     trayIconMenu->addAction(checkUpdatesAction);
-    QAction *quitAction = new QAction("Quit");
+    QAction *quitAction = new QAction(tr("Quit"));
     trayIconMenu->addAction(quitAction);
     trayIcon->setContextMenu(trayIconMenu);
     trayIcon->setToolTip("DDE Store");
