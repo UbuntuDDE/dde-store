@@ -4,12 +4,12 @@
 <context>
     <name>AppStreamHelper</name>
     <message>
-        <location filename="../backend/appstreamhelper.cpp" line="28"/>
+        <location filename="../backend/appstreamhelper.cpp" line="30"/>
         <source>ERROR: Unable to open AppStream metadata pool</source>
         <translation>ERROR: Unable to open AppStream metadata pool</translation>
     </message>
     <message>
-        <location filename="../backend/appstreamhelper.cpp" line="32"/>
+        <location filename="../backend/appstreamhelper.cpp" line="34"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -189,27 +189,27 @@
 <context>
     <name>PackageKitHelper</name>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="60"/>
+        <location filename="../backend/packagekithelper.cpp" line="66"/>
         <source>Updates Available</source>
         <translation>Updates Available</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="124"/>
+        <location filename="../backend/packagekithelper.cpp" line="133"/>
         <source>Installed &quot;%1&quot;</source>
         <translation>Installed &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="144"/>
+        <location filename="../backend/packagekithelper.cpp" line="156"/>
         <source>Uninstalled &quot;%1&quot;</source>
         <translation>Uninstalled &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="164"/>
+        <location filename="../backend/packagekithelper.cpp" line="179"/>
         <source>Updates Installed</source>
         <translation>Updates Installed</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="172"/>
+        <location filename="../backend/packagekithelper.cpp" line="188"/>
         <source>PackageKit Error</source>
         <translation>PackageKit Error</translation>
     </message>
