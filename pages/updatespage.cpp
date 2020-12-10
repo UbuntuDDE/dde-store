@@ -89,15 +89,15 @@ void UpdatesPage::loadData(QHash<QString, int> apps)
     }
 
     for (QString app : apps.keys()) {
-        app = PackageKitHelper::instance()->nameFromID(app);
-        if (settings::instance()->nonApps() == 0) {
-            if (AppStreamHelper::instance()->hasAppData(app)) {
-                appUpdates << app;
-            } else {
-                systemUpdates << app;
-            }
-        } else {
+        if (AppStreamHelper::instance()->hasAppData(app)) {
+            app = PackageKitHelper::instance()->nameFromID(app);
             appUpdates << app;
+        } else {
+            if (settings::instance()->nonApps() == 0) {
+                systemUpdates << app;
+            } else {
+                appUpdates << app;
+            }
         }
     }
     appUpdates.sort();
@@ -111,7 +111,7 @@ void UpdatesPage::loadData(QHash<QString, int> apps)
         list->addItem(systemUpdatesItem, QIcon::fromTheme("application-x-executable"));
         QString popupText;
         for (QString app : systemUpdates) {
-            popupText.append("<br><b>" + app + "</b> - " + locale.formattedDataSize(apps.value(app)));
+            popupText.append("<br><b>" + PackageKitHelper::instance()->nameFromID(app) + "</b> - " + locale.formattedDataSize(apps.value(app)));
         }
         systemUpdatesPopup = new DDialog(systemUpdatesItem, popupText);
         systemUpdatesPopup->setIcon(style()->standardIcon(QStyle::SP_MessageBoxInformation));
@@ -124,6 +124,8 @@ void UpdatesPage::updatePercent(QString package, uint percent)
 {
     if (appUpdates.contains(package)) {
         list->editItemText(package, QString::number(percent) + "%");
+    } else if (appUpdates.contains(PackageKitHelper::instance()->nameFromID(package))) {
+        list->editItemText(PackageKitHelper::instance()->nameFromID(package), QString::number(percent) + "%");
     } else {
         list->editItemText(systemUpdatesItem, QString::number(percent) + "%");
     }
