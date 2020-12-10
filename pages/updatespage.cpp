@@ -3,6 +3,7 @@
 #include "backend/appstreamhelper.h"
 #include "backend/settings.h"
 #include <QVBoxLayout>
+#include <QTimer>
 #include <DGuiApplicationHelper>
 
 UpdatesPage::UpdatesPage(MainWindow *parent)
@@ -45,6 +46,10 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
     PackageKitHelper::instance()->getUpdates(this);
 
     layout->addWidget(list);
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &UpdatesPage::refresh);
+    timer->start(3600000);
 }
 
 void UpdatesPage::loadData(QHash<QString, int> apps)
@@ -123,10 +128,12 @@ void UpdatesPage::updatePercent(QString package, uint percent)
 
 void UpdatesPage::refresh()
 {
-    updateButton->setDisabled(true);
-    refreshButton->setDisabled(true);
-    Q_EMIT(cantRefresh());
-    list->clear();
-    list->unload();
-    PackageKitHelper::instance()->getUpdates(this);
+    if (refreshButton->isEnabled()) {
+        updateButton->setDisabled(true);
+        refreshButton->setDisabled(true);
+        Q_EMIT(cantRefresh());
+        list->clear();
+        list->unload();
+        PackageKitHelper::instance()->getUpdates(this);
+    }
 }
