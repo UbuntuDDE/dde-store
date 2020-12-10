@@ -20,6 +20,7 @@ public:
     bool notifyAvailableUpdates();
     bool notifyFinishedUpdates();
     bool tray();
+    int updateTime();
 
 private:
     static settings *currentInstance;

@@ -62,3 +62,8 @@ bool settings::tray()
 {
     return appsettings->option("basic.behaviour.tray")->value().toBool();
 }
+
+int settings::updateTime()
+{
+    return appsettings->option("basic.behaviour.updatetime")->value().toInt();
+}

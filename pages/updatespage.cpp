@@ -47,9 +47,11 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
 
     layout->addWidget(list);
 
-    QTimer *timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &UpdatesPage::refresh);
-    timer->start(3600000);
+    if (!settings::instance()->updateTime() == 1) {
+        QTimer *timer = new QTimer(this);
+        connect(timer, &QTimer::timeout, this, &UpdatesPage::refresh);
+        timer->start(3600000);
+    }
 }
 
 void UpdatesPage::loadData(QHash<QString, int> apps)
