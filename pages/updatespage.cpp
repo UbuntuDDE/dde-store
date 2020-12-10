@@ -89,6 +89,7 @@ void UpdatesPage::loadData(QHash<QString, int> apps)
     }
 
     for (QString app : apps.keys()) {
+        app = PackageKitHelper::instance()->nameFromID(app);
         if (settings::instance()->nonApps() == 0) {
             if (AppStreamHelper::instance()->hasAppData(app)) {
                 appUpdates << app;

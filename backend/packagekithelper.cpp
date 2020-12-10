@@ -192,3 +192,8 @@ void PackageKitHelper::error(Transaction::Error err, const QString &error)
     dialog.addButton("OK");
     dialog.exec();
 }
+
+QString PackageKitHelper::nameFromID(QString ID)
+{
+    return Transaction::packageName(ID);
+}
