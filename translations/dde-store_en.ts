@@ -40,52 +40,52 @@
 <context>
     <name>HomePage</name>
     <message>
-        <location filename="../pages/homepage.cpp" line="50"/>
+        <location filename="../pages/homepage.cpp" line="48"/>
         <source>Messaging</source>
         <translation>Messaging</translation>
     </message>
     <message>
-        <location filename="../pages/homepage.cpp" line="51"/>
+        <location filename="../pages/homepage.cpp" line="49"/>
         <source>Internet</source>
         <translation>Internet</translation>
     </message>
     <message>
-        <location filename="../pages/homepage.cpp" line="52"/>
+        <location filename="../pages/homepage.cpp" line="50"/>
         <source>Games</source>
         <translation>Games</translation>
     </message>
     <message>
-        <location filename="../pages/homepage.cpp" line="53"/>
+        <location filename="../pages/homepage.cpp" line="51"/>
         <source>Development</source>
         <translation>Development</translation>
     </message>
     <message>
-        <location filename="../pages/homepage.cpp" line="54"/>
+        <location filename="../pages/homepage.cpp" line="52"/>
         <source>Office</source>
         <translation>Office</translation>
     </message>
     <message>
-        <location filename="../pages/homepage.cpp" line="55"/>
+        <location filename="../pages/homepage.cpp" line="53"/>
         <source>Graphics</source>
         <translation>Graphics</translation>
     </message>
     <message>
-        <location filename="../pages/homepage.cpp" line="56"/>
+        <location filename="../pages/homepage.cpp" line="54"/>
         <source>Video</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../pages/homepage.cpp" line="57"/>
+        <location filename="../pages/homepage.cpp" line="55"/>
         <source>Music</source>
         <translation>Music</translation>
     </message>
     <message>
-        <location filename="../pages/homepage.cpp" line="58"/>
+        <location filename="../pages/homepage.cpp" line="56"/>
         <source>System</source>
         <translation>System</translation>
     </message>
     <message>
-        <location filename="../pages/homepage.cpp" line="91"/>
+        <location filename="../pages/homepage.cpp" line="89"/>
         <source>View More</source>
         <translation>View More</translation>
     </message>
@@ -116,82 +116,82 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="30"/>
+        <location filename="../mainwindow.cpp" line="33"/>
         <source>Check for updates</source>
         <translation>Check for updates</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="32"/>
+        <location filename="../mainwindow.cpp" line="34"/>
         <source>Quit</source>
         <translation>Quit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="115"/>
+        <location filename="../mainwindow.cpp" line="131"/>
         <source>Settings</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="139"/>
+        <location filename="../mainwindow.cpp" line="158"/>
         <source>Home</source>
         <translation>Home</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="140"/>
+        <location filename="../mainwindow.cpp" line="159"/>
         <source>Messaging</source>
         <translation>Messaging</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="141"/>
+        <location filename="../mainwindow.cpp" line="160"/>
         <source>Internet</source>
         <translation>Internet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="142"/>
+        <location filename="../mainwindow.cpp" line="161"/>
         <source>Games</source>
         <translation>Games</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="143"/>
+        <location filename="../mainwindow.cpp" line="162"/>
         <source>Development</source>
         <translation>Development</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="144"/>
+        <location filename="../mainwindow.cpp" line="163"/>
         <source>Office</source>
         <translation>Office</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="145"/>
+        <location filename="../mainwindow.cpp" line="164"/>
         <source>Graphics</source>
         <translation>Graphics</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="146"/>
+        <location filename="../mainwindow.cpp" line="165"/>
         <source>Video</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="147"/>
+        <location filename="../mainwindow.cpp" line="166"/>
         <source>Music</source>
         <translation>Music</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="167"/>
         <source>System</source>
         <translation>System</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="149"/>
+        <location filename="../mainwindow.cpp" line="168"/>
         <source>Installed</source>
         <translation>Installed</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="262"/>
+        <location filename="../mainwindow.cpp" line="294"/>
         <source>Cannot close while app is being installed</source>
         <translation>Cannot close while app is being installed</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="263"/>
+        <location filename="../mainwindow.cpp" line="295"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -227,62 +227,62 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../backend/settings.cpp" line="76"/>
+        <location filename="../backend/settings.cpp" line="74"/>
         <source>Basic</source>
         <translation>Basic</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="77"/>
+        <location filename="../backend/settings.cpp" line="75"/>
         <source>View</source>
         <translation>View</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="78"/>
+        <location filename="../backend/settings.cpp" line="76"/>
         <source>Behaviour</source>
         <translation>Behaviour</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="79"/>
+        <location filename="../backend/settings.cpp" line="77"/>
         <source>Notifications</source>
         <translation>Notifications</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="80"/>
+        <location filename="../backend/settings.cpp" line="78"/>
         <source>Show non-app updates as</source>
         <translation>Show non-app updates as</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="81"/>
+        <location filename="../backend/settings.cpp" line="79"/>
         <source>Max apps per list</source>
         <translation>Max apps per list</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="82"/>
+        <location filename="../backend/settings.cpp" line="80"/>
         <source>Minimize to tray on exit</source>
         <translation>Minimize to tray on exit</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="83"/>
+        <location filename="../backend/settings.cpp" line="81"/>
         <source>Check for updates</source>
         <translation>Check for updates</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="84"/>
+        <location filename="../backend/settings.cpp" line="82"/>
         <source>App installed</source>
         <translation>App installed</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="85"/>
+        <location filename="../backend/settings.cpp" line="83"/>
         <source>App uninstalled</source>
         <translation>App uninstalled</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="86"/>
+        <location filename="../backend/settings.cpp" line="84"/>
         <source>Available updates</source>
         <translation>Available updates</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="87"/>
+        <location filename="../backend/settings.cpp" line="85"/>
         <source>Finished updates</source>
         <translation>Finished updates</translation>
     </message>
@@ -336,22 +336,22 @@
 <context>
     <name>settings</name>
     <message>
-        <location filename="../backend/settings.cpp" line="30"/>
+        <location filename="../backend/settings.cpp" line="28"/>
         <source>&quot;System Updates&quot;</source>
         <translation>&quot;System Updates&quot;</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="30"/>
+        <location filename="../backend/settings.cpp" line="28"/>
         <source>Individual Packages</source>
         <translation>Individual Packages</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="31"/>
+        <location filename="../backend/settings.cpp" line="29"/>
         <source>Hourly</source>
         <translation>Hourly</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="31"/>
+        <location filename="../backend/settings.cpp" line="29"/>
         <source>Never</source>
         <translation>Never</translation>
     </message>
