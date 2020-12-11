@@ -186,6 +186,11 @@
         <translation>Instalados</translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="288"/>
+        <source>DDE Store continue running in background, you can disable this in the option menu.</source>
+        <translation>DDE Store sigue ejecutándose en segundo plano, puedes deshabilitar esto en el menú de opciones.</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.cpp" line="301"/>
         <source>Cannot close while app is being installed</source>
         <translation>No se puede cerrar mientras la aplicacion esta siendo instalada</translation>

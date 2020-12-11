@@ -186,6 +186,11 @@
         <translation>Yüklenenler</translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="288"/>
+        <source>DDE Store continue running in background, you can disable this in the option menu.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mainwindow.cpp" line="301"/>
         <source>Cannot close while app is being installed</source>
         <translation>Uygulama yüklenirken kapatılamaz</translation>

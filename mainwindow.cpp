@@ -285,7 +285,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     if (settings::instance()->tray()) {
         if (!trayIcon->isVisible()) {
             QMessageBox trayexecute;
-            trayexecute.setText("DDE Store continue running in background, you can disable this in the option menu.");
+            trayexecute.setText(tr("DDE Store continue running in background, you can disable this in the option menu."));
             trayexecute.exec();
 
             event->ignore();
