@@ -118,12 +118,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="33"/>
         <source>Check for updates</source>
-        <translation type="unfinished">Buscar actualizaciones</translation>
+        <translation>Buscar actualizaciones</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="34"/>
         <source>Quit</source>
-        <translation type="unfinished">Salir</translation>
+        <translation>Salir</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="131"/>
@@ -229,62 +229,62 @@
     <message>
         <location filename="../backend/settings.cpp" line="74"/>
         <source>Basic</source>
-        <translation type="unfinished">Básico</translation>
+        <translation>Básico</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="75"/>
         <source>View</source>
-        <translation type="unfinished">Vista</translation>
+        <translation>Vista</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="76"/>
         <source>Behaviour</source>
-        <translation type="unfinished">Comportamiento</translation>
+        <translation>Comportamiento</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="77"/>
         <source>Notifications</source>
-        <translation type="unfinished">Notificaciones</translation>
+        <translation>Notificaciones</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="78"/>
         <source>Show non-app updates as</source>
-        <translation type="unfinished">Mostrar actualizaciones de no-aplicaciones</translation>
+        <translation>Mostrar actualizaciones de no-aplicaciones</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="79"/>
         <source>Max apps per list</source>
-        <translation type="unfinished">Cantidad máxima de apps a mostrar por lista</translation>
+        <translation>Cantidad máxima de apps a mostrar por lista</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="80"/>
         <source>Minimize to tray on exit</source>
-        <translation type="unfinished">Minimizar a la bandeja del sistema al salir</translation>
+        <translation>Minimizar a la bandeja del sistema al salir</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="81"/>
         <source>Check for updates</source>
-        <translation type="unfinished">Buscar actualizaciones</translation>
+        <translation>Buscar actualizaciones</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="82"/>
         <source>App installed</source>
-        <translation type="unfinished">Aplicación instaladas</translation>
+        <translation>Aplicación instaladas</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="83"/>
         <source>App uninstalled</source>
-        <translation type="unfinished">Aplicaciones desinstaladas</translation>
+        <translation>Aplicaciones desinstaladas</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="84"/>
         <source>Available updates</source>
-        <translation type="unfinished">Actualizaciones disponibles</translation>
+        <translation>Actualizaciones disponibles</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="85"/>
         <source>Finished updates</source>
-        <translation type="unfinished">Actualizaciones terminadas</translation>
+        <translation>Actualizaciones terminadas</translation>
     </message>
 </context>
 <context>
@@ -338,22 +338,22 @@
     <message>
         <location filename="../backend/settings.cpp" line="28"/>
         <source>&quot;System Updates&quot;</source>
-        <translation type="unfinished">&quot;Actualizaciones del sistema&quot;</translation>
+        <translation>&quot;Actualizaciones del sistema&quot;</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="28"/>
         <source>Individual Packages</source>
-        <translation type="unfinished">Paquetes individuales</translation>
+        <translation>Paquetes individuales</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="29"/>
         <source>Hourly</source>
-        <translation type="unfinished">Cada hora</translation>
+        <translation>Cada hora</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="29"/>
         <source>Never</source>
-        <translation type="unfinished">Nunca</translation>
+        <translation>Nunca</translation>
     </message>
 </context>
 <context>
