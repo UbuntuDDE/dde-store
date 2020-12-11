@@ -26,6 +26,9 @@ settings::settings() : QObject(qApp)
     Dtk::Core::QSettingBackend *backend = new QSettingBackend(path);
     appsettings = DSettings::fromJsonFile("://resources/settings.json");
     appsettings->setBackend(backend);
+
+    appsettings->option("basic.view.nonapps")->setData("items", QStringList({tr("\"System Updates\""), tr("Individual Packages")}));
+    appsettings->option("basic.behaviour.updatetime")->setData("items", QStringList({tr("Hourly"), tr("Never")}));
 }
 
 int settings::maxItems()
@@ -66,4 +69,20 @@ bool settings::tray()
 int settings::updateTime()
 {
     return appsettings->option("basic.behaviour.updatetime")->value().toInt();
+}
+
+void GenerateSettingTranslate()
+{
+    auto group_basicName = QObject::tr("Basic");
+    auto group_basic_viewName = QObject::tr("View");
+    auto group_basic_behaviourName = QObject::tr("Behaviour");
+    auto group_basic_notificationsName = QObject::tr("Notifications");
+    auto basic_view_nonapps = QObject::tr("Show non-app updates as");
+    auto basic_view_maxitems = QObject::tr("Max apps per list");
+    auto basic_behaviour_tray = QObject::tr("Minimize to tray on exit");
+    auto basic_behaviour_updatetime = QObject::tr("Check for updates");
+    auto basic_notifications_install = QObject::tr("App installed");
+    auto basic_notifications_uninstall = QObject::tr("App uninstalled");
+    auto basic_notifications_availableupdates = QObject::tr("Available updates");
+    auto basic_notifications_finishedupdates = QObject::tr("Finished updates");
 }

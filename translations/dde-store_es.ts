@@ -186,12 +186,12 @@
         <translation>Instalados</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="260"/>
+        <location filename="../mainwindow.cpp" line="262"/>
         <source>Cannot close while app is being installed</source>
         <translation>No se puede cerrar mientras la aplicacion esta siendo instalada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="261"/>
+        <location filename="../mainwindow.cpp" line="263"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -225,34 +225,97 @@
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="../backend/settings.cpp" line="76"/>
+        <source>Basic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="77"/>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="78"/>
+        <source>Behaviour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="79"/>
+        <source>Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="80"/>
+        <source>Show non-app updates as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="81"/>
+        <source>Max apps per list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="82"/>
+        <source>Minimize to tray on exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="83"/>
+        <source>Check for updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="84"/>
+        <source>App installed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="85"/>
+        <source>App uninstalled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="86"/>
+        <source>Available updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="87"/>
+        <source>Finished updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UpdatesPage</name>
     <message>
-        <location filename="../pages/updatespage.cpp" line="13"/>
+        <location filename="../pages/updatespage.cpp" line="14"/>
         <source>Updates</source>
         <translation>Actualizaciones</translation>
     </message>
     <message>
-        <location filename="../pages/updatespage.cpp" line="14"/>
+        <location filename="../pages/updatespage.cpp" line="15"/>
         <source>Up to date</source>
         <translation>Actualizado</translation>
     </message>
     <message>
-        <location filename="../pages/updatespage.cpp" line="16"/>
+        <location filename="../pages/updatespage.cpp" line="17"/>
         <source>System Updates</source>
         <translation>Actualizaciones del sistema</translation>
     </message>
     <message>
-        <location filename="../pages/updatespage.cpp" line="41"/>
+        <location filename="../pages/updatespage.cpp" line="42"/>
         <source>Update All</source>
         <translation>Actualizar todo</translation>
     </message>
     <message>
-        <location filename="../pages/updatespage.cpp" line="64"/>
+        <location filename="../pages/updatespage.cpp" line="71"/>
         <source>Updating...</source>
         <translation>Actualizando...</translation>
     </message>
     <message>
-        <location filename="../pages/updatespage.cpp" line="72"/>
+        <location filename="../pages/updatespage.cpp" line="79"/>
         <source>Update All (%1)</source>
         <translation>Actualizar todo (%1)</translation>
     </message>
@@ -268,6 +331,29 @@
         <location filename="../main.cpp" line="18"/>
         <source>Created by %1</source>
         <translation>Creada por %1</translation>
+    </message>
+</context>
+<context>
+    <name>settings</name>
+    <message>
+        <location filename="../backend/settings.cpp" line="30"/>
+        <source>&quot;System Updates&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="30"/>
+        <source>Individual Packages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="31"/>
+        <source>Hourly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/settings.cpp" line="31"/>
+        <source>Never</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
