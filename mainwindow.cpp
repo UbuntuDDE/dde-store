@@ -70,7 +70,7 @@ void MainWindow::initTitlebar()
         pageHistoryIndex -= 1;
         buttonNavigated = true;
         stackedWidget->setCurrentWidget(pageHistory[pageHistoryIndex]);
-        if (pageHistory[pageHistoryIndex]->objectName() != "ItemPage") {
+        if (pageHistoryIndex < navModel->rowCount()) {
             navView->setCurrentIndex(navModel->index(stackedWidget->indexOf(pageHistory[pageHistoryIndex]), 0));
         }
     });
@@ -82,7 +82,7 @@ void MainWindow::initTitlebar()
         pageHistoryIndex += 1;
         buttonNavigated = true;
         stackedWidget->setCurrentWidget(pageHistory[pageHistoryIndex]);
-        if (pageHistory[pageHistoryIndex]->objectName() != "ItemPage") {
+        if (pageHistoryIndex < navModel->rowCount()) {
             navView->setCurrentIndex(navModel->index(stackedWidget->indexOf(pageHistory[pageHistoryIndex]), 0));
         }
     });
