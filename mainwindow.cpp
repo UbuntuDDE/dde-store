@@ -22,16 +22,21 @@ MainWindow::MainWindow(QWidget *parent)
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
 
+    // Initialize updates page here so tray button works
+
     UpdatesPage *updates = new UpdatesPage(this);
     updatesPage = updates;
 
+    // Initialize tray item and buttons
+
     DMenu *trayIconMenu = new DMenu;
     QAction *checkUpdatesAction = new QAction(tr("Check for updates"));
-    trayIconMenu->addAction(checkUpdatesAction);
     QAction *quitAction = new QAction(tr("Quit"));
-    trayIconMenu->addAction(quitAction);
+    trayIconMenu->addActions({checkUpdatesAction, quitAction});
     trayIcon->setContextMenu(trayIconMenu);
     trayIcon->setToolTip("DDE Store");
+
+    // Set up button actions
 
     connect(quitAction, &QAction::triggered, this, &MainWindow::close);
 
@@ -50,7 +55,8 @@ MainWindow::MainWindow(QWidget *parent)
         trayIcon->hide();
     });
 
-        
+    // Initialize sidebar (navView) and titlebar
+
     initTitlebar();
     initNav();
 
@@ -63,6 +69,8 @@ void MainWindow::initTitlebar()
     DTitlebar *titlebar = this->titlebar();
     titlebar->setIcon(QIcon::fromTheme("deepin-app-store"));
 
+    // Create back button
+
     backButton = new DButtonBoxButton(DStyle::SP_ArrowLeave);
     backButton->setDisabled(true);
     backButton->setFixedSize(36, 36);
@@ -70,15 +78,19 @@ void MainWindow::initTitlebar()
         pageHistoryIndex -= 1;
         buttonNavigated = true;
         stackedWidget->setCurrentWidget(pageHistory[pageHistoryIndex]);
+        // If the new current page has an entry in the sidebar then select that entry
         if (pageHistoryIndex < navModel->rowCount()) {
             navView->setCurrentIndex(navModel->index(stackedWidget->indexOf(pageHistory[pageHistoryIndex]), 0));
         }
     });
 
+    // Create forward button
+
     forwardButton = new DButtonBoxButton(DStyle::SP_ArrowEnter);
     forwardButton->setDisabled(true);
     forwardButton->setFixedSize(36, 36);
     connect(forwardButton, &DButtonBoxButton::clicked, this, [ = ] {
+        // The same as back button, just increases the index rather than decreasing it
         pageHistoryIndex += 1;
         buttonNavigated = true;
         stackedWidget->setCurrentWidget(pageHistory[pageHistoryIndex]);
@@ -87,25 +99,30 @@ void MainWindow::initTitlebar()
         }
     });
 
-    QList<DButtonBoxButton *> buttonList;
-    buttonList << backButton << forwardButton;
+    // Initialize the button box and add the buttons
 
     DButtonBox *buttonBox = new DButtonBox();
-    buttonBox->setButtonList(buttonList, false);
+    buttonBox->setButtonList({backButton, forwardButton}, false);
     buttonBox->setFocusPolicy(Qt::NoFocus);
     titlebar->addWidget(buttonBox, Qt::AlignLeft);
+
+    // Create search box
 
     DSearchEdit *searchBox = new DSearchEdit();
     searchBox->setFixedWidth(300);
     titlebar->addWidget(searchBox);
     connect(searchBox, &DSearchEdit::returnPressed, this, [ = ] {
+        // Create a new category page for the search
         CategoryPage *page = new CategoryPage(this, QString("\"%1\"").arg(searchBox->text()), searchBox->text());
+        // Open it
         stackedWidget->addWidget(page);
         stackedWidget->setCurrentWidget(page);
+        // Clear the sidebar selection
         navView->setCurrentIndex(QModelIndex());
         navView->clearSelection();
     });
     connect(searchBox, &DSearchEdit::searchAborted, this, [ = ] {
+        // Go to homepage when search aborted
         navView->setCurrentIndex(navModel->index(0, 0));
         stackedWidget->setCurrentIndex(0);
     });
@@ -125,6 +142,7 @@ void MainWindow::initTitlebar()
 
 void MainWindow::initNav()
 {
+    // Set up list
     navView->setViewportMargins(QMargins(10, 10, 10, 10));
     navView->setMinimumWidth(188);
     navView->setSpacing(0);
@@ -134,6 +152,8 @@ void MainWindow::initNav()
     navView->setAutoFillBackground(true);
     navView->setModel(navModel);
     navView->setEditTriggers(QListView::NoEditTriggers);
+
+    // Add entries
 
     addPage(tr("Home"), "home.svg", new HomePage(this));
     addPage(tr("Messaging"), "chat.svg", new CategoryPage(this, tr("Messaging"), "InstantMessaging"));
@@ -148,8 +168,11 @@ void MainWindow::initNav()
     addPage(tr("Installed"), "installed.svg", new CategoryPage(this, tr("Installed"), "Installed"));
     addPage("Updates", "updates.svg", updatesPage);
 
+    // When the current entry is changed
     connect(navView, qOverload<const QModelIndex &>(&DListView::currentChanged), this, [ = ] (const QModelIndex &previous) {
+        // If it isn't -1 (-1 means no sidebar entries are selected)
         if (navView->currentIndex().row() != -1) {
+            // If theme is light, set the selected icon to active and the previous one to normal
             if (DGuiApplicationHelper::instance()->themeType() == DGuiApplicationHelper::LightType) {
                 auto currentItem = navModel->itemFromIndex(navView->currentIndex());
                 currentItem->setIcon(QIcon("://resources/icons/active/" + pageIcons.value(currentItem->text())));
@@ -158,8 +181,10 @@ void MainWindow::initNav()
                     previousItem->setIcon(QIcon("://resources/icons/light/" + pageIcons.value(previousItem->text())));
                 }
             }
+            // Open the entrie's widget
             stackedWidget->setCurrentIndex(navView->currentIndex().row());
         } else {
+            // If it is -1 and there is an active sidebar entry, set it to normal
             if (previous.row() != -1) {
                 auto selectedItem = navModel->itemFromIndex(previous);
                 if (DGuiApplicationHelper::instance()->themeType() == DGuiApplicationHelper::LightType) {
@@ -169,9 +194,12 @@ void MainWindow::initNav()
         }
                 
         if (!buttonNavigated) {
+            // Add the page to history and increase index by 1
             pageHistory << stackedWidget->currentWidget();
             pageHistoryIndex += 1;
+            // If the index isn't at the end of the history (the user pressed back)
             if (pageHistoryIndex != pageHistory.length() - 1) {
+                // Remove all entires after this current one
                 for (int i = 0; i < pageHistory.length() - pageHistoryIndex + 1; i++) {
                     pageHistory.removeLast();
                 }
@@ -195,8 +223,10 @@ void MainWindow::initNav()
         }
     });
 
+    // Select homepage by default
     navView->setCurrentIndex(navModel->index(0, 0));
 
+    // Set icon type based on current theme
     connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ] {
         for (int i = 0; i < navModel->rowCount(); i++) {
             QIcon icon;
@@ -232,9 +262,12 @@ void MainWindow::addPage(QString name, QString iconname, QWidget *widget)
 
 void MainWindow::openItem(QString app)
 {
+    // If the item page is in the list
     if (itemPageList.values(app).length() > 0) {
+        // Open it
         stackedWidget->setCurrentWidget(itemPageList.value(app));
     } else {
+        // If not, create the page and add it to the list
         ItemPage *widget = new ItemPage(app);
         stackedWidget->addWidget(widget);
         stackedWidget->setCurrentWidget(widget);
