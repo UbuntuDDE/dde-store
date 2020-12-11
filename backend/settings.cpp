@@ -2,9 +2,7 @@
 #include <QStandardPaths>
 #include <QApplication>
 #include <qsettingbackend.h>
-#include <QDebug>
 #include <DSettingsOption>
-#include <DSettingsGroup>
 
 settings *settings::currentInstance = nullptr;
 

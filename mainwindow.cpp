@@ -3,7 +3,6 @@
 #include "pages/updatespage.h"
 #include "backend/settings.h"
 #include "backend/packagekithelper.h"
-#include "backend/ratingshelper.h"
 #include "pages/categorypage.h"
 #include <DTitlebar>
 #include <DSearchEdit>

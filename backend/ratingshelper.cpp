@@ -3,7 +3,6 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QJsonDocument>
-#include <QJsonObject>
 #include <QtMath>
 #include <QDebug>
 

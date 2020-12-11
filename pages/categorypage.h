@@ -4,10 +4,6 @@
 #include "mainwindow.h"
 #include "widgets/list.h"
 #include <QWidget>
-#include <DStandardItem>
-#include <DLabel>
-
-DWIDGET_USE_NAMESPACE
 
 class CategoryPage : public QWidget
 {

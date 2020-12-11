@@ -9,10 +9,8 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
 #include <QMultiMap>
 #include <DSuggestButton>
-#include <DDialog>
 
 DWIDGET_USE_NAMESPACE
 
