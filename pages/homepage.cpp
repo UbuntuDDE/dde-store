@@ -33,11 +33,11 @@ HomePage::HomePage(MainWindow *parent)
     QFile bannerFile("://resources/featuredbanners.json");
     bannerFile.open(QIODevice::ReadOnly | QIODevice::Text);
     QJsonObject bannerData = QJsonDocument::fromJson(bannerFile.readAll()).object();
-    QList<QPair<QPixmap, QString>> banners;
+    QList<QPair<QString, QString>> banners;
     for (const QString &key : bannerData.keys()) {
         if (!AppStreamHelper::instance()->packageFromID(key).isEmpty()) {
-            QPair<QPixmap, QString> banner;
-            banner.first = QPixmap(bannerData.value(key).toString());
+            QPair<QString, QString> banner;
+            banner.first = bannerData.value(key).toString();
             banner.second = AppStreamHelper::instance()->packageFromID(key);
             banners << banner;
         }

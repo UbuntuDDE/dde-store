@@ -51,7 +51,7 @@ gallery::gallery(QList<QUrl> imageList)
     changeImage(0);
 }
 
-gallery::gallery(QList<QPair<QPixmap, QString>> imageList, MainWindow *parent)
+gallery::gallery(QList<QPair<QString, QString>> imageList, MainWindow *parent)
 {
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setAlignment(Qt::AlignTop);
@@ -124,7 +124,7 @@ void gallery::changeLocalImage(int index)
     currentImage = index;
     pageIndicator->setCurrentPage(index);
 
-    imageView->setPixmap(banners[index].first.scaled(imageView->width(), imageView->width() * 9/16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    imageView->setPixmap(QPixmap::fromImage(QImage(banners[index].first)).scaled(imageView->width(), imageView->width() * 9/16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 void gallery::changeImage(int index)
