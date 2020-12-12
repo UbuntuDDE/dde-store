@@ -187,16 +187,26 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="288"/>
+        <source>DDE Store still executing in background</source>
+        <translation>DDE Store sigue ejecutándose en segundo plano</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="289"/>
+        <source>If you want to close the app definitely you just have to do right click on the icon and choose quit. You can prevent DDE Store from keep running in background by changing this in the option menu.</source>
+        <translation>Si quieres cerrar definitivamente la aplicación, solo tienes que darle click derecho al ícono en la bandeja del sistema y selccionar salir. Puedes evitar que DDE Store siga ejecutándose en segundo plano yendo al menú de opciones y cambiándolo. </translation>
+    </message>
+    <message>
         <source>DDE Store continue running in background, you can disable this in the option menu.</source>
-        <translation>DDE Store sigue ejecutándose en segundo plano, puedes deshabilitar esto en el menú de opciones.</translation>
+        <translation type="vanished">DDE Store sigue ejecutándose en segundo plano, puedes deshabilitar esto en el menú de opciones.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="301"/>
+        <location filename="../mainwindow.cpp" line="304"/>
         <source>Cannot close while app is being installed</source>
-        <translation>No se puede cerrar mientras la aplicacion esta siendo instalada</translation>
+        <translation>No se puede cerrar mientras la aplicación esta siendo instalada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="302"/>
+        <location filename="../mainwindow.cpp" line="290"/>
+        <location filename="../mainwindow.cpp" line="305"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -279,7 +289,7 @@
     <message>
         <location filename="../backend/settings.cpp" line="83"/>
         <source>App uninstalled</source>
-        <translation type="unfinished">Aplicaciones desinstaladas</translation>
+        <translation type="unfinished">aplicaciones desinstaladas</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="84"/>

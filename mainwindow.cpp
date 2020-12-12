@@ -285,7 +285,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
     if (settings::instance()->tray()) {
         if (!trayIcon->isVisible()) {
             DDialog appStillExec;
-            appStillExec.setTitle(tr("DDE Store still executing in background, you can change this in the options menu."));
+            appStillExec.setTitle(tr("DDE Store still executing in background"));
+            appStillExec.setMessage(tr("If you want to close the app definitely you just have to do right click on the icon and choose quit. You can prevent DDE Store from keep running in background by changing this in the option menu."));
             appStillExec.addButton(tr("OK"));
             appStillExec.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
             appStillExec.exec();

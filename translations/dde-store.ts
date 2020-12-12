@@ -187,16 +187,22 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="288"/>
-        <source>DDE Store continue running in background, you can disable this in the option menu.</source>
+        <source>DDE Store still executing in background</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="301"/>
+        <location filename="../mainwindow.cpp" line="289"/>
+        <source>If you want to close the app definitely you just have to make right click on the icon and choose quit.You can change this in the options menu.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="304"/>
         <source>Cannot close while app is being installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="302"/>
+        <location filename="../mainwindow.cpp" line="290"/>
+        <location filename="../mainwindow.cpp" line="305"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
