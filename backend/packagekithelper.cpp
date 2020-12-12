@@ -76,15 +76,11 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent)
 
 void PackageKitHelper::launch(QString packageId)
 {
-    Transaction *transaction = Daemon::getFiles(packageId);
-    connect(transaction, &Transaction::errorCode, this, &PackageKitHelper::error);
-    connect(transaction, &Transaction::files, this, [ = ] (const QString &, const QStringList &files) {
-        AppStreamHelper::appData AppStreamData = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
-        QStringList paths = QStandardPaths::locateAll(QStandardPaths::ApplicationsLocation, AppStreamData.id);
-        int first = paths[0].lastIndexOf("/");
-        int last = paths[0].lastIndexOf(".desktop");
-        QProcess::startDetached("gtk-launch", QStringList() << paths[0].mid(first + 1, last - first - 1));
-    });
+    AppStreamHelper::appData AppStreamData = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
+    QStringList paths = QStandardPaths::locateAll(QStandardPaths::ApplicationsLocation, AppStreamData.id);
+    int first = paths[0].lastIndexOf("/");
+    int last = paths[0].lastIndexOf(".desktop");
+    QProcess::startDetached("gtk-launch", QStringList() << paths[0].mid(first + 1, last - first - 1));
 }
 
 void PackageKitHelper::itemPageData(ItemPage *parent, QString package)
@@ -100,17 +96,13 @@ void PackageKitHelper::itemPageData(ItemPage *parent, QString package)
             });
             connect(getdetails, &Transaction::errorCode, this, &PackageKitHelper::error);
         } else if (info == Transaction::InfoInstalled) {
-            Transaction *getfiles = Daemon::getFiles(packageId);
-            connect(getfiles, &Transaction::errorCode, this, &PackageKitHelper::error);
-            connect(getfiles, &Transaction::files, this, [ = ] (const QString &, const QStringList &files) {
-                    AppStreamHelper::appData AppStreamData = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
-                    QStringList paths = QStandardPaths::locateAll(QStandardPaths::ApplicationsLocation, AppStreamData.id);
-                    if (paths.length() > 0) {
-                        parent->setInstallButton(packageId, "launchable");
-                    } else {
-                        parent->setInstallButton(packageId, "installed");
-                    }
-            });
+            AppStreamHelper::appData AppStreamData = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
+            QStringList paths = QStandardPaths::locateAll(QStandardPaths::ApplicationsLocation, AppStreamData.id);
+            if (paths.length() > 0) {
+                parent->setInstallButton(packageId, "launchable");
+            } else {
+                parent->setInstallButton(packageId, "installed");
+            }
         }
     });
 }
@@ -166,7 +158,7 @@ void PackageKitHelper::update(UpdatesPage *parent, QStringList updates)
     Transaction *update = Daemon::updatePackages(updates);
     preventClose = true;
     qDebug() << "[ UPDATES ] Updating apps";
-    connect(update, &Transaction::itemProgress, this, [ = ] (const QString &packageId, Transaction::Status status, uint percent) {
+    connect(update, &Transaction::itemProgress, this, [ = ] (const QString &packageId, Transaction::Status, uint percent) {
         if (percent <= 100) {
             qDebug() << "[ UPDATES ]" << Transaction::packageName(packageId) << percent;
             parent->updatePercent(Transaction::packageName(packageId), percent);

@@ -47,7 +47,7 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
 
     layout->addWidget(list);
 
-    if (!settings::instance()->updateTime() == 1) {
+    if (settings::instance()->updateTime() != 1) {
         QTimer *timer = new QTimer(this);
         connect(timer, &QTimer::timeout, this, &UpdatesPage::refresh);
         timer->start(3600000);

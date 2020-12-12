@@ -26,10 +26,10 @@ AppStreamHelper::AppStreamHelper()
     qDebug() << "[ APPSTREAM ] Loading metadata pool";
 
     QString error;
-    if (!pool->load(&error)) {
+    if (!pool->load()) {
         QString errorText = tr("ERROR: Unable to open AppStream metadata pool");
-        DDialog dialog(errorText, error);
-        qDebug() << "[ ERROR ]" << errorText << error;
+        DDialog dialog(errorText, pool->lastError());
+        qDebug() << "[ ERROR ]" << errorText << pool->lastError();
         dialog.setIcon(DStyle().standardIcon(QStyle::SP_MessageBoxCritical));
         dialog.addButton(tr("OK"));
         dialog.exec();
@@ -107,7 +107,7 @@ QStringList AppStreamHelper::search(QString query)
             AppStream::Component component = appList.value(key);
             const QStringList queryList = query.split(QRegExp("\\s"), QString::SkipEmptyParts);
             bool noMatch = false;
-            for (const QString item : queryList) {
+            for (const QString &item : queryList) {
                 if (!component.name().contains(item, Qt::CaseInsensitive) && !component.description().contains(item, Qt::CaseInsensitive)) {
                     noMatch = true;
                 };

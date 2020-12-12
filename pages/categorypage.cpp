@@ -51,17 +51,17 @@ void CategoryPage::loadData(QStringList appList)
     } else if (sort == "ratings") {
         QMultiMap<double, QString> map;
         appList.sort();
-        for (const QString app : appList) {
+        for (const QString &app : appList) {
             AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(app);
             map.insert(RatingsHelper::instance()->totalRatings(data.id), app);
         }
         appList.clear();
-        for (const QString app : map.values()) {
+        for (const QString &app : map.values()) {
             appList.insert(0, app);
         }
     }
     apps = appList;
-    for (const QString app : appList) {
+    for (const QString &app : appList) {
         list->addItem(app);
     }
     list->load();

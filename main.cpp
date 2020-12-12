@@ -7,6 +7,7 @@ DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
+    DApplication::loadDXcbPlugin();
     DApplication *app = new DApplication(argc, argv);
     app->loadTranslator();
     app->setApplicationName("dde-store");

@@ -71,12 +71,12 @@ void HomePage::addCategory(QString name, QString category, MainWindow *parent)
         QStringList appList = AppStreamHelper::instance()->category(category);
         QMultiMap<double, QString> map;
         appList.sort();
-        for (const QString app : appList) {
+        for (const QString &app : appList) {
             AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(app);
             map.insert(RatingsHelper::instance()->totalRatings(data.id), app);
         }
         appList.clear();
-        for (const QString app : map.values()) {
+        for (const QString &app : map.values()) {
             appList.insert(0, app);
         }
         for (QString app : appList) {
