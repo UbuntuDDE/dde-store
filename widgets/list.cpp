@@ -7,9 +7,7 @@ List::List(QString title)
     layout = new QVBoxLayout;
     this->setLayout(layout);
 
-    QWidget *header = new QWidget;
     headerLayout = new QHBoxLayout;
-    header->setLayout(headerLayout);
     DLabel *titleLabel = new DLabel(title);
     QFont titleFont;
     titleFont.setPixelSize(28);
@@ -17,6 +15,8 @@ List::List(QString title)
     headerLayout->addWidget(titleLabel);
     headerLayout->addStretch();
     headerLayout->setSpacing(10);
+    headerLayout->setMargin(10);
+    layout->addLayout(headerLayout);
 
     listView = new DListView;
     listView->setViewMode(QListView::IconMode);
@@ -33,7 +33,6 @@ List::List(QString title)
     DStyle::setFrameRadius(listView, 18);
     model = new QStandardItemModel;
     listView->setModel(model);
-    layout->addWidget(header, 0, Qt::AlignTop);
 
     connect(listView, qOverload<const QModelIndex &>(&DListView::currentChanged), this, [ = ] {
         if (listView->currentIndex().row() != -1) {

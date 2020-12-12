@@ -28,46 +28,45 @@ ItemPage::ItemPage(QString app)
     PackageKitHelper::instance()->itemPageData(this, app);
     AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(app);
 
-    QWidget *headerSection = new QWidget;
-    QHBoxLayout *headerSectionLayout = new QHBoxLayout;
-    headerSection->setLayout(headerSectionLayout);
+    QHBoxLayout *header = new QHBoxLayout;
+    header->setMargin(10);
+    header->setAlignment(Qt::AlignVCenter);
 
     QLabel *icon = new QLabel;
     icon->setPixmap(data.icon.pixmap(data.icon.actualSize(QSize(64, 64))));
-    headerSectionLayout->addWidget(icon);
+    header->addWidget(icon);
 
-    QWidget *nameSection = new QWidget;
-    QVBoxLayout *nameSectionLayout = new QVBoxLayout;
-    nameSection->setLayout(nameSectionLayout);
-    nameSectionLayout->addStretch();
+    QVBoxLayout *nameSection = new QVBoxLayout;
+    nameSection->setMargin(0);
+    nameSection->setAlignment(Qt::AlignTop);
+
     DLabel *name = new DLabel(data.name);
     QFont nameFont;
     nameFont.setPixelSize(22);
     name->setFont(nameFont);
-    nameSectionLayout->addWidget(name);
+    nameSection->addWidget(name);
     if (!data.developer.isNull()) {
         DLabel *developer = new DLabel(data.developer);
-        nameSectionLayout->addWidget(developer);
+        nameSection->addWidget(developer);
     }
     if (RatingsHelper::instance()->averageRating(data.id) != 0) {
         stars *starsView = new stars(data.id);
-        nameSectionLayout->addWidget(starsView);
+        nameSection->addWidget(starsView);
     }
-    nameSectionLayout->addStretch();
-    headerSectionLayout->addWidget(nameSection);
+    header->addLayout(nameSection);
 
-    headerSectionLayout->addStretch();
+    header->addStretch();
 
     removeBtn = new DWarningButton;
     removeBtn->setText(tr("Uninstall"));
     removeBtn->hide();
-    headerSectionLayout->addWidget(removeBtn, 0, Qt::AlignVCenter);
-    headerSectionLayout->addSpacing(10);
+    header->addWidget(removeBtn, 0, Qt::AlignVCenter);
+    header->addSpacing(10);
     installBtn = new DSuggestButton;
     installBtn->hide();
-    headerSectionLayout->addWidget(installBtn, 0, Qt::AlignVCenter);
+    header->addWidget(installBtn, 0, Qt::AlignVCenter);
 
-    layout->addWidget(headerSection, 0, Qt::AlignTop);
+    layout->addLayout(header);
 
     progressBar = new DProgressBar;
     progressBar->hide();
