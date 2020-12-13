@@ -20,6 +20,7 @@ public:
     bool notifyAvailableUpdates();
     bool notifyFinishedUpdates();
     bool tray();
+    bool popup();
     int updateTime();
 
 private:
