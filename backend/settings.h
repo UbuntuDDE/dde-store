@@ -20,8 +20,9 @@ public:
     bool notifyAvailableUpdates();
     bool notifyFinishedUpdates();
     bool tray();
-    bool popup();
+    bool remembered();
     int updateTime();
+    void setValue(QString key, QVariant value);
 
 private:
     static settings *currentInstance;

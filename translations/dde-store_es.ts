@@ -93,22 +93,22 @@
 <context>
     <name>ItemPage</name>
     <message>
-        <location filename="../pages/itempage.cpp" line="62"/>
+        <location filename="../pages/itempage.cpp" line="61"/>
         <source>Uninstall</source>
         <translation>Desinstalar</translation>
     </message>
     <message>
-        <location filename="../pages/itempage.cpp" line="86"/>
+        <location filename="../pages/itempage.cpp" line="85"/>
         <source>No description provided.</source>
         <translation>Sin descripción brindada.</translation>
     </message>
     <message>
-        <location filename="../pages/itempage.cpp" line="101"/>
+        <location filename="../pages/itempage.cpp" line="100"/>
         <source>Install (%1)</source>
         <translation>Instalar (%1)</translation>
     </message>
     <message>
-        <location filename="../pages/itempage.cpp" line="110"/>
+        <location filename="../pages/itempage.cpp" line="109"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
@@ -187,26 +187,41 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="288"/>
-        <source>DDE Store still executing in background</source>
-        <translation>DDE Store sigue ejecutándose en segundo plano</translation>
+        <source>Exit</source>
+        <translation>Salir</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="289"/>
-        <source>If you want to close the app definitely you just have to do right click on the icon and choose quit. You can prevent DDE Store from keep running in background by changing this in the option menu.</source>
-        <translation>Si quieres cerrar definitivamente la aplicación, solo tienes que darle click derecho al ícono en la bandeja del sistema y selccionar salir. Puedes evitar que DDE Store siga ejecutándose en segundo plano yendo al menú de opciones y cambiándolo. </translation>
+        <location filename="../mainwindow.cpp" line="290"/>
+        <source>Minimize to system tray</source>
+        <translation>Minimizar a bandeja de sistema</translation>
     </message>
     <message>
-        <source>DDE Store continue running in background, you can disable this in the option menu.</source>
-        <translation type="vanished">DDE Store sigue ejecutándose en segundo plano, puedes deshabilitar esto en el menú de opciones.</translation>
+        <location filename="../mainwindow.cpp" line="292"/>
+        <source>Do not ask again</source>
+        <translation>No preguntar de nuevo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="304"/>
+        <location filename="../mainwindow.cpp" line="294"/>
+        <source>Please choose your action</source>
+        <translation>Elige qué hacer</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="299"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="300"/>
+        <source>Confirm</source>
+        <translation>Confirmar</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="331"/>
         <source>Cannot close while app is being installed</source>
         <translation>No se puede cerrar mientras la aplicación esta siendo instalada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="290"/>
-        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="332"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -219,22 +234,22 @@
         <translation>Actualizaciones disponibles</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="133"/>
+        <location filename="../backend/packagekithelper.cpp" line="125"/>
         <source>Installed &quot;%1&quot;</source>
         <translation>Instalado &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="156"/>
+        <location filename="../backend/packagekithelper.cpp" line="148"/>
         <source>Uninstalled &quot;%1&quot;</source>
         <translation>Desinstalado &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="179"/>
+        <location filename="../backend/packagekithelper.cpp" line="171"/>
         <source>Updates Installed</source>
         <translation>Actualizaciones instaladas</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="188"/>
+        <location filename="../backend/packagekithelper.cpp" line="180"/>
         <source>PackageKit Error</source>
         <translation>Error de PackageKit</translation>
     </message>
@@ -242,62 +257,62 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../backend/settings.cpp" line="74"/>
+        <location filename="../backend/settings.cpp" line="85"/>
         <source>Basic</source>
         <translation>Básico</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="75"/>
+        <location filename="../backend/settings.cpp" line="86"/>
         <source>View</source>
         <translation>Vista</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="76"/>
+        <location filename="../backend/settings.cpp" line="87"/>
         <source>Behaviour</source>
         <translation>Comportamiento</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="77"/>
+        <location filename="../backend/settings.cpp" line="88"/>
         <source>Notifications</source>
         <translation>Notificaciones</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="78"/>
+        <location filename="../backend/settings.cpp" line="89"/>
         <source>Show non-app updates as</source>
         <translation>Mostrar actualizaciones de no-aplicaciones</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="79"/>
+        <location filename="../backend/settings.cpp" line="90"/>
         <source>Max apps per list</source>
         <translation>Cantidad máxima de apps a mostrar por lista</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="80"/>
+        <location filename="../backend/settings.cpp" line="91"/>
         <source>Minimize to tray on exit</source>
         <translation>Minimizar a la bandeja del sistema al salir</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="81"/>
+        <location filename="../backend/settings.cpp" line="92"/>
         <source>Check for updates</source>
         <translation>Buscar actualizaciones</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="82"/>
+        <location filename="../backend/settings.cpp" line="93"/>
         <source>App installed</source>
         <translation>Aplicación instaladas</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="83"/>
+        <location filename="../backend/settings.cpp" line="94"/>
         <source>App uninstalled</source>
         <translation>Aplicaciones desinstaladas</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="84"/>
+        <location filename="../backend/settings.cpp" line="95"/>
         <source>Available updates</source>
         <translation>Actualizaciones disponibles</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="85"/>
+        <location filename="../backend/settings.cpp" line="96"/>
         <source>Finished updates</source>
         <translation>Actualizaciones terminadas</translation>
     </message>
@@ -338,12 +353,12 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="18"/>
+        <location filename="../main.cpp" line="19"/>
         <source>An app store for DDE built with DTK</source>
         <translation>Una tienda de aplicaciones para DDE hecha con DTK</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="18"/>
+        <location filename="../main.cpp" line="19"/>
         <source>Created by %1</source>
         <translation>Creada por %1</translation>
     </message>

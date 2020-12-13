@@ -64,14 +64,20 @@ bool settings::tray()
     return appsettings->option("basic.behaviour.tray")->value().toBool();
 }
 
-bool settings::popup()
+bool settings::remembered()
 {
-    return appsettings->option("basic.behaviour.popup")->value().toBool();
+    return appsettings->option("basic.behaviour.remember")->value().toBool();
 }
 
 int settings::updateTime()
 {
     return appsettings->option("basic.behaviour.updatetime")->value().toInt();
+}
+
+void settings::setValue(QString key, QVariant value)
+{
+    appsettings->setOption(key, value);
+    appsettings->sync();
 }
 
 void GenerateSettingTranslate()
@@ -83,7 +89,6 @@ void GenerateSettingTranslate()
     auto basic_view_nonapps = QObject::tr("Show non-app updates as");
     auto basic_view_maxitems = QObject::tr("Max apps per list");
     auto basic_behaviour_tray = QObject::tr("Minimize to tray on exit");
-    auto basic_behaviour_popup = QObject::tr("Show the popup when the app still running in backgorund");
     auto basic_behaviour_updatetime = QObject::tr("Check for updates");
     auto basic_notifications_install = QObject::tr("App installed");
     auto basic_notifications_uninstall = QObject::tr("App uninstalled");

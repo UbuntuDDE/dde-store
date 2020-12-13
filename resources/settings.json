@@ -36,10 +36,11 @@
                             "default": true
                         },
                         {
-                            "key": "popup",
-                            "text": "Show the popup when the app still running in backgorund",
+                            "key": "remember",
+                            "text": "",
                             "type": "checkbox",
-                            "default": true
+                            "default": false,
+                            "hide": true
                         },
                         {
                             "key": "updatetime",

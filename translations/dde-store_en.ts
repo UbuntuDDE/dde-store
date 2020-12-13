@@ -93,22 +93,22 @@
 <context>
     <name>ItemPage</name>
     <message>
-        <location filename="../pages/itempage.cpp" line="62"/>
+        <location filename="../pages/itempage.cpp" line="61"/>
         <source>Uninstall</source>
         <translation>Uninstall</translation>
     </message>
     <message>
-        <location filename="../pages/itempage.cpp" line="86"/>
+        <location filename="../pages/itempage.cpp" line="85"/>
         <source>No description provided.</source>
         <translation>No description provided.</translation>
     </message>
     <message>
-        <location filename="../pages/itempage.cpp" line="101"/>
+        <location filename="../pages/itempage.cpp" line="100"/>
         <source>Install (%1)</source>
         <translation>Install (%1)</translation>
     </message>
     <message>
-        <location filename="../pages/itempage.cpp" line="110"/>
+        <location filename="../pages/itempage.cpp" line="109"/>
         <source>Open</source>
         <translation>Open</translation>
     </message>
@@ -187,22 +187,41 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="288"/>
-        <source>DDE Store still executing in background</source>
-        <translation type="unfinished"></translation>
+        <source>Exit</source>
+        <translation>Exit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="289"/>
-        <source>If you want to close the app definitely you just have to do right click on the icon and choose quit. You can prevent DDE Store from keep running in background by changing this in the option menu.</source>
-        <translation type="unfinished"></translation>
+        <location filename="../mainwindow.cpp" line="290"/>
+        <source>Minimize to system tray</source>
+        <translation>Minimize</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="304"/>
+        <location filename="../mainwindow.cpp" line="292"/>
+        <source>Do not ask again</source>
+        <translation>Do not ask again</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="294"/>
+        <source>Please choose your action</source>
+        <translation>Please choose your action</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="299"/>
+        <source>Cancel</source>
+        <translation>Cancel</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="300"/>
+        <source>Confirm</source>
+        <translation>Confirm</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="331"/>
         <source>Cannot close while app is being installed</source>
         <translation>Cannot close while app is being installed</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="290"/>
-        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="332"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -215,22 +234,22 @@
         <translation>Updates Available</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="133"/>
+        <location filename="../backend/packagekithelper.cpp" line="125"/>
         <source>Installed &quot;%1&quot;</source>
         <translation>Installed &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="156"/>
+        <location filename="../backend/packagekithelper.cpp" line="148"/>
         <source>Uninstalled &quot;%1&quot;</source>
         <translation>Uninstalled &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="179"/>
+        <location filename="../backend/packagekithelper.cpp" line="171"/>
         <source>Updates Installed</source>
         <translation>Updates Installed</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="188"/>
+        <location filename="../backend/packagekithelper.cpp" line="180"/>
         <source>PackageKit Error</source>
         <translation>PackageKit Error</translation>
     </message>
@@ -238,62 +257,62 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../backend/settings.cpp" line="74"/>
+        <location filename="../backend/settings.cpp" line="85"/>
         <source>Basic</source>
         <translation>Basic</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="75"/>
+        <location filename="../backend/settings.cpp" line="86"/>
         <source>View</source>
         <translation>View</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="76"/>
+        <location filename="../backend/settings.cpp" line="87"/>
         <source>Behaviour</source>
         <translation>Behaviour</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="77"/>
+        <location filename="../backend/settings.cpp" line="88"/>
         <source>Notifications</source>
         <translation>Notifications</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="78"/>
+        <location filename="../backend/settings.cpp" line="89"/>
         <source>Show non-app updates as</source>
         <translation>Show non-app updates as</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="79"/>
+        <location filename="../backend/settings.cpp" line="90"/>
         <source>Max apps per list</source>
         <translation>Max apps per list</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="80"/>
+        <location filename="../backend/settings.cpp" line="91"/>
         <source>Minimize to tray on exit</source>
         <translation>Minimize to tray on exit</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="81"/>
+        <location filename="../backend/settings.cpp" line="92"/>
         <source>Check for updates</source>
         <translation>Check for updates</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="82"/>
+        <location filename="../backend/settings.cpp" line="93"/>
         <source>App installed</source>
         <translation>App installed</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="83"/>
+        <location filename="../backend/settings.cpp" line="94"/>
         <source>App uninstalled</source>
         <translation>App uninstalled</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="84"/>
+        <location filename="../backend/settings.cpp" line="95"/>
         <source>Available updates</source>
         <translation>Available updates</translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="85"/>
+        <location filename="../backend/settings.cpp" line="96"/>
         <source>Finished updates</source>
         <translation>Finished updates</translation>
     </message>
@@ -334,12 +353,12 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="18"/>
+        <location filename="../main.cpp" line="19"/>
         <source>An app store for DDE built with DTK</source>
         <translation>An app store for DDE built with DTK</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="18"/>
+        <location filename="../main.cpp" line="19"/>
         <source>Created by %1</source>
         <translation>Created by %1</translation>
     </message>

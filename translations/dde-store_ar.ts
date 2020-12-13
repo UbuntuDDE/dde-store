@@ -93,22 +93,22 @@
 <context>
     <name>ItemPage</name>
     <message>
-        <location filename="../pages/itempage.cpp" line="62"/>
+        <location filename="../pages/itempage.cpp" line="61"/>
         <source>Uninstall</source>
         <translation>إلغاء التثبيت</translation>
     </message>
     <message>
-        <location filename="../pages/itempage.cpp" line="86"/>
+        <location filename="../pages/itempage.cpp" line="85"/>
         <source>No description provided.</source>
         <translation>لا يتوفر وصف.</translation>
     </message>
     <message>
-        <location filename="../pages/itempage.cpp" line="101"/>
+        <location filename="../pages/itempage.cpp" line="100"/>
         <source>Install (%1)</source>
         <translation>تثبيت (%1)</translation>
     </message>
     <message>
-        <location filename="../pages/itempage.cpp" line="110"/>
+        <location filename="../pages/itempage.cpp" line="109"/>
         <source>Open</source>
         <translation>فتح</translation>
     </message>
@@ -187,22 +187,41 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="288"/>
-        <source>DDE Store still executing in background</source>
+        <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="289"/>
-        <source>If you want to close the app definitely you just have to do right click on the icon and choose quit. You can prevent DDE Store from keep running in background by changing this in the option menu.</source>
+        <location filename="../mainwindow.cpp" line="290"/>
+        <source>Minimize to system tray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="304"/>
+        <location filename="../mainwindow.cpp" line="292"/>
+        <source>Do not ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="294"/>
+        <source>Please choose your action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="299"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="300"/>
+        <source>Confirm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="331"/>
         <source>Cannot close while app is being installed</source>
         <translation>يتعذر الإغلاق خلال تثبيت البرامج</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="290"/>
-        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="332"/>
         <source>OK</source>
         <translation>موافق</translation>
     </message>
@@ -215,22 +234,22 @@
         <translation>يتوفر تحديثات جديدة</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="133"/>
+        <location filename="../backend/packagekithelper.cpp" line="125"/>
         <source>Installed &quot;%1&quot;</source>
         <translation>تم تثبيت &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="156"/>
+        <location filename="../backend/packagekithelper.cpp" line="148"/>
         <source>Uninstalled &quot;%1&quot;</source>
         <translation>تم إزالة تثبيت &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="179"/>
+        <location filename="../backend/packagekithelper.cpp" line="171"/>
         <source>Updates Installed</source>
         <translation>تم تثبيت التحديثات</translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="188"/>
+        <location filename="../backend/packagekithelper.cpp" line="180"/>
         <source>PackageKit Error</source>
         <translation>خطأ في PackageKit</translation>
     </message>
@@ -238,62 +257,62 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../backend/settings.cpp" line="74"/>
+        <location filename="../backend/settings.cpp" line="85"/>
         <source>Basic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="75"/>
+        <location filename="../backend/settings.cpp" line="86"/>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="76"/>
+        <location filename="../backend/settings.cpp" line="87"/>
         <source>Behaviour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="77"/>
+        <location filename="../backend/settings.cpp" line="88"/>
         <source>Notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="78"/>
+        <location filename="../backend/settings.cpp" line="89"/>
         <source>Show non-app updates as</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="79"/>
+        <location filename="../backend/settings.cpp" line="90"/>
         <source>Max apps per list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="80"/>
+        <location filename="../backend/settings.cpp" line="91"/>
         <source>Minimize to tray on exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="81"/>
+        <location filename="../backend/settings.cpp" line="92"/>
         <source>Check for updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="82"/>
+        <location filename="../backend/settings.cpp" line="93"/>
         <source>App installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="83"/>
+        <location filename="../backend/settings.cpp" line="94"/>
         <source>App uninstalled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="84"/>
+        <location filename="../backend/settings.cpp" line="95"/>
         <source>Available updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/settings.cpp" line="85"/>
+        <location filename="../backend/settings.cpp" line="96"/>
         <source>Finished updates</source>
         <translation type="unfinished"></translation>
     </message>
@@ -334,12 +353,12 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="18"/>
+        <location filename="../main.cpp" line="19"/>
         <source>An app store for DDE built with DTK</source>
         <translation>متجر تطبيقات مخصص لـ DDE مبني على DTK</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="18"/>
+        <location filename="../main.cpp" line="19"/>
         <source>Created by %1</source>
         <translation>بواسطة %1</translation>
     </message>

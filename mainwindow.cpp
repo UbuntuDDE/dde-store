@@ -4,7 +4,6 @@
 #include "backend/settings.h"
 #include "backend/packagekithelper.h"
 #include "pages/categorypage.h"
-
 #include <DTitlebar>
 #include <DSearchEdit>
 #include <DSettingsDialog>
@@ -12,11 +11,8 @@
 #include <DMenu>
 #include <DCheckBox>
 #include <DRadioButton>
-
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QMessageBox>
-
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
@@ -286,32 +282,46 @@ void MainWindow::openItem(QString app)
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    if (settings::instance()->tray()) {
-        if (!trayIcon->isVisible()) {
+    if (!trayIcon->isVisible()) {
+        if (!settings::instance()->remembered()) {
+            DDialog dialog;
+            DRadioButton *exitButton = new DRadioButton(tr("Exit"));
+            exitButton->setChecked(!settings::instance()->tray());
+            DRadioButton *minimizeButton = new DRadioButton(tr("Minimize to system tray"));
+            minimizeButton->setChecked(settings::instance()->tray());
+            DCheckBox *rememberBox = new DCheckBox(tr("Do not ask again"));
 
-                DDialog appStillExec;
-                DCheckBox remind;
-                DRadioButton exitbt;
-                DRadioButton continuebt;
+            dialog.setTitle(tr("Please choose your action"));
+            dialog.setIcon(QIcon::fromTheme("deepin-app-store"));
+            dialog.addContent(exitButton);
+            dialog.addContent(minimizeButton);
+            dialog.addContent(rememberBox);
+            dialog.addButton(tr("Cancel"), false, DDialog::ButtonNormal);
+            dialog.addButton(tr("Confirm"), true, DDialog::ButtonRecommend);
+            int index = dialog.exec();
 
-                exitbt.setText(tr("Close definitely"));
-                continuebt.setText(tr("Continue running in the system tray"));
+            if (index == 1) {
+                if (rememberBox->isChecked()) {
+                    settings::instance()->setValue("basic.behaviour.remember", true);
+                }
 
-                remind.setText(tr("Don't remind me anymore"));
-                remind.isChecked();
-
-                appStillExec.setTitle(tr("DDE Store still executing in background, you can change this in the options menu."));
-                appStillExec.addButton(tr("OK"));
-                appStillExec.addContent(&exitbt);
-                appStillExec.addContent(&continuebt);
-                appStillExec.addContent(&remind);
-                appStillExec.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
-                appStillExec.exec();
-
-            event->ignore();
-            trayIcon->show();
-            hide();
-            return;
+                if (exitButton->isChecked()) {
+                    settings::instance()->setValue("basic.behaviour.tray", false);
+                } else if (minimizeButton->isChecked()) {
+                    settings::instance()->setValue("basic.behaviour.tray", true);
+                    event->ignore();
+                    trayIcon->show();
+                    hide();
+                }
+            } else {
+                event->ignore();
+            }
+        } else {
+            if (settings::instance()->tray()) {
+                event->ignore();
+                trayIcon->show();
+                hide();
+            }
         }
     }
 
