@@ -4,11 +4,15 @@
 #include "backend/settings.h"
 #include "backend/packagekithelper.h"
 #include "pages/categorypage.h"
+
 #include <DTitlebar>
 #include <DSearchEdit>
 #include <DSettingsDialog>
 #include <DDialog>
 #include <DMenu>
+#include <DCheckBox>
+#include <DRadioButton>
+
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMessageBox>
@@ -284,12 +288,26 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (settings::instance()->tray()) {
         if (!trayIcon->isVisible()) {
-            DDialog appStillExec;
-            appStillExec.setTitle(tr("DDE Store still executing in background"));
-            appStillExec.setMessage(tr("If you want to close the app definitely you just have to do right click on the icon and choose quit. You can prevent DDE Store from keep running in background by changing this in the option menu."));
-            appStillExec.addButton(tr("OK"));
-            appStillExec.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
-            appStillExec.exec();
+                DDialog appStillExec;
+                DCheckBox remind;
+                DRadioButton exitbt;
+                DRadioButton continuebt;
+
+                exitbt.setText(tr("Close definitely"));
+                continuebt.setText(tr("Continue running in the system tray"));
+
+                remind.setText(tr("Don't remind me anymore"));
+                remind.isChecked();
+
+                appStillExec.setTitle(tr("DDE Store still executing in background, you can change this in the options menu."));
+                appStillExec.addButton(tr("OK"));
+                appStillExec.addContent(&exitbt);
+                appStillExec.addContent(&continuebt);
+                appStillExec.addContent(&remind);
+                appStillExec.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
+                appStillExec.exec();
+
+ 
 
             event->ignore();
             trayIcon->show();

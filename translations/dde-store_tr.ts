@@ -192,7 +192,7 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="289"/>
-        <source>If you want to close the app definitely you just have to make right click on the icon and choose quit.You can change this in the options menu.</source>
+        <source>If you want to close the app definitely you just have to do right click on the icon and choose quit. You can prevent DDE Store from keep running in background by changing this in the option menu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
