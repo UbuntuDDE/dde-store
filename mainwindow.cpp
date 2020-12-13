@@ -4,13 +4,19 @@
 #include "backend/settings.h"
 #include "backend/packagekithelper.h"
 #include "pages/categorypage.h"
+
 #include <DTitlebar>
 #include <DSearchEdit>
 #include <DSettingsDialog>
 #include <DDialog>
 #include <DMenu>
+#include <DCheckBox>
+#include <DRadioButton>
+
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QMessageBox>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
@@ -277,10 +283,31 @@ void MainWindow::openItem(QString app)
     navView->clearSelection();
 }
 
+
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (settings::instance()->tray()) {
         if (!trayIcon->isVisible()) {
+
+                DDialog appStillExec;
+                DCheckBox remind;
+                DRadioButton exitbt;
+                DRadioButton continuebt;
+
+                exitbt.setText(tr("Close definitely"));
+                continuebt.setText(tr("Continue running in the system tray"));
+
+                remind.setText(tr("Don't remind me anymore"));
+                remind.isChecked();
+
+                appStillExec.setTitle(tr("DDE Store still executing in background, you can change this in the options menu."));
+                appStillExec.addButton(tr("OK"));
+                appStillExec.addContent(&exitbt);
+                appStillExec.addContent(&continuebt);
+                appStillExec.addContent(&remind);
+                appStillExec.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
+                appStillExec.exec();
+
             event->ignore();
             trayIcon->show();
             hide();

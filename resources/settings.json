@@ -36,6 +36,12 @@
                             "default": true
                         },
                         {
+                            "key": "popup",
+                            "text": "Show the popup when the app still running in backgorund",
+                            "type": "checkbox",
+                            "default": true
+                        },
+                        {
                             "key": "updatetime",
                             "name": "Check for updates",
                             "type": "combobox",
