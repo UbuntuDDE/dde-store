@@ -288,6 +288,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (settings::instance()->tray()) {
         if (!trayIcon->isVisible()) {
+
                 DDialog appStillExec;
                 DCheckBox remind;
                 DRadioButton exitbt;
@@ -306,8 +307,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
                 appStillExec.addContent(&remind);
                 appStillExec.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
                 appStillExec.exec();
-
- 
 
             event->ignore();
             trayIcon->show();
