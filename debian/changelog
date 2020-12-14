@@ -1,3 +1,12 @@
+dde-store (1.1.0) groovy; urgency=low
+
+  * Added automatic hourly background update checking
+  * Various performance improvements
+  * Translation improvements
+  * Bug fixes
+
+ -- dekzi <dekzidev@protonmail.com>  Sun, 13 Dec 2020 16:52:52 -0800
+
 dde-store (1.0.4) groovy; urgency=medium
 
   * Bug fixes
