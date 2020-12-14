@@ -1,6 +1,5 @@
 #include "widgets/list.h"
 #include "backend/appstreamhelper.h"
-#include <DSpinner>
 
 List::List(QString title)
 {
@@ -8,6 +7,7 @@ List::List(QString title)
     this->setLayout(layout);
 
     headerLayout = new QHBoxLayout;
+    headerLayout->setAlignment(Qt::AlignTop);
     DLabel *titleLabel = new DLabel(title);
     QFont titleFont;
     titleFont.setPixelSize(28);
@@ -41,14 +41,10 @@ List::List(QString title)
         }
     });
 
-    loadingBox = new QWidget;
-    QHBoxLayout *loadingBoxLayout = new QHBoxLayout;
-    loadingBox->setLayout(loadingBoxLayout);
-    DSpinner *loading = new DSpinner;
+    loading = new DSpinner;
     loading->setFixedSize(50, 50);
     loading->start();
-    loadingBoxLayout->addWidget(loading);
-    layout->addWidget(loadingBox, 0, Qt::AlignTop);
+    layout->addWidget(loading, 0, Qt::AlignHCenter | Qt::AlignTop);
 
     emptyLabel = new DLabel;
     QFont emptyFont;
@@ -101,7 +97,7 @@ void List::clear()
 
 void List::load()
 {
-    loadingBox->hide();
+    loading->hide();
     if (model->rowCount() == 0) {
         layout->removeWidget(listView);
         emptyLabel->show();
@@ -112,7 +108,7 @@ void List::load()
 
 void List::unload()
 {
-    loadingBox->show();
+    loading->show();
     emptyLabel->hide();
     layout->removeWidget(listView);
 }

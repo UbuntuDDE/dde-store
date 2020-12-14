@@ -6,6 +6,7 @@
 #include <DListView>
 #include <DStandardItem>
 #include <DLabel>
+#include <DSpinner>
 
 DWIDGET_USE_NAMESPACE
 
@@ -26,7 +27,7 @@ public:
 private:
     QHBoxLayout *headerLayout;
     QStandardItemModel *model;
-    QWidget *loadingBox;
+    DSpinner *loading;
     DLabel *emptyLabel;
     QVBoxLayout *layout;
 signals:
