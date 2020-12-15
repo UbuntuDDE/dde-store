@@ -17,7 +17,7 @@ public:
     UpdatesPage(MainWindow *parent);
     void loadData(QHash<QString, int> apps);
     void updatePercent(QString package, uint percent);
-    void refresh();
+    void refresh(bool refreshCache = false);
 private:
     List *list;
     DDialog *systemUpdatesPopup;

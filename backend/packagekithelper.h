@@ -16,7 +16,7 @@ class PackageKitHelper : public QObject
 public:
     static PackageKitHelper *instance();
     void getInstalled(CategoryPage *parent);
-    void getUpdates(UpdatesPage *parent);
+    void getUpdates(UpdatesPage *parent, bool refreshCache = false);
     void launch(QString packageId);
     void itemPageData(ItemPage *parent, QString package);
     void install(ItemPage *parent, QString packageId);
@@ -26,6 +26,7 @@ public:
     QString nameFromID(QString ID);
 private:
     static PackageKitHelper *currentInstance;
+    void refreshCacheAndGetUpdates(UpdatesPage *parent);
 private slots:
     void error(Transaction::Error err, const QString &error);
 };

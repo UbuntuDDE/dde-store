@@ -49,7 +49,7 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
 
     if (settings::instance()->updateTime() != 1) {
         QTimer *timer = new QTimer(this);
-        connect(timer, &QTimer::timeout, this, &UpdatesPage::refresh);
+        connect(timer, &QTimer::timeout, this, [ = ] { refresh(true); });
         timer->start(3600000);
     }
 }
@@ -74,7 +74,7 @@ void UpdatesPage::loadData(QHash<QString, int> apps)
         PackageKitHelper::instance()->update(this, apps.keys());
     });
 
-    connect(refreshButton, &DIconButton::clicked, this, &UpdatesPage::refresh);
+    connect(refreshButton, &DIconButton::clicked, this, [ = ] { refresh(true); });
 
     updateButton->setText(tr("Update All (%1)").arg(locale.formattedDataSize(totalSize)));
     updateButton->setDisabled(false);
@@ -131,7 +131,7 @@ void UpdatesPage::updatePercent(QString package, uint percent)
     }
 }
 
-void UpdatesPage::refresh()
+void UpdatesPage::refresh(bool refreshCache)
 {
     if (refreshButton->isEnabled()) {
         updateButton->setDisabled(true);
@@ -139,6 +139,6 @@ void UpdatesPage::refresh()
         Q_EMIT(cantRefresh());
         list->clear();
         list->unload();
-        PackageKitHelper::instance()->getUpdates(this);
+        PackageKitHelper::instance()->getUpdates(this, refreshCache);
     }
 }

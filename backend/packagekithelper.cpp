@@ -42,8 +42,13 @@ void PackageKitHelper::getInstalled(CategoryPage *parent)
     });
 }
 
-void PackageKitHelper::getUpdates(UpdatesPage *parent)
+void PackageKitHelper::getUpdates(UpdatesPage *parent, bool refreshCache)
 {
+    if (refreshCache) {
+        refreshCacheAndGetUpdates(parent);
+        return;
+    }
+    
     QStringList *pkgList = new QStringList;
     Transaction *getupdates = Daemon::getUpdates();
     qDebug() << "[ UPDATES ] Checking for updates...";
@@ -188,4 +193,15 @@ void PackageKitHelper::error(Transaction::Error err, const QString &error)
 QString PackageKitHelper::nameFromID(QString ID)
 {
     return Transaction::packageName(ID);
+}
+
+void PackageKitHelper::refreshCacheAndGetUpdates(UpdatesPage *parent)
+{
+    qDebug() << "[ UPDATES ] Refreshing package cache...";
+    Transaction *refreshcache = Daemon::refreshCache(false);
+    connect(refreshcache, &Transaction::errorCode, this, &PackageKitHelper::error);
+    connect(refreshcache, &Transaction::finished, this, [ = ] {
+        qDebug() << "[ UPDATES ] Package cache updated";
+        getUpdates(parent);
+    });
 }

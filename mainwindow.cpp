@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent)
         checkUpdatesAction->setDisabled(false);
     });
 
-    connect(checkUpdatesAction, &QAction::triggered, updates, &UpdatesPage::refresh);
+    connect(checkUpdatesAction, &QAction::triggered, updates, [ = ] { updates->refresh(true); });
 
     connect(trayIcon, &QSystemTrayIcon::activated, this, [ = ] {
         show();
