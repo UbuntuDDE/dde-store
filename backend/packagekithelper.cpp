@@ -68,7 +68,7 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent, bool refreshCache)
             connect(getdetails, &Transaction::errorCode, this, &PackageKitHelper::error);
             connect(getdetails, &Transaction::finished, this, [ = ] {
                 if (settings::instance()->notifyAvailableUpdates()) {
-                    Dtk::Core::DUtil::DNotifySender(tr("Updates Available")).appIcon("system-updated").call();
+                    Dtk::Core::DUtil::DNotifySender(tr("Updates Available")).appIcon("system-updated").appName("DDE Store").timeOut(10000).call();
                 }
                 parent->loadData(*apps);
                 qDebug() << "[ UPDATES ] Updates found:" << apps->size();
@@ -130,7 +130,7 @@ void PackageKitHelper::install(ItemPage *parent, QString packageId)
     connect(transaction, &Transaction::finished, this, [ = ] {
         if (settings::instance()->notifyInstall()) {
             AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
-            Dtk::Core::DUtil::DNotifySender(tr("Installed \"%1\"").arg(data.name)).appIcon("dialog-ok").call();
+            Dtk::Core::DUtil::DNotifySender(tr("Installed \"%1\"").arg(data.name)).appIcon("dialog-ok").appName("DDE Store").timeOut(5000).call();
         }
         preventClose = false;
         itemPageData(parent, Transaction::packageName(packageId));
@@ -153,7 +153,7 @@ void PackageKitHelper::uninstall(ItemPage *parent, QString packageId)
     connect(transaction, &Transaction::finished, this, [ = ] {
         if (settings::instance()->notifyUninstall()) {
             AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
-            Dtk::Core::DUtil::DNotifySender(tr("Uninstalled \"%1\"").arg(data.name)).appIcon("dialog-ok").call();
+            Dtk::Core::DUtil::DNotifySender(tr("Uninstalled \"%1\"").arg(data.name)).appIcon("dialog-ok").appName("DDE Store").timeOut(5000).call();
         }
         preventClose = false;
         itemPageData(parent, Transaction::packageName(packageId));
@@ -176,7 +176,7 @@ void PackageKitHelper::update(UpdatesPage *parent, QStringList updates)
     connect(update, &Transaction::finished, this, [ = ] {
         getUpdates(parent);
         if (settings::instance()->notifyFinishedUpdates()) {
-            Dtk::Core::DUtil::DNotifySender(tr("Updates Installed")).appIcon("system-updated").call();
+            Dtk::Core::DUtil::DNotifySender(tr("Updates Installed")).appIcon("system-updated").appName("DDE Store").timeOut(5000).call();
         }
         preventClose = false;
         qDebug() << "[ UPDATES ] Updates complete";
