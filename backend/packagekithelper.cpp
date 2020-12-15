@@ -72,9 +72,12 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent, bool refreshCache)
                 }
                 parent->loadData(*apps);
                 qDebug() << "[ UPDATES ] Updates found:" << apps->size();
+                updatesAvailable = true;
             });
         } else {
+            qDebug() << "[ UPDATES ] System is up to date";
             parent->loadData(*apps);
+            updatesAvailable = false;
         }
     });
 }
@@ -119,7 +122,7 @@ void PackageKitHelper::install(ItemPage *parent, QString packageId)
     qDebug() << "[ INSTALL ] Installing app" << Transaction::packageName(packageId);
     connect(transaction, &Transaction::percentageChanged, this, [ = ] {
         if (transaction->percentage() <= 100) {
-            qDebug() << "[ INSTALL ]" << transaction->percentage();
+            qDebug() << "[ INSTALL ]" << QString::number(transaction->percentage()) + "%";
             parent->setInstallButton(packageId, "installing", QString::number(transaction->percentage()));
         }
     });
@@ -142,7 +145,7 @@ void PackageKitHelper::uninstall(ItemPage *parent, QString packageId)
     qDebug() << "[ UNINSTALL ] Uninstalling app" << Transaction::packageName(packageId);
     connect(transaction, &Transaction::percentageChanged, this, [ = ] {
         if (transaction->percentage() <= 100) {
-            qDebug() << "[ UNINSTALL ]" << transaction->percentage();
+            qDebug() << "[ UNINSTALL ]" << QString::number(transaction->percentage()) + "%";
             parent->setInstallButton(packageId, "installing", QString::number(transaction->percentage()));
         }
     });
@@ -165,7 +168,7 @@ void PackageKitHelper::update(UpdatesPage *parent, QStringList updates)
     qDebug() << "[ UPDATES ] Updating apps";
     connect(update, &Transaction::itemProgress, this, [ = ] (const QString &packageId, Transaction::Status, uint percent) {
         if (percent <= 100) {
-            qDebug() << "[ UPDATES ]" << Transaction::packageName(packageId) << percent;
+            qDebug() << "[ UPDATES ]" << Transaction::packageName(packageId) << QString::number(percent) + "%";
             parent->updatePercent(Transaction::packageName(packageId), percent);
         }
     });

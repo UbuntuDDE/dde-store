@@ -49,7 +49,11 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
 
     if (settings::instance()->updateTime() != 1) {
         QTimer *timer = new QTimer(this);
-        connect(timer, &QTimer::timeout, this, [ = ] { refresh(true); });
+        connect(timer, &QTimer::timeout, this, [ = ] {
+            if (!PackageKitHelper::instance()->updatesAvailable) {
+                refresh(true);
+            }
+        });
         timer->start(3600000);
     }
 }

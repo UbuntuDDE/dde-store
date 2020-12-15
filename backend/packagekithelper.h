@@ -23,6 +23,7 @@ public:
     void uninstall(ItemPage *parent, QString packageId);
     void update(UpdatesPage *parent, QStringList updates);
     bool preventClose = false;
+    bool updatesAvailable = false;
     QString nameFromID(QString ID);
 private:
     static PackageKitHelper *currentInstance;
