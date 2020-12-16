@@ -61,6 +61,10 @@ target_link_libraries(${PROJECT_NAME}
     AppStreamQt
 )
 
+if (Snapd_FOUND)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE SNAP)
+endif()
+
 set(CMAKE_INSTALL_PREFIX /usr)
 
 install(TARGETS dde-store DESTINATION bin)
