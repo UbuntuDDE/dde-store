@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <Snapd/Client>
+#include "pages/itempage.h"
 
 class SnapHelper : public QObject
 {
@@ -10,6 +11,7 @@ class SnapHelper : public QObject
 
 public:
     static SnapHelper *instance();
+    void itemPageData(ItemPage *page, QString app);
 
 private:
     static SnapHelper *currentInstance;

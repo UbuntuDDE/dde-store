@@ -1,12 +1,13 @@
 #include "pages/itempage.h"
-#include "backend/appstreamhelper.h"
 #include "backend/packagekithelper.h"
 #include "backend/ratingshelper.h"
 #include "widgets/gallery.h"
 #include "widgets/stars.h"
-#include <QVBoxLayout>
 #include <QScrollArea>
 #include <DLabel>
+#ifdef SNAP
+#include "backend/snaphelper.h"
+#endif
 
 ItemPage::ItemPage(QString app, bool snap)
 {
@@ -15,7 +16,7 @@ ItemPage::ItemPage(QString app, bool snap)
     scroll->setWidget(widget);
     scroll->setWidgetResizable(true);
     scroll->setFrameShape(QFrame::NoFrame);
-    QVBoxLayout *layout = new QVBoxLayout;
+    layout = new QVBoxLayout;
     layout->setAlignment(Qt::AlignTop);
     widget->setLayout(layout);
 
@@ -28,13 +29,17 @@ ItemPage::ItemPage(QString app, bool snap)
     isSnap = snap;
 
     if (isSnap) {
-        
+#ifdef SNAP
+        SnapHelper::instance()->itemPageData(this, app);
+#endif
     } else {
         PackageKitHelper::instance()->itemPageData(this, app);
+        setData(AppStreamHelper::instance()->getAppData(app));
     }
+}
 
-    AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(app);
-
+void ItemPage::setData(AppStreamHelper::appData data)
+{
     QHBoxLayout *header = new QHBoxLayout;
     header->setMargin(10);
     header->setAlignment(Qt::AlignVCenter);
