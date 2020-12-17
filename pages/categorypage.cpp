@@ -27,8 +27,8 @@ CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
     });
     list->addHeaderWidget(sortBox);
 
-    connect(list, &List::currentItemChanged, this, [ = ] (QString package) {
-        parent->openItem(package);
+    connect(list, &List::currentItemChanged, this, [ = ] (QVariant data) {
+        parent->openItem(data.toString());
     });
 
     if (category == "Installed") {
@@ -62,7 +62,8 @@ void CategoryPage::loadData(QStringList appList)
     }
     apps = appList;
     for (const QString &app : appList) {
-        list->addItem(app);
+        AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(app);
+        list->addItem(data.name, data.icon, app);
     }
     list->load();
 }

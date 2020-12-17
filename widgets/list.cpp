@@ -1,5 +1,4 @@
 #include "widgets/list.h"
-#include "backend/appstreamhelper.h"
 
 List::List(QString title)
 {
@@ -36,7 +35,7 @@ List::List(QString title)
 
     connect(listView, qOverload<const QModelIndex &>(&DListView::currentChanged), this, [ = ] {
         if (listView->currentIndex().row() != -1) {
-            emit currentItemChanged(model->item(listView->currentIndex().row())->data().toString());
+            emit currentItemChanged(model->item(listView->currentIndex().row())->data());
             listView->setCurrentIndex(QModelIndex());
         }
     });
@@ -55,18 +54,10 @@ List::List(QString title)
     layout->addWidget(emptyLabel, 0, Qt::AlignTop);
 }
 
-void List::addItem(QString package)
-{
-    AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(package);
-    DStandardItem *item = new DStandardItem(data.icon, data.name);
-    item->setData(package);
-    model->appendRow(item);
-}
-
-void List::addItem(QString name, QIcon icon)
+void List::addItem(QString name, QIcon icon, QVariant data)
 {
     DStandardItem *item = new DStandardItem(icon, name);
-    item->setData(name);
+    item->setData(data.isNull() ? name : data);
     model->appendRow(item);
 }
 
