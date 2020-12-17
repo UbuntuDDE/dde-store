@@ -8,7 +8,7 @@
 #include <QScrollArea>
 #include <DLabel>
 
-ItemPage::ItemPage(QString app)
+ItemPage::ItemPage(QString app, bool snap)
 {
     QScrollArea *scroll = new QScrollArea(this);
     QWidget *widget = new QWidget;
@@ -25,7 +25,14 @@ ItemPage::ItemPage(QString app)
     setLayout(mainLayout);
     mainLayout->addWidget(scroll);
 
-    PackageKitHelper::instance()->itemPageData(this, app);
+    isSnap = snap;
+
+    if (isSnap) {
+        
+    } else {
+        PackageKitHelper::instance()->itemPageData(this, app);
+    }
+
     AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(app);
 
     QHBoxLayout *header = new QHBoxLayout;
@@ -100,7 +107,11 @@ void ItemPage::setInstallButton(QString packageId, QString type, QString param)
         installBtn->setText(tr("Install (%1)").arg(param));
         installBtn->disconnect(this);
         connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
-            PackageKitHelper::instance()->install(this, packageId);
+            if (isSnap) {
+
+            } else {
+                PackageKitHelper::instance()->install(this, packageId);
+            }
         });
     } else if (type == "launchable") {
         progressBar->hide();
@@ -109,18 +120,30 @@ void ItemPage::setInstallButton(QString packageId, QString type, QString param)
         installBtn->setText(tr("Open"));
         installBtn->disconnect(this);
         connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
-            PackageKitHelper::instance()->launch(packageId);
+            if (isSnap) {
+
+            } else {
+                PackageKitHelper::instance()->launch(packageId);
+            }
         });
         removeBtn->show();
         connect(removeBtn, &DWarningButton::clicked, this, [ = ] {
-            PackageKitHelper::instance()->uninstall(this, packageId);
+            if (isSnap) {
+
+            } else {
+                PackageKitHelper::instance()->uninstall(this, packageId);
+            }
         });
     } else if (type == "installed") {
         progressBar->hide();
         installBtn->hide();
         removeBtn->show();
         connect(removeBtn, &DWarningButton::clicked, this, [ = ] {
-            PackageKitHelper::instance()->uninstall(this, packageId);
+            if (isSnap) {
+                
+            } else {
+                PackageKitHelper::instance()->uninstall(this, packageId);
+            }
         });
     } else if (type == "installing") {
         progressBar->show();

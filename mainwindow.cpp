@@ -262,7 +262,7 @@ void MainWindow::addPage(QString name, QString iconname, QWidget *widget)
     }
 }
 
-void MainWindow::openItem(QString app)
+void MainWindow::openItem(QString app, bool snap)
 {
     // If the item page is in the list
     if (itemPageList.values(app).length() > 0) {
@@ -270,7 +270,7 @@ void MainWindow::openItem(QString app)
         stackedWidget->setCurrentWidget(itemPageList.value(app));
     } else {
         // If not, create the page and add it to the list
-        ItemPage *widget = new ItemPage(app);
+        ItemPage *widget = new ItemPage(app, snap);
         stackedWidget->addWidget(widget);
         stackedWidget->setCurrentWidget(widget);
         itemPageList.insert(app, widget);

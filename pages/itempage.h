@@ -13,12 +13,13 @@ class ItemPage : public QWidget
     Q_OBJECT
 
 public:
-    ItemPage(QString app);
+    ItemPage(QString app, bool snap);
     void setInstallButton(QString packageId, QString type, QString param = nullptr);
 private:
     DWarningButton *removeBtn;
     DSuggestButton *installBtn;
     DProgressBar *progressBar;
+    bool isSnap;
 };
 
 #endif // ITEMPAGE_H
