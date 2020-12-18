@@ -100,16 +100,16 @@ void PackageKitHelper::itemPageData(ItemPage *parent, QString package)
             Transaction *getdetails = Daemon::getDetails(packageId);
             connect(getdetails, &Transaction::details, this, [ = ] (const Details &details) {
                 QLocale locale;
-                parent->setInstallButton(packageId, "notinstalled", locale.formattedDataSize(details.size()));
+                parent->setInstallButton(packageId, ItemPage::NotInstalled, locale.formattedDataSize(details.size()));
             });
             connect(getdetails, &Transaction::errorCode, this, &PackageKitHelper::error);
         } else if (info == Transaction::InfoInstalled) {
             AppStreamHelper::appData AppStreamData = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
             QStringList paths = QStandardPaths::locateAll(QStandardPaths::ApplicationsLocation, AppStreamData.id);
             if (paths.length() > 0) {
-                parent->setInstallButton(packageId, "launchable");
+                parent->setInstallButton(packageId, ItemPage::Launchable);
             } else {
-                parent->setInstallButton(packageId, "installed");
+                parent->setInstallButton(packageId, ItemPage::Installed);
             }
         }
     });
@@ -123,7 +123,7 @@ void PackageKitHelper::install(ItemPage *parent, QString packageId)
     connect(transaction, &Transaction::percentageChanged, this, [ = ] {
         if (transaction->percentage() <= 100) {
             qDebug() << "[ INSTALL ]" << QString::number(transaction->percentage()) + "%";
-            parent->setInstallButton(packageId, "installing", QString::number(transaction->percentage()));
+            parent->setInstallButton(packageId, ItemPage::Installing, QString::number(transaction->percentage()));
         }
     });
     connect(transaction, &Transaction::errorCode, this, &PackageKitHelper::error);
@@ -146,7 +146,7 @@ void PackageKitHelper::uninstall(ItemPage *parent, QString packageId)
     connect(transaction, &Transaction::percentageChanged, this, [ = ] {
         if (transaction->percentage() <= 100) {
             qDebug() << "[ UNINSTALL ]" << QString::number(transaction->percentage()) + "%";
-            parent->setInstallButton(packageId, "installing", QString::number(transaction->percentage()));
+            parent->setInstallButton(packageId, ItemPage::Installing, QString::number(transaction->percentage()));
         }
     });
     connect(transaction, &Transaction::errorCode, this, &PackageKitHelper::error);

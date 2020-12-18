@@ -12,7 +12,11 @@ public:
     CategoryPage(MainWindow *parent, QString name, QString category);
     void loadData(QStringList appList);
 private:
-    QString sort = "alphabetical";
+    enum SortType {
+        Alphabetical,
+        Ratings
+    };
+    SortType sort = SortType::Alphabetical;
     QStringList apps;
     List *list;
 };

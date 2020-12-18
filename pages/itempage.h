@@ -14,7 +14,13 @@ class ItemPage : public QWidget
 
 public:
     ItemPage(QString app);
-    void setInstallButton(QString packageId, QString type, QString param = nullptr);
+    enum Status {
+        Installed,
+        NotInstalled,
+        Installing,
+        Launchable
+    };
+    void setInstallButton(QString packageId, Status type, QString param = nullptr);
 private:
     DWarningButton *removeBtn;
     DSuggestButton *installBtn;
