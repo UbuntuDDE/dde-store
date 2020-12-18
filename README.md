@@ -21,7 +21,7 @@ sudo apt-get install dde-store
 
 ### Arch/Manjaro
 ```
-sudo pacman -S dde-store
+sudo pacman -S deepin-store
 ```
 
 ### Building from source
