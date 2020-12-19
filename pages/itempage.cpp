@@ -102,9 +102,11 @@ void ItemPage::setData(AppStreamHelper::appData data)
     layout->addWidget(description);
 }
 
-void ItemPage::setInstallButton(QString packageId, QString type, QString param)
+void ItemPage::setInstallButton(QString packageId, Status type, QString param)
 {
-    if (type == "notinstalled") {
+    switch (type)
+    {
+    case NotInstalled:
         removeBtn->hide();
         progressBar->hide();
         installBtn->show();
@@ -118,7 +120,8 @@ void ItemPage::setInstallButton(QString packageId, QString type, QString param)
                 PackageKitHelper::instance()->install(this, packageId);
             }
         });
-    } else if (type == "launchable") {
+        break;
+    case Launchable:
         progressBar->hide();
         installBtn->show();
         installBtn->setDisabled(false);
@@ -139,7 +142,8 @@ void ItemPage::setInstallButton(QString packageId, QString type, QString param)
                 PackageKitHelper::instance()->uninstall(this, packageId);
             }
         });
-    } else if (type == "installed") {
+        break;
+    case Installed:
         progressBar->hide();
         installBtn->hide();
         removeBtn->show();
@@ -150,10 +154,12 @@ void ItemPage::setInstallButton(QString packageId, QString type, QString param)
                 PackageKitHelper::instance()->uninstall(this, packageId);
             }
         });
-    } else if (type == "installing") {
+        break;
+    case Installing:
         progressBar->show();
         progressBar->setValue(param.toInt());
         removeBtn->hide();
         installBtn->setDisabled(true);
+        break;
     }
 }

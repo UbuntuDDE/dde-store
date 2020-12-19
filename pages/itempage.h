@@ -16,8 +16,14 @@ class ItemPage : public QWidget
 
 public:
     ItemPage(QString app, bool snap);
+    enum Status {
+        Installed,
+        NotInstalled,
+        Installing,
+        Launchable
+    };
+    void setInstallButton(QString packageId, Status type, QString param = nullptr);
     void setData(AppStreamHelper::appData data);
-    void setInstallButton(QString packageId, QString type, QString param = nullptr);
 private:
     QVBoxLayout *layout;
     DWarningButton *removeBtn;

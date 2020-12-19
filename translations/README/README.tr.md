@@ -19,9 +19,9 @@ sudo apt-get update
 sudo apt-get install dde-store
 ```
 
-### Arch/Manjaro (AUR)
+### Arch/Manjaro
 ```
-sudo pacman -S dde-store
+sudo pacman -S deepin-store
 ```
 
 ### Kaynak dosyadan kurulum

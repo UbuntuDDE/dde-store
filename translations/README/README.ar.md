@@ -20,10 +20,10 @@ sudo apt-get update
 sudo apt-get install dde-store
 ```
 
-<h3 dir='rtl' align="right">Arch/Manjaro (AUR)</h3>
+<h3 dir='rtl' align="right">Arch/Manjaro</h3>
 
 ```
-sudo pacman -S dde-store
+sudo pacman -S deepin-store
 ```
 
 <h3 dir='rtl' align="right">البناء من الكود المصدري</h3>

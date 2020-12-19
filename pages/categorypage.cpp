@@ -19,9 +19,9 @@ CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
     sortBox->addItems(QStringList() << sortAlphabetical << sortRatings);
     connect(sortBox, &QComboBox::currentTextChanged, this, [ = ] (const QString &text) {
         if (text == sortAlphabetical) {
-            sort = "alphabetical";
+            sort = SortType::Alphabetical;
         } else if (text == sortRatings) {
-            sort = "ratings";
+            sort = SortType::Ratings;
         }
         loadData(apps);
     });
@@ -46,9 +46,9 @@ CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
 void CategoryPage::loadData(QStringList appList)
 {
     list->clear();   
-    if (sort == "alphabetical") {
+    if (sort == SortType::Alphabetical) {
         appList.sort();
-    } else if (sort == "ratings") {
+    } else if (sort == SortType::Ratings) {
         QMultiMap<double, QString> map;
         appList.sort();
         for (const QString &app : appList) {
