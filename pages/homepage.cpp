@@ -80,7 +80,8 @@ void HomePage::addCategory(QString name, QString category, MainWindow *parent)
             appList.insert(0, app);
         }
         for (QString app : appList) {
-            list->addItem(app);
+            AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(app);
+            list->addItem(data.name, data.icon, app);
         }
     
         list->load();
@@ -94,7 +95,7 @@ void HomePage::addCategory(QString name, QString category, MainWindow *parent)
 
     layout->addWidget(list);
 
-    connect(list, &List::currentItemChanged, this, [ = ] (QString package) {
-        parent->openItem(package);
+    connect(list, &List::currentItemChanged, this, [ = ] (QVariant data) {
+        parent->openItem(data.toString());
     });
 }
