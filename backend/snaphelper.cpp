@@ -36,10 +36,10 @@ void SnapHelper::itemPageData(ItemPage *page, QString app)
 
         switch (request->snap()->status()){
             case QSnapdEnums::SnapStatusAvailable:
-                page->setInstallButton(data.id, "notinstalled");
+                page->setInstallButton(data.id, ItemPage::NotInstalled);
                 break;
             case QSnapdEnums::SnapStatusInstalled:
-                page->setInstallButton(data.id, "installed");
+                page->setInstallButton(data.id, ItemPage::Installed);
                 break;
         }
     });
