@@ -1,7 +1,15 @@
 #include "snaphelper.h"
+#include "backend/packagekithelper.h"
+#include "backend/settings.h"
 #include <QLocale>
 #include <QBuffer>
 #include <QImageReader>
+#include <QDebug>
+#include <DNotifySender>
+#include <DDialog>
+#include <DStyle>
+
+DWIDGET_USE_NAMESPACE
 
 SnapHelper *SnapHelper::currentInstance = nullptr;
 
@@ -68,4 +76,96 @@ void SnapHelper::itemPageData(ItemPage *page, QString app)
                 break;
         };
     });
+}
+
+void SnapHelper::install(ItemPage *page, QString app, bool classic)
+{
+    QSnapdInstallRequest *request;
+    if (classic) {
+        request = client->install(QSnapdClient::Classic, app);
+    } else {
+        request = client->install(app);
+    }
+    PackageKitHelper::instance()->preventClose = true;
+    request->runAsync();
+    qDebug() << "[ INSTALL ] Installing snap" << app;
+    connect(request, &QSnapdRequest::progress, this, [ = ] {
+        int percent = 0;
+        for (int i = 0; i < request->change()->taskCount(); i++) {
+            percent += (100 * request->change()->task(i)->progressDone() / request->change()->task(i)->progressTotal());
+        }
+        percent /= qMax(request->change()->taskCount(), 1);
+        qDebug() << "[ INSTALL ]" << QString::number(percent) + "%";
+        page->setInstallButton(app, ItemPage::Installing, QString::number(percent));
+    });
+    connect(request, &QSnapdRequest::complete, this, [ = ] {
+        PackageKitHelper::instance()->preventClose = false;
+        switch (request->error())
+        {
+        case QSnapdRequest::NoError:
+            if (settings::instance()->notifyInstall()) {
+                DUtil::DNotifySender(tr("Installed \"%1\"").arg(app)).appIcon("dialog-ok").appName("DDE Store").timeOut(5000).call();
+            }
+            page->setInstallButton(app, ItemPage::Installed);
+            qDebug() << "[ INSTALL ] Snap installed";
+            break;
+        case QSnapdRequest::NeedsClassic:
+            page->setInstallButton(app, ItemPage::NotInstalled);
+            if (requestClassic() == 1) {
+                install(page, app, true);
+            }
+        default:
+            page->setInstallButton(app, ItemPage::NotInstalled);
+            error(request->error(), request->errorString());
+        }
+    });
+}
+
+void SnapHelper::uninstall(ItemPage *page, QString app)
+{
+    auto request = client->remove(app);
+    PackageKitHelper::instance()->preventClose = true;
+    request->runAsync();
+    qDebug() << "[ UNINSTALL ] Uninstalling snap" << app;
+    connect(request, &QSnapdRequest::progress, this, [ = ] {
+        int percent = 0;
+        for (int i = 0; i < request->change()->taskCount(); i++) {
+            percent += (100 * request->change()->task(i)->progressDone() / request->change()->task(i)->progressTotal());
+        }
+        percent /= qMax(request->change()->taskCount(), 1);
+        qDebug() << "[ UNINSTALL ]" << QString::number(percent) + "%";
+        page->setInstallButton(app, ItemPage::Installing, QString::number(percent));
+    });
+    connect(request, &QSnapdRequest::complete, this, [ = ] {
+        if (request->error() != QSnapdRequest::NoError) {
+            error(request->error(), request->errorString());
+        } else {
+            if (settings::instance()->notifyInstall()) {
+                DUtil::DNotifySender(tr("Uninstalled \"%1\"").arg(app)).appIcon("dialog-ok").appName("DDE Store").timeOut(5000).call();
+            }
+            page->setInstallButton(app, ItemPage::NotInstalled);
+            qDebug() << "[ Uninstalled ] Snap uninstalled";
+        }
+        PackageKitHelper::instance()->preventClose = false;
+
+    });
+}
+
+int SnapHelper::requestClassic()
+{
+    DDialog dialog(tr("Classic mode required"), tr("This snap requires confinement to be disabled via classic mode"));
+    dialog.setIcon(DStyle().standardIcon(QStyle::SP_MessageBoxWarning));
+    dialog.addButton(tr("Cancel"));
+    dialog.addButton(tr("Continue"), true, DDialog::ButtonRecommend);
+    return dialog.exec();
+}
+
+void SnapHelper::error(QSnapdRequest::QSnapdError err, QString error)
+{
+    QString errorText = tr("Snap Error");
+    qDebug() << "[ ERROR ]" << errorText << err << error;
+    DDialog dialog(errorText, QString(QMetaEnum::fromType<QSnapdRequest::QSnapdError>().valueToKey(err)) + "<br>" + error);
+    dialog.setIcon(DStyle().standardIcon(QStyle::SP_MessageBoxCritical));
+    dialog.addButton("OK");
+    dialog.exec();
 }

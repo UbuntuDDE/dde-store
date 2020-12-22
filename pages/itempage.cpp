@@ -28,14 +28,14 @@ ItemPage::ItemPage(QString app, bool snap)
 
     isSnap = snap;
 
+    spinner = new DSpinner;
     if (isSnap) {
 #ifdef SNAP
         SnapHelper::instance()->itemPageData(this, app);
-        spinner = new DSpinner;
+#endif
         spinner->start();
         spinner->setFixedSize(50, 50);
         layout->addWidget(spinner, 1, Qt::AlignCenter);
-#endif
     } else {
         PackageKitHelper::instance()->itemPageData(this, app);
         setData(AppStreamHelper::instance()->getAppData(app));
@@ -120,7 +120,9 @@ void ItemPage::setInstallButton(QString packageId, Status type, QString param)
         installBtn->disconnect(this);
         connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
             if (isSnap) {
-
+#ifdef SNAP
+                SnapHelper::instance()->install(this, packageId, false);
+#endif
             } else {
                 PackageKitHelper::instance()->install(this, packageId);
             }
@@ -142,7 +144,9 @@ void ItemPage::setInstallButton(QString packageId, Status type, QString param)
         removeBtn->show();
         connect(removeBtn, &DWarningButton::clicked, this, [ = ] {
             if (isSnap) {
-
+#ifdef SNAP
+                SnapHelper::instance()->uninstall(this, packageId);
+#endif
             } else {
                 PackageKitHelper::instance()->uninstall(this, packageId);
             }
@@ -154,7 +158,9 @@ void ItemPage::setInstallButton(QString packageId, Status type, QString param)
         removeBtn->show();
         connect(removeBtn, &DWarningButton::clicked, this, [ = ] {
             if (isSnap) {
-                
+#ifdef SNAP
+                SnapHelper::instance()->uninstall(this, packageId);
+#endif
             } else {
                 PackageKitHelper::instance()->uninstall(this, packageId);
             }
