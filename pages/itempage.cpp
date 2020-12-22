@@ -31,6 +31,10 @@ ItemPage::ItemPage(QString app, bool snap)
     if (isSnap) {
 #ifdef SNAP
         SnapHelper::instance()->itemPageData(this, app);
+        spinner = new DSpinner;
+        spinner->start();
+        spinner->setFixedSize(50, 50);
+        layout->addWidget(spinner, 1, Qt::AlignCenter);
 #endif
     } else {
         PackageKitHelper::instance()->itemPageData(this, app);
@@ -40,6 +44,7 @@ ItemPage::ItemPage(QString app, bool snap)
 
 void ItemPage::setData(AppStreamHelper::appData data)
 {
+    spinner->hide();
     QHBoxLayout *header = new QHBoxLayout;
     header->setMargin(10);
     header->setAlignment(Qt::AlignVCenter);

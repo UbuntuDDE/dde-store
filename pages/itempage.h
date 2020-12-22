@@ -6,6 +6,7 @@
 #include <DSuggestButton>
 #include <DWarningButton>
 #include <DProgressBar>
+#include <DSpinner>
 #include "backend/appstreamhelper.h"
 
 DWIDGET_USE_NAMESPACE
@@ -29,6 +30,7 @@ private:
     DWarningButton *removeBtn;
     DSuggestButton *installBtn;
     DProgressBar *progressBar;
+    DSpinner *spinner = new DSpinner;
     bool isSnap;
 };
 
