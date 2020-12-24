@@ -4,6 +4,7 @@
 #include <QObject>
 #include <Snapd/Client>
 #include "pages/itempage.h"
+#include "pages/categorypage.h"
 
 class SnapHelper : public QObject
 {
@@ -14,6 +15,9 @@ public:
     void itemPageData(ItemPage *page, QString app);
     void install(ItemPage *page, QString app, bool classic);
     void uninstall(ItemPage *page, QString app);
+    void search(CategoryPage *parent, QString query);
+    void installed(CategoryPage *parent);
+    CategoryPage::App categoryPageData(QSnapdSnap *snap);
 
 private:
     static SnapHelper *currentInstance;

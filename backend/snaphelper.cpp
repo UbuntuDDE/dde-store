@@ -1,5 +1,6 @@
 #include "snaphelper.h"
 #include "backend/packagekithelper.h"
+#include "backend/ratingshelper.h"
 #include "backend/settings.h"
 #include <QLocale>
 #include <QBuffer>
@@ -43,7 +44,11 @@ void SnapHelper::itemPageData(ItemPage *page, QString app)
             }
         }
         data.screenshots = screenshots;
-        data.id = request->snap(0)->name();
+        if (request->snap(0)->commonIds().length() > 0) {
+            data.id = request->snap(0)->commonIds()[0];
+        } else {
+            data.id = QString("io.snapcraft.%1-%2").arg(request->snap(0)->name()).arg(request->snap(0)->id());
+        }
 
         if (request->snap(0)->icon().startsWith("/")) {
             data.icon = QIcon(request->snap(0)->icon());
@@ -147,7 +152,58 @@ void SnapHelper::uninstall(ItemPage *page, QString app)
             qDebug() << "[ Uninstalled ] Snap uninstalled";
         }
         PackageKitHelper::instance()->preventClose = false;
+    });
+}
 
+CategoryPage::App SnapHelper::categoryPageData(QSnapdSnap *snap)
+{
+    CategoryPage::App data;
+    data.name = snap->title();
+    if (snap->icon().startsWith("/")) {
+        data.icon = QIcon(snap->icon());
+    } else if (snap->icon().isEmpty()) {
+        data.icon = QIcon::fromTheme("application-x-executable");
+    } else {
+        auto iconrequest = client->getIcon(snap->name());
+        iconrequest->runSync();
+        if (!iconrequest->error()) {
+            QBuffer *buffer;
+            buffer->setData(iconrequest->icon()->data());
+            QImageReader reader(buffer);
+            reader.read();
+            data.icon = QIcon(QPixmap::fromImage(reader.read()));
+        }
+    }
+    if (data.icon.isNull()) {
+        data.icon = QIcon::fromTheme("application-x-executable");
+    }
+    data.id = snap->name();
+    data.ratings = RatingsHelper::instance()->totalRatings(data.id);
+    data.source = CategoryPage::Backend::Snap;
+    return data;
+}
+
+void SnapHelper::search(CategoryPage *parent, QString query)
+{
+    auto request = client->find(query);
+    request->runAsync();
+    connect(request, &QSnapdRequest::complete, this, [ = ] {
+        for (int i = 0; i < request->snapCount(); i++) {
+            parent->insertItem(categoryPageData(request->snap(i)));
+        }
+        parent->load();
+    });
+}
+
+void SnapHelper::installed(CategoryPage *parent)
+{
+    auto request = client->getSnaps();
+    request->runAsync();
+    connect(request, &QSnapdRequest::complete, this, [ = ] {
+        for (int i = 0; i < request->snapCount(); i++) {
+            parent->insertItem(categoryPageData(request->snap(i)));
+        }
+        parent->load();
     });
 }
 

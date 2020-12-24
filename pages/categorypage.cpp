@@ -4,6 +4,9 @@
 #include "backend/ratingshelper.h"
 #include <QComboBox>
 #include <QVBoxLayout>
+#ifdef SNAP
+#include "backend/snaphelper.h"
+#endif
 
 CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
 {
@@ -19,51 +22,91 @@ CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
     sortBox->addItems(QStringList() << sortAlphabetical << sortRatings);
     connect(sortBox, &QComboBox::currentTextChanged, this, [ = ] (const QString &text) {
         if (text == sortAlphabetical) {
-            sort = SortType::Alphabetical;
+            load(Alphabetical);
         } else if (text == sortRatings) {
-            sort = SortType::Ratings;
+            load(Ratings);
         }
-        loadData(apps);
     });
     list->addHeaderWidget(sortBox);
 
     connect(list, &List::currentItemChanged, this, [ = ] (QVariant data) {
-        parent->openItem(data.toString());
+        bool snap = false;
+        for (App app : apps) {
+            if (app.id == data.toString()) {
+                if (app.source == Snap) {
+                    snap = true;
+                }
+            }
+        }
+        parent->openItem(data.toString(), snap); 
     });
 
     if (category == "Installed") {
         PackageKitHelper::instance()->getInstalled(this);
     } else if (name.startsWith("\"")) {
-        loadData(AppStreamHelper::instance()->search(category));
         list->setEmptyText(tr("No results for %1").arg(name));
+        auto list = AppStreamHelper::instance()->search(category);
+        for (QString entry : list) {
+            auto app = AppStreamHelper::instance()->getAppData(entry);
+            App item;
+            item.name = app.name;
+            item.icon = app.icon;
+            item.id = entry;
+            item.ratings = RatingsHelper::instance()->totalRatings(item.id);
+            item.source = PackageKit;
+            insertItem(item);
+        }
+#ifdef SNAP
+        SnapHelper::instance()->search(this, category);
+#else
+        load();
+#endif
     } else {
-        loadData(AppStreamHelper::instance()->category(category));
+        auto list = AppStreamHelper::instance()->category(category);
+        for (QString entry : list) {
+            auto app = AppStreamHelper::instance()->getAppData(entry);
+            App item;
+            item.name = app.name;
+            item.icon = app.icon;
+            item.id = entry;
+            item.ratings = RatingsHelper::instance()->totalRatings(item.id);
+            item.source = PackageKit;
+            insertItem(item);
+        }
+        load();
     }
 
     layout->addWidget(list);
 }
 
-void CategoryPage::loadData(QStringList appList)
+void CategoryPage::insertItem(App item)
 {
-    list->clear();   
-    if (sort == SortType::Alphabetical) {
-        appList.sort();
-    } else if (sort == SortType::Ratings) {
-        QMultiMap<double, QString> map;
-        appList.sort();
-        for (const QString &app : appList) {
-            AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(app);
-            map.insert(RatingsHelper::instance()->totalRatings(data.id), app);
+    list->addItem(item.name, item.icon, item.id);
+    apps << item;
+}
+
+void CategoryPage::load(SortType sort)
+{
+    list->clear();
+    if (sort == Alphabetical) {
+        QMap<QString, App> map;
+        for (App item : apps) {
+            map.insert(item.name, item);
         }
-        appList.clear();
-        for (const QString &app : map.values()) {
-            appList.insert(0, app);
+        apps = map.values();
+    } else {
+        QMap<int, App> map;
+        for (App item : apps) {
+            map.insert(item.ratings, item);
         }
+        QList<App> list;
+        for (App item : map.values()) {
+            list << item;
+        }
+        apps = list;
     }
-    apps = appList;
-    for (const QString &app : appList) {
-        AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(app);
-        list->addItem(data.name, data.icon, app);
+    for (App item : apps) {
+        insertItem(item);
     }
     list->load();
 }
