@@ -29,6 +29,7 @@ RatingsHelper::RatingsHelper()
             ratingsList.insert(key, array.value(key).toObject());
         }
         emit(fetched());
+        available = true;
         qDebug() << "[ RATINGS ] Ratings fetched";
     });
 }
@@ -50,5 +51,9 @@ double RatingsHelper::averageRating(QString app)
 
 int RatingsHelper::totalRatings(QString app)
 {
-    return ratingsList.value(app).value("total").toInt();
+    int total = ratingsList.value(app).value("total").toInt();
+    if (total != total) {
+        total = 0;
+    }
+    return total;
 }

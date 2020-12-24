@@ -41,6 +41,18 @@ CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
         parent->openItem(data.toString(), snap); 
     });
 
+    if (RatingsHelper::instance()->available) {
+        init(category, name);
+    } else {
+        connect(RatingsHelper::instance(), &RatingsHelper::fetched, this, [ = ] {
+            init(category, name);
+        });
+    }
+    layout->addWidget(list);
+}
+
+void CategoryPage::init(QString category, QString name)
+{
     if (category == "Installed") {
         PackageKitHelper::instance()->getInstalled(this);
     } else if (name.startsWith("\"")) {
@@ -52,7 +64,7 @@ CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
             item.name = app.name;
             item.icon = app.icon;
             item.id = entry;
-            item.ratings = RatingsHelper::instance()->totalRatings(item.id);
+            item.ratings = RatingsHelper::instance()->totalRatings(app.id);
             item.source = PackageKit;
             insertItem(item);
         }
@@ -69,14 +81,12 @@ CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
             item.name = app.name;
             item.icon = app.icon;
             item.id = entry;
-            item.ratings = RatingsHelper::instance()->totalRatings(item.id);
+            item.ratings = RatingsHelper::instance()->totalRatings(app.id);
             item.source = PackageKit;
             insertItem(item);
         }
         load();
     }
-
-    layout->addWidget(list);
 }
 
 void CategoryPage::insertItem(App item)
@@ -93,20 +103,23 @@ void CategoryPage::load(SortType sort)
         for (App item : apps) {
             map.insert(item.name, item);
         }
-        apps = map.values();
+        apps.clear();
+        for (App item : map.values()) {
+            insertItem(item);
+        }
     } else {
-        QMap<int, App> map;
+        QMultiMap<int, App> map;
         for (App item : apps) {
             map.insert(item.ratings, item);
         }
         QList<App> list;
         for (App item : map.values()) {
-            list << item;
+            list.insert(0, item);
         }
-        apps = list;
-    }
-    for (App item : apps) {
-        insertItem(item);
+        apps.clear();
+        for (App item : list) {
+            insertItem(item);
+        }
     }
     list->load();
 }

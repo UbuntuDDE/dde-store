@@ -29,6 +29,7 @@ public:
     void insertItem(App item);
     void load(SortType sort = Alphabetical);
 private:
+    void init(QString category, QString name);
     QList<CategoryPage::App> apps;
     List *list;
 };
