@@ -18,11 +18,11 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
 
     mainwindow = parent;
 
-    connect(list, &List::currentItemChanged, this, [ = ] (QString package) {
-        if (package == systemUpdatesItem) {
+    connect(list, &List::currentItemChanged, this, [ = ] (QVariant data) {
+        if (data == systemUpdatesItem) {
             systemUpdatesPopup->exec();
         } else {
-            parent->openItem(package);
+            parent->openItem(data.toString());
         }
     });
 
