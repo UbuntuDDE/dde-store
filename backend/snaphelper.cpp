@@ -74,10 +74,10 @@ void SnapHelper::itemPageData(ItemPage *page, QString app)
 
         switch (request->snap(0)->status()) {
             case QSnapdEnums::SnapStatusAvailable:
-                page->setInstallButton(data.id, ItemPage::NotInstalled, QLocale().formattedDataSize(request->snap(0)->downloadSize()));
+                page->setInstallButton(app, ItemPage::NotInstalled, QLocale().formattedDataSize(request->snap(0)->downloadSize()));
                 break;
             case QSnapdEnums::SnapStatusInstalled:
-                page->setInstallButton(data.id, ItemPage::Installed);
+                page->setInstallButton(app, ItemPage::Installed);
                 break;
         };
     });
@@ -115,13 +115,14 @@ void SnapHelper::install(ItemPage *page, QString app, bool classic)
             qDebug() << "[ INSTALL ] Snap installed";
             break;
         case QSnapdRequest::NeedsClassic:
-            page->setInstallButton(app, ItemPage::NotInstalled);
             if (requestClassic() == 1) {
                 install(page, app, true);
             }
+            break;
         default:
             page->setInstallButton(app, ItemPage::NotInstalled);
             error(request->error(), request->errorString());
+            break;
         }
     });
 }

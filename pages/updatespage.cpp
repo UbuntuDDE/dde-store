@@ -5,7 +5,6 @@
 #include <QVBoxLayout>
 #include <QTimer>
 #include <DGuiApplicationHelper>
-#include <DNotifySender>
 
 UpdatesPage::UpdatesPage(MainWindow *parent)
 {
@@ -14,16 +13,16 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
     this->setLayout(layout);
     list = new List(tr("Updates"));
     list->setEmptyText(tr("Up to date"));
+
+    systemUpdatesItem = tr("System Updates");
+
     mainwindow = parent;
 
-    systemUpdatesPopup = new DDialog;
-    systemUpdatesPopup->setTitle(tr("System Updates"));
-    systemUpdatesPopup->setIcon(style()->standardIcon(QStyle::SP_MessageBoxInformation));
-    connect(list, &List::currentItemChanged, this, [ = ] (QVariant data) {
-        if (data.toString() == "sysupdates") {
+    connect(list, &List::currentItemChanged, this, [ = ] (QString package) {
+        if (package == systemUpdatesItem) {
             systemUpdatesPopup->exec();
         } else {
-            parent->openItem(data.toString());
+            parent->openItem(package);
         }
     });
 
@@ -44,21 +43,6 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
     updateButton->setDisabled(true);
     list->addHeaderWidget(updateButton);
 
-    connect(updateButton, &DSuggestButton::clicked, this, [ = ] {
-        updateButton->setDisabled(true);
-        updateButton->setText(tr("Updating..."));
-        refreshButton->setDisabled(true);
-        Q_EMIT(cantRefresh());
-        PackageKitHelper::instance()->update(this);
-    });
-
-    connect(refreshButton, &DIconButton::clicked, this, [ = ] { refresh(true); });
-
-    updateButton->setText(tr("Update All (%1)").arg(QLocale().formattedDataSize(totalSize)));
-    updateButton->setDisabled(false);
-    refreshButton->setDisabled(false);
-    Q_EMIT(canRefresh());
-
     PackageKitHelper::instance()->getUpdates(this);
 
     layout->addWidget(list);
@@ -66,7 +50,7 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
     if (settings::instance()->updateTime() != 1) {
         QTimer *timer = new QTimer(this);
         connect(timer, &QTimer::timeout, this, [ = ] {
-            if (!updates.isEmpty()) {
+            if (!PackageKitHelper::instance()->updatesAvailable) {
                 refresh(true);
             }
         });
@@ -74,30 +58,70 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
     }
 }
 
-void UpdatesPage::insertSystemUpdate(QString package, int size)
+void UpdatesPage::loadData(QHash<QString, int> apps)
 {
-    systemUpdatesPopup->setMessage(systemUpdatesPopup->message().append(
-        "<br><b>" + PackageKitHelper::instance()->nameFromID(package) + "</b> - " + QLocale().formattedDataSize(size))
-    );
-    updates << package;
-}
+    QLocale locale;
+    int totalSize = 0;
+    for (int size : apps) {
+        totalSize += size;
+    }
 
-void UpdatesPage::insertItem(QString name, QIcon icon, QString id, int size)
-{
-    list->addItem(name, icon, id);
-    totalSize += size;
-    appUpdates << id;
-    updates << id;
-}
+    list->clear();
+    appUpdates.clear();
+    systemUpdates.clear();
 
-void UpdatesPage::load()
-{
-    if (!updates.isEmpty()) {
-        list->addItem(tr("System Updates"), QIcon::fromTheme("application-x-executable"), "sysupdates");
-        if (settings::instance()->notifyAvailableUpdates()) {
-            Dtk::Core::DUtil::DNotifySender(tr("Updates Available")).appIcon("system-updated").appName("DDE Store").timeOut(10000).call();
+    connect(updateButton, &DSuggestButton::clicked, this, [ = ] {
+        updateButton->setDisabled(true);
+        updateButton->setText(tr("Updating..."));
+        refreshButton->setDisabled(true);
+        Q_EMIT(cantRefresh());
+        PackageKitHelper::instance()->update(this, apps.keys());
+    });
+
+    connect(refreshButton, &DIconButton::clicked, this, [ = ] { refresh(true); });
+
+    updateButton->setText(tr("Update All (%1)").arg(locale.formattedDataSize(totalSize)));
+    updateButton->setDisabled(false);
+    refreshButton->setDisabled(false);
+    Q_EMIT(canRefresh());
+
+    if (apps.size() == 0) {
+        updateButton->setDisabled(true);
+        mainwindow->setUpdateIndicatorVisible(false);
+    } else {
+        mainwindow->setUpdateIndicatorVisible(true);
+    }
+
+    for (QString app : apps.keys()) {
+        if (AppStreamHelper::instance()->hasAppData(app)) {
+            app = PackageKitHelper::instance()->nameFromID(app);
+            appUpdates << app;
+        } else {
+            if (settings::instance()->nonApps() == 0) {
+                systemUpdates << app;
+            } else {
+                appUpdates << app;
+            }
         }
     }
+    appUpdates.sort();
+    systemUpdates.sort();
+
+    for (QString app : appUpdates) {
+        auto data = AppStreamHelper::instance()->getAppData(app);
+        list->addItem(data.name, data.icon, app);
+    }
+
+    if (systemUpdates.length() > 0) {
+        list->addItem(systemUpdatesItem, QIcon::fromTheme("application-x-executable"));
+        QString popupText;
+        for (QString app : systemUpdates) {
+            popupText.append("<br><b>" + PackageKitHelper::instance()->nameFromID(app) + "</b> - " + locale.formattedDataSize(apps.value(app)));
+        }
+        systemUpdatesPopup = new DDialog(systemUpdatesItem, popupText);
+        systemUpdatesPopup->setIcon(style()->standardIcon(QStyle::SP_MessageBoxInformation));
+    }
+
     list->load();
 }
 
@@ -105,10 +129,10 @@ void UpdatesPage::updatePercent(QString package, uint percent)
 {
     if (appUpdates.contains(package)) {
         list->editItemText(package, QString::number(percent) + "%");
-    } else if (appUpdates.contains(package)) {
-        list->editItemText(package, QString::number(percent) + "%");
+    } else if (appUpdates.contains(PackageKitHelper::instance()->nameFromID(package))) {
+        list->editItemText(PackageKitHelper::instance()->nameFromID(package), QString::number(percent) + "%");
     } else {
-        list->editItemText("sysupdates", QString::number(percent) + "%");
+        list->editItemText(systemUpdatesItem, QString::number(percent) + "%");
     }
 }
 

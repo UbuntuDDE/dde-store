@@ -72,33 +72,25 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent, bool refreshCache)
     });
     connect(getupdates, &Transaction::errorCode, this, &PackageKitHelper::error);
     connect(getupdates, &Transaction::finished, this, [ = ] {
-        updates = *pkgList;        
+        QHash<QString, int> *apps = new QHash<QString, int>;
         if (pkgList->length() > 0) {
             Transaction *getdetails = Daemon::getDetails(*pkgList);
             connect(getdetails, &Transaction::details, this, [ = ] (const Details &details) {
-                if (AppStreamHelper::instance()->hasAppData(Transaction::packageName(details.packageId()))) {
-                    auto data = AppStreamHelper::instance()->getAppData(Transaction::packageName(details.packageId()));
-                    parent->insertItem(data.name, data.icon, Transaction::packageName(details.packageId()), details.size());
-                } else {
-                    parent->insertSystemUpdate(Transaction::packageName(details.packageId()), details.size());
-                }
+                apps->insert(details.packageId(), details.size());
             });
             connect(getdetails, &Transaction::errorCode, this, &PackageKitHelper::error);
             connect(getdetails, &Transaction::finished, this, [ = ] {
-#ifdef SNAP
-                SnapHelper::instance()->getUpdates(parent);
-#else
-                parent->load();
-#endif
-                qDebug() << "[ UPDATES ] PackageKit - Updates found";
+                if (settings::instance()->notifyAvailableUpdates()) {
+                    Dtk::Core::DUtil::DNotifySender(tr("Updates Available")).appIcon("system-updated").appName("DDE Store").timeOut(10000).call();
+                }
+                parent->loadData(*apps);
+                qDebug() << "[ UPDATES ] Updates found:" << apps->size();
+                updatesAvailable = true;
             });
         } else {
-            qDebug() << "[ UPDATES ] PackageKit -  System is up to date";
-#ifdef SNAP
-            SnapHelper::instance()->getUpdates(parent);
-#else
-            parent->load();
-#endif        
+            qDebug() << "[ UPDATES ] System is up to date";
+            parent->loadData(*apps);
+            updatesAvailable = false;
         }
     });
 }
@@ -182,7 +174,7 @@ void PackageKitHelper::uninstall(ItemPage *parent, QString packageId)
     });
 }
 
-void PackageKitHelper::update(UpdatesPage *parent)
+void PackageKitHelper::update(UpdatesPage *parent, QStringList updates)
 {
     Transaction *update = Daemon::updatePackages(updates);
     preventClose = true;

@@ -21,13 +21,13 @@ public:
     void itemPageData(ItemPage *parent, QString package);
     void install(ItemPage *parent, QString packageId);
     void uninstall(ItemPage *parent, QString packageId);
-    void update(UpdatesPage *parent);
+    void update(UpdatesPage *parent, QStringList updates);
     bool preventClose = false;
+    bool updatesAvailable = false;
     QString nameFromID(QString ID);
 private:
     static PackageKitHelper *currentInstance;
     void refreshCacheAndGetUpdates(UpdatesPage *parent);
-    QStringList updates;
 private slots:
     void error(Transaction::Error err, const QString &error);
 };
