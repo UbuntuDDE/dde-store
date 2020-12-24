@@ -207,6 +207,21 @@ void SnapHelper::installed(CategoryPage *parent)
     });
 }
 
+void SnapHelper::getUpdates(UpdatesPage *parent)
+{
+    auto request = client->findRefreshable();
+    request->runAsync();
+    connect(request, &QSnapdRequest::complete, this, [ = ] {
+        for (int i = 0; i < request->snapCount(); i++) {
+            auto data = categoryPageData(request->snap(i));
+            parent->insertItem(data.name, data.icon, data.id, request->snap(i)->downloadSize());
+            qDebug() << "[ UPDATES ] Snap - Update found" << data.name;
+        }
+        parent->load();
+        qDebug() << "[ UPDATES ] Snap - updates fetched";
+    });
+}
+
 int SnapHelper::requestClassic()
 {
     DDialog dialog(tr("Classic mode required"), tr("This snap requires confinement to be disabled via classic mode"));

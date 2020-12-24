@@ -5,6 +5,7 @@
 #include <Snapd/Client>
 #include "pages/itempage.h"
 #include "pages/categorypage.h"
+#include "pages/updatespage.h"
 
 class SnapHelper : public QObject
 {
@@ -17,6 +18,7 @@ public:
     void uninstall(ItemPage *page, QString app);
     void search(CategoryPage *parent, QString query);
     void installed(CategoryPage *parent);
+    void getUpdates(UpdatesPage *parent);
     CategoryPage::App categoryPageData(QSnapdSnap *snap);
 
 private:
