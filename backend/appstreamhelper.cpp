@@ -141,3 +141,8 @@ QString AppStreamHelper::packageFromID(QString ID)
     }
     return package;
 }
+
+QString AppStreamHelper::IDFromPackage(QString package)
+{
+    return getAppData(package).id;
+}

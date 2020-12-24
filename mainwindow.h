@@ -17,7 +17,7 @@ class MainWindow : public DMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void openItem(QString app, bool snap = false);
+    void openItem(QString app, QString id, bool snap = false);
     void setUpdateIndicatorVisible(bool value);
     DListView *navView = new DListView;
     QStandardItemModel *navModel = new QStandardItemModel;

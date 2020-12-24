@@ -96,6 +96,6 @@ void HomePage::addCategory(QString name, QString category, MainWindow *parent)
     layout->addWidget(list);
 
     connect(list, &List::currentItemChanged, this, [ = ] (QVariant data) {
-        parent->openItem(data.toString());
+        parent->openItem(data.toString(), AppStreamHelper::instance()->IDFromPackage(data.toString()));
     });
 }

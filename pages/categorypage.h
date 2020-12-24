@@ -22,8 +22,9 @@ public:
         QString name;
         QIcon icon;
         QString id;
+        QString package;
         int ratings;
-        CategoryPage::Backend source;
+        Backend source;
     };
     CategoryPage(MainWindow *parent, QString name, QString category);
     void insertItem(App item);

@@ -39,7 +39,8 @@ void PackageKitHelper::getInstalled(CategoryPage *parent)
         CategoryPage::App app;
         app.name = data.name;
         app.icon = data.icon;
-        app.id = Transaction::packageName(packageId);
+        app.id = data.id;
+        app.package = Transaction::packageName(packageId);
         app.ratings = RatingsHelper::instance()->totalRatings(data.id);
         app.source = CategoryPage::Backend::PackageKit;
         parent->insertItem(app);

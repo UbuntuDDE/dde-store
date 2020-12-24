@@ -30,15 +30,11 @@ CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
     list->addHeaderWidget(sortBox);
 
     connect(list, &List::currentItemChanged, this, [ = ] (QVariant data) {
-        bool snap = false;
         for (App app : apps) {
             if (app.id == data.toString()) {
-                if (app.source == Snap) {
-                    snap = true;
-                }
+                parent->openItem(app.package, app.id, (app.source == Snap));
             }
         }
-        parent->openItem(data.toString(), snap); 
     });
 
     if (RatingsHelper::instance()->available) {
@@ -63,7 +59,8 @@ void CategoryPage::init(QString category, QString name)
             App item;
             item.name = app.name;
             item.icon = app.icon;
-            item.id = entry;
+            item.id = app.id;
+            item.package = entry;
             item.ratings = RatingsHelper::instance()->totalRatings(app.id);
             item.source = PackageKit;
             insertItem(item);
@@ -80,7 +77,8 @@ void CategoryPage::init(QString category, QString name)
             App item;
             item.name = app.name;
             item.icon = app.icon;
-            item.id = entry;
+            item.id = app.id;
+            item.package = entry;
             item.ratings = RatingsHelper::instance()->totalRatings(app.id);
             item.source = PackageKit;
             insertItem(item);

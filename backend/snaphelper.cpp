@@ -178,12 +178,13 @@ CategoryPage::App SnapHelper::categoryPageData(QSnapdSnap *snap)
     if (data.icon.isNull()) {
         data.icon = QIcon::fromTheme("application-x-executable");
     }
-    data.id = snap->name();
+    data.package = snap->name();
     if (snap->commonIds().length() > 0) {
-        data.ratings = RatingsHelper::instance()->totalRatings(snap->commonIds()[0]);
+        data.id = snap->commonIds()[0];
     } else {
-        data.ratings = RatingsHelper::instance()->totalRatings(QString("io.snapcraft.%1-%2").arg(snap->name()).arg(snap->id()));
+        data.id = QString("io.snapcraft.%1-%2").arg(snap->name()).arg(snap->id());
     }
+    data.ratings = RatingsHelper::instance()->totalRatings(data.id);
     data.source = CategoryPage::Backend::Snap;
     return data;
 }

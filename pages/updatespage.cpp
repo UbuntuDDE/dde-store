@@ -22,7 +22,7 @@ UpdatesPage::UpdatesPage(MainWindow *parent)
         if (data == systemUpdatesItem) {
             systemUpdatesPopup->exec();
         } else {
-            parent->openItem(data.toString());
+            parent->openItem(data.toString(), AppStreamHelper::instance()->IDFromPackage(data.toString()));
         }
     });
 
