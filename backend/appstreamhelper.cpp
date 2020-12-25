@@ -67,12 +67,19 @@ AppStreamHelper::appData AppStreamHelper::getAppData(QString package)
             }
         }
 
-        AppStream::Icon packageIcon = app.icon(QSize(64, 64));
-        if (packageIcon.kind() == AppStream::Icon::KindLocal || packageIcon.kind() == AppStream::Icon::KindCached) {
+        for (AppStream::Icon icon : app.icons()) {
+            if (icon.kind() == AppStream::Icon::KindStock) {
+                data.icon = QIcon::fromTheme(icon.name());
+                if (!data.icon.isNull()) {
+                    break;
+                }
+            }
+        }
+
+        if (data.icon.isNull()) {
+            AppStream::Icon packageIcon = app.icon(QSize(64, 64));
             data.icon.addFile(packageIcon.url().toLocalFile(), packageIcon.size());
-        } else if (packageIcon.kind() == AppStream::Icon::KindStock) {
-            data.icon = QIcon::fromTheme(packageIcon.name());
-        };
+        }
     }
 
     if (data.name.isNull()) {

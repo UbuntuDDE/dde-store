@@ -58,9 +58,9 @@ void SnapHelper::itemPageData(ItemPage *page, QString app)
             auto iconrequest = client->getIcon(app);
             iconrequest->runSync();
             if (!iconrequest->error()) {
-                QBuffer *buffer;
-                buffer->setData(iconrequest->icon()->data());
-                QImageReader reader(buffer);
+                QBuffer buffer;
+                buffer.setData(iconrequest->icon()->data());
+                QImageReader reader(&buffer);
                 reader.read();
                 data.icon = QIcon(QPixmap::fromImage(reader.read()));
             }
@@ -168,9 +168,9 @@ CategoryPage::App SnapHelper::categoryPageData(QSnapdSnap *snap)
         auto iconrequest = client->getIcon(snap->name());
         iconrequest->runSync();
         if (!iconrequest->error()) {
-            QBuffer *buffer;
-            buffer->setData(iconrequest->icon()->data());
-            QImageReader reader(buffer);
+            QBuffer buffer;
+            buffer.setData(iconrequest->icon()->data());
+            QImageReader reader(&buffer);
             reader.read();
             data.icon = QIcon(QPixmap::fromImage(reader.read()));
         }
