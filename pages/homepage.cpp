@@ -79,9 +79,9 @@ void HomePage::addCategory(QString name, QString category, MainWindow *parent)
         for (const QString &app : map.values()) {
             appList.insert(0, app);
         }
-        for (QString app : appList) {
-            AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(app);
-            list->addItem(data.name, data.icon, app);
+        for (int i = 0; i < 10; i++) {
+            AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(appList[i]);
+            list->addItem(data.name, data.icon, appList[i]);
         }
     
         list->load();

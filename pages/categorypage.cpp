@@ -99,7 +99,7 @@ void CategoryPage::load(SortType sort)
     if (sort == Alphabetical) {
         QMap<QString, App> map;
         for (App item : apps) {
-            map.insert(item.name, item);
+            map.insert(item.name.toLower(), item);
         }
         apps.clear();
         for (App item : map.values()) {
