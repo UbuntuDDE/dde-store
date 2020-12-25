@@ -35,16 +35,18 @@ void PackageKitHelper::getInstalled(CategoryPage *parent)
     qDebug() << "[ INSTALLED ] Getting installed applications...";
 
     connect(transaction, &Transaction::package, this, [ = ] (Transaction::Info, const QString &packageId) {
-        auto data = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
-        CategoryPage::App app;
-        app.name = data.name;
-        app.icon = data.icon;
-        app.id = data.id;
-        app.package = Transaction::packageName(packageId);
-        app.ratings = RatingsHelper::instance()->totalRatings(data.id);
-        app.source = CategoryPage::Backend::PackageKit;
-        parent->insertItem(app);
-        qDebug() << "[ INSTALLED ] Found installed app" << Transaction::packageName(packageId);
+        if (AppStreamHelper::instance()->hasAppData(Transaction::packageName(packageId))) {
+            auto data = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
+            CategoryPage::App app;
+            app.name = data.name;
+            app.icon = data.icon;
+            app.id = data.id;
+            app.package = Transaction::packageName(packageId);
+            app.ratings = RatingsHelper::instance()->totalRatings(data.id);
+            app.source = CategoryPage::Backend::PackageKit;
+            parent->insertItem(app);
+            qDebug() << "[ INSTALLED ] Found installed app" << Transaction::packageName(packageId);
+        }
     });
 
     connect(transaction, &Transaction::finished, this, [ = ] {
