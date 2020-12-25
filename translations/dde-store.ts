@@ -17,22 +17,22 @@
 <context>
     <name>CategoryPage</name>
     <message>
-        <location filename="../pages/categorypage.cpp" line="14"/>
+        <location filename="../pages/categorypage.cpp" line="17"/>
         <source>Sort by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/categorypage.cpp" line="17"/>
+        <location filename="../pages/categorypage.cpp" line="20"/>
         <source>Alphabetical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/categorypage.cpp" line="18"/>
+        <location filename="../pages/categorypage.cpp" line="21"/>
         <source>Ratings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/categorypage.cpp" line="38"/>
+        <location filename="../pages/categorypage.cpp" line="55"/>
         <source>No results for %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -85,7 +85,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/homepage.cpp" line="89"/>
+        <location filename="../pages/homepage.cpp" line="90"/>
         <source>View More</source>
         <translation type="unfinished"></translation>
     </message>
@@ -93,22 +93,22 @@
 <context>
     <name>ItemPage</name>
     <message>
-        <location filename="../pages/itempage.cpp" line="61"/>
+        <location filename="../pages/itempage.cpp" line="78"/>
         <source>Uninstall</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/itempage.cpp" line="85"/>
+        <location filename="../pages/itempage.cpp" line="102"/>
         <source>No description provided.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/itempage.cpp" line="100"/>
+        <location filename="../pages/itempage.cpp" line="119"/>
         <source>Install (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/itempage.cpp" line="109"/>
+        <location filename="../pages/itempage.cpp" line="135"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
@@ -229,27 +229,27 @@
 <context>
     <name>PackageKitHelper</name>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="66"/>
+        <location filename="../backend/packagekithelper.cpp" line="85"/>
         <source>Updates Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="125"/>
+        <location filename="../backend/packagekithelper.cpp" line="147"/>
         <source>Installed &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="148"/>
+        <location filename="../backend/packagekithelper.cpp" line="170"/>
         <source>Uninstalled &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="171"/>
+        <location filename="../backend/packagekithelper.cpp" line="193"/>
         <source>Updates Installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../backend/packagekithelper.cpp" line="180"/>
+        <location filename="../backend/packagekithelper.cpp" line="202"/>
         <source>PackageKit Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -318,6 +318,44 @@
     </message>
 </context>
 <context>
+    <name>SnapHelper</name>
+    <message>
+        <location filename="../backend/snaphelper.cpp" line="112"/>
+        <source>Installed &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/snaphelper.cpp" line="150"/>
+        <source>Uninstalled &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/snaphelper.cpp" line="218"/>
+        <source>Classic mode required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/snaphelper.cpp" line="218"/>
+        <source>This snap requires confinement to be disabled via classic mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/snaphelper.cpp" line="220"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/snaphelper.cpp" line="221"/>
+        <source>Continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backend/snaphelper.cpp" line="227"/>
+        <source>Snap Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UpdatesPage</name>
     <message>
         <location filename="../pages/updatespage.cpp" line="14"/>
@@ -340,12 +378,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/updatespage.cpp" line="71"/>
+        <location filename="../pages/updatespage.cpp" line="75"/>
         <source>Updating...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/updatespage.cpp" line="79"/>
+        <location filename="../pages/updatespage.cpp" line="83"/>
         <source>Update All (%1)</source>
         <translation type="unfinished"></translation>
     </message>
