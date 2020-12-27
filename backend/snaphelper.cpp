@@ -29,58 +29,62 @@ SnapHelper::SnapHelper()
 
 void SnapHelper::itemPageData(ItemPage *page, QString app)
 {
-    auto request = client->find(QSnapdClient::MatchName, app);
-    request->runAsync();
-    connect(request, &QSnapdRequest::complete, this, [ = ] {
-        AppStreamHelper::appData data;
-        data.name = request->snap(0)->title();
-        data.description = request->snap(0)->description();
-        data.summary = request->snap(0)->summary();
-        data.developer = request->snap(0)->publisherDisplayName();
-        QList<QUrl> screenshots;
-        for (int i = 0; i < request->snap(0)->mediaCount(); i++) {
-            if (request->snap(0)->media(i)->type() == "screenshot") {
-                screenshots << QUrl(request->snap(0)->media(i)->url());
-            }
-        }
-        data.screenshots = screenshots;
-        if (request->snap(0)->commonIds().length() > 0) {
-            data.id = request->snap(0)->commonIds()[0];
-        } else {
-            data.id = QString("io.snapcraft.%1-%2").arg(request->snap(0)->name()).arg(request->snap(0)->id());
-        }
+    QSnapdSnap *snap;
+    if (installedSnaps.contains(app)) {
+        auto request = client->getSnap(app);
+        request->runSync();
+        snap = request->snap();
+    } else {
+        auto request = client->find(QSnapdClient::MatchName, app);
+        request->runSync();
+        snap = request->snap(0);
+    }
 
-        if (request->snap(0)->icon().startsWith("/")) {
-            data.icon = QIcon(request->snap(0)->icon());
-        } else if (request->snap(0)->icon().isEmpty()) {
-            data.icon = QIcon::fromTheme("application-x-executable");
-        } else {
-            auto iconrequest = client->getIcon(app);
-            iconrequest->runSync();
-            if (!iconrequest->error()) {
-                QBuffer buffer;
-                buffer.setData(iconrequest->icon()->data());
-                QImageReader reader(&buffer);
-                reader.read();
-                data.icon = QIcon(QPixmap::fromImage(reader.read()));
-            }
+    AppStreamHelper::appData data;
+    data.name = snap->title();
+    data.description = snap->description();
+    data.summary = snap->summary();
+    data.developer = snap->publisherDisplayName();
+    QList<QUrl> screenshots;
+    for (int i = 0; i < snap->mediaCount(); i++) {
+        if (snap->media(i)->type() == "screenshot") {
+            screenshots << QUrl(snap->media(i)->url());
         }
+    }
+    data.screenshots = screenshots;
+    if (snap->commonIds().length() > 0) {
+        data.id = snap->commonIds()[0];
+    } else {
+        data.id = QString("io.snapcraft.%1-%2").arg(snap->name()).arg(snap->id());
+    }
 
-        if (data.icon.isNull()) {
-            data.icon = QIcon::fromTheme("application-x-executable");
+    if (snap->icon().startsWith("/")) {
+        data.icon = QIcon(snap->icon());
+    } else if (snap->icon().isEmpty()) {
+        data.icon = QIcon::fromTheme("application-x-executable");
+    } else {
+        auto iconrequest = client->getIcon(app);
+        iconrequest->runSync();
+        if (!iconrequest->error()) {
+            QBuffer buffer;
+            buffer.setData(iconrequest->icon()->data());
+            QImageReader reader(&buffer);
+            reader.read();
+            data.icon = QIcon(QPixmap::fromImage(reader.read()));
         }
+    }
 
-        page->setData(data);
+    if (data.icon.isNull()) {
+        data.icon = QIcon::fromTheme("application-x-executable");
+    }
 
-        switch (request->snap(0)->status()) {
-            case QSnapdEnums::SnapStatusAvailable:
-                page->setInstallButton(app, ItemPage::NotInstalled, QLocale().formattedDataSize(request->snap(0)->downloadSize()));
-                break;
-            case QSnapdEnums::SnapStatusInstalled:
-                page->setInstallButton(app, ItemPage::Installed);
-                break;
-        };
-    });
+    page->setData(data);
+
+    if (installedSnaps.contains(snap->name())) {
+        page->setInstallButton(app, ItemPage::Installed);
+    } else {
+        page->setInstallButton(app, ItemPage::NotInstalled, QLocale().formattedDataSize(snap->downloadSize()));
+    }
 }
 
 void SnapHelper::install(ItemPage *page, QString app, bool classic)
@@ -97,7 +101,7 @@ void SnapHelper::install(ItemPage *page, QString app, bool classic)
     connect(request, &QSnapdRequest::progress, this, [ = ] {
         int percent = 0;
         for (int i = 0; i < request->change()->taskCount(); i++) {
-            percent += (100 * request->change()->task(i)->progressDone() / request->change()->task(i)->progressTotal());
+            percent += (100 * request->change()->task(i)->progressDone()) / request->change()->task(i)->progressTotal();
         }
         percent /= qMax(request->change()->taskCount(), 1);
         qDebug() << "[ INSTALL ]" << QString::number(percent) + "%";
@@ -112,6 +116,7 @@ void SnapHelper::install(ItemPage *page, QString app, bool classic)
                 DUtil::DNotifySender(tr("Installed \"%1\"").arg(app)).appIcon("dialog-ok").appName("DDE Store").timeOut(5000).call();
             }
             page->setInstallButton(app, ItemPage::Installed);
+            installedSnaps << app;
             qDebug() << "[ INSTALL ] Snap installed";
             break;
         case QSnapdRequest::NeedsClassic:
@@ -136,7 +141,7 @@ void SnapHelper::uninstall(ItemPage *page, QString app)
     connect(request, &QSnapdRequest::progress, this, [ = ] {
         int percent = 0;
         for (int i = 0; i < request->change()->taskCount(); i++) {
-            percent += (100 * request->change()->task(i)->progressDone() / request->change()->task(i)->progressTotal());
+            percent += (100 * request->change()->task(i)->progressDone()) / request->change()->task(i)->progressTotal();
         }
         percent /= qMax(request->change()->taskCount(), 1);
         qDebug() << "[ UNINSTALL ]" << QString::number(percent) + "%";
@@ -149,6 +154,7 @@ void SnapHelper::uninstall(ItemPage *page, QString app)
             if (settings::instance()->notifyInstall()) {
                 DUtil::DNotifySender(tr("Uninstalled \"%1\"").arg(app)).appIcon("dialog-ok").appName("DDE Store").timeOut(5000).call();
             }
+            installedSnaps.removeAll(app);
             page->setInstallButton(app, ItemPage::NotInstalled);
             qDebug() << "[ Uninstalled ] Snap uninstalled";
         }
@@ -207,6 +213,9 @@ void SnapHelper::installed(CategoryPage *parent)
     request->runAsync();
     connect(request, &QSnapdRequest::complete, this, [ = ] {
         for (int i = 0; i < request->snapCount(); i++) {
+            if (!installedSnaps.contains(request->snap(i)->name())) {
+                installedSnaps << request->snap(i)->name();
+            }
             parent->insertItem(categoryPageData(request->snap(i)));
         }
         parent->load();

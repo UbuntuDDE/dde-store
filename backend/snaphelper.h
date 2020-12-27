@@ -25,6 +25,7 @@ private:
     QSnapdClient *client;
     int requestClassic();
     void error(QSnapdRequest::QSnapdError err, QString error);
+    QStringList installedSnaps;
 };
 
 #endif // SNAPHELPER_H
