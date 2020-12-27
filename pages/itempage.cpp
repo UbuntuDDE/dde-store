@@ -136,7 +136,9 @@ void ItemPage::setInstallButton(QString packageId, Status type, QString param)
         installBtn->disconnect(this);
         connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
             if (isSnap) {
+#ifdef SNAP
                 SnapHelper::launch(packageId);
+#endif
             } else {
                 PackageKitHelper::instance()->launch(packageId);
             }
