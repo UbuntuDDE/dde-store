@@ -218,10 +218,12 @@ void SnapHelper::installed(CategoryPage *parent)
     request->runAsync();
     connect(request, &QSnapdRequest::complete, this, [ = ] {
         for (int i = 0; i < request->snapCount(); i++) {
-            if (!installedSnaps.contains(request->snap(i)->name())) {
-                installedSnaps << request->snap(i)->name();
+            if (request->snap(i)->snapType() == QSnapdEnums::SnapTypeApp) {
+                if (!installedSnaps.contains(request->snap(i)->name())) {
+                    installedSnaps << request->snap(i)->name();
+                }
+                parent->insertItem(categoryPageData(request->snap(i)));
             }
-            parent->insertItem(categoryPageData(request->snap(i)));
         }
         parent->load();
     });
