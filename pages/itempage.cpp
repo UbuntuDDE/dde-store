@@ -1,21 +1,22 @@
 #include "pages/itempage.h"
-#include "backend/appstreamhelper.h"
 #include "backend/packagekithelper.h"
 #include "backend/ratingshelper.h"
 #include "widgets/gallery.h"
 #include "widgets/stars.h"
-#include <QVBoxLayout>
 #include <QScrollArea>
 #include <DLabel>
+#ifdef SNAP
+#include "backend/snaphelper.h"
+#endif
 
-ItemPage::ItemPage(QString app)
+ItemPage::ItemPage(QString app, bool snap)
 {
     QScrollArea *scroll = new QScrollArea(this);
     QWidget *widget = new QWidget;
     scroll->setWidget(widget);
     scroll->setWidgetResizable(true);
     scroll->setFrameShape(QFrame::NoFrame);
-    QVBoxLayout *layout = new QVBoxLayout;
+    layout = new QVBoxLayout;
     layout->setAlignment(Qt::AlignTop);
     widget->setLayout(layout);
 
@@ -25,9 +26,25 @@ ItemPage::ItemPage(QString app)
     setLayout(mainLayout);
     mainLayout->addWidget(scroll);
 
-    PackageKitHelper::instance()->itemPageData(this, app);
-    AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(app);
+    isSnap = snap;
 
+    spinner = new DSpinner;
+    if (isSnap) {
+#ifdef SNAP
+        SnapHelper::instance()->itemPageData(this, app);
+#endif
+        spinner->start();
+        spinner->setFixedSize(50, 50);
+        layout->addWidget(spinner, 1, Qt::AlignCenter);
+    } else {
+        PackageKitHelper::instance()->itemPageData(this, app);
+        setData(AppStreamHelper::instance()->getAppData(app));
+    }
+}
+
+void ItemPage::setData(AppStreamHelper::appData data)
+{
+    spinner->hide();
     QHBoxLayout *header = new QHBoxLayout;
     header->setMargin(10);
     header->setAlignment(Qt::AlignVCenter);
@@ -102,7 +119,13 @@ void ItemPage::setInstallButton(QString packageId, Status type, QString param)
         installBtn->setText(tr("Install (%1)").arg(param));
         installBtn->disconnect(this);
         connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
-            PackageKitHelper::instance()->install(this, packageId);
+            if (isSnap) {
+#ifdef SNAP
+                SnapHelper::instance()->install(this, packageId, false);
+#endif
+            } else {
+                PackageKitHelper::instance()->install(this, packageId);
+            }
         });
         break;
     case Launchable:
@@ -112,11 +135,23 @@ void ItemPage::setInstallButton(QString packageId, Status type, QString param)
         installBtn->setText(tr("Open"));
         installBtn->disconnect(this);
         connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
-            PackageKitHelper::instance()->launch(packageId);
+            if (isSnap) {
+#ifdef SNAP
+                SnapHelper::launch(packageId);
+#endif
+            } else {
+                PackageKitHelper::instance()->launch(packageId);
+            }
         });
         removeBtn->show();
         connect(removeBtn, &DWarningButton::clicked, this, [ = ] {
-            PackageKitHelper::instance()->uninstall(this, packageId);
+            if (isSnap) {
+#ifdef SNAP
+                SnapHelper::instance()->uninstall(this, packageId);
+#endif
+            } else {
+                PackageKitHelper::instance()->uninstall(this, packageId);
+            }
         });
         break;
     case Installed:
@@ -124,7 +159,13 @@ void ItemPage::setInstallButton(QString packageId, Status type, QString param)
         installBtn->hide();
         removeBtn->show();
         connect(removeBtn, &DWarningButton::clicked, this, [ = ] {
-            PackageKitHelper::instance()->uninstall(this, packageId);
+            if (isSnap) {
+#ifdef SNAP
+                SnapHelper::instance()->uninstall(this, packageId);
+#endif
+            } else {
+                PackageKitHelper::instance()->uninstall(this, packageId);
+            }
         });
         break;
     case Installing:

@@ -13,6 +13,7 @@ public:
     static RatingsHelper *instance();
     double averageRating(QString app);
     int totalRatings(QString app);
+    bool available;
 
 private:
     static RatingsHelper *currentInstance;

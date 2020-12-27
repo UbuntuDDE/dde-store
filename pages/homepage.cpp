@@ -79,8 +79,9 @@ void HomePage::addCategory(QString name, QString category, MainWindow *parent)
         for (const QString &app : map.values()) {
             appList.insert(0, app);
         }
-        for (QString app : appList) {
-            list->addItem(app);
+        for (int i = 0; i < 10; i++) {
+            AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(appList[i]);
+            list->addItem(data.name, data.icon, appList[i]);
         }
     
         list->load();
@@ -94,7 +95,7 @@ void HomePage::addCategory(QString name, QString category, MainWindow *parent)
 
     layout->addWidget(list);
 
-    connect(list, &List::currentItemChanged, this, [ = ] (QString package) {
-        parent->openItem(package);
+    connect(list, &List::currentItemChanged, this, [ = ] (QVariant data) {
+        parent->openItem(data.toString(), AppStreamHelper::instance()->IDFromPackage(data.toString()));
     });
 }

@@ -9,15 +9,29 @@ class CategoryPage : public QWidget
 {
     Q_OBJECT
 public:
-    CategoryPage(MainWindow *parent, QString name, QString category);
-    void loadData(QStringList appList);
-private:
     enum SortType {
         Alphabetical,
         Ratings
     };
-    SortType sort = SortType::Alphabetical;
-    QStringList apps;
+    enum Backend {
+        PackageKit,
+        Snap
+    };
+    struct App
+    {
+        QString name;
+        QIcon icon;
+        QString id;
+        QString package;
+        int ratings;
+        Backend source;
+    };
+    CategoryPage(MainWindow *parent, QString name, QString category);
+    void insertItem(App item);
+    void load(SortType sort = Alphabetical);
+private:
+    void init(QString category, QString name);
+    QList<CategoryPage::App> apps;
     List *list;
 };
 

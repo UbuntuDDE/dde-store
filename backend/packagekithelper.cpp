@@ -1,5 +1,6 @@
 #include "backend/packagekithelper.h"
 #include "backend/appstreamhelper.h"
+#include "backend/ratingshelper.h"
 #include "backend/settings.h"
 #include <Details>
 #include <QLocale>
@@ -9,6 +10,9 @@
 #include <DNotifySender>
 #include <DDialog>
 #include <DStyle>
+#ifdef SNAP
+#include "backend/snaphelper.h"
+#endif
 
 DWIDGET_USE_NAMESPACE
 
@@ -24,7 +28,6 @@ PackageKitHelper *PackageKitHelper::instance()
 
 void PackageKitHelper::getInstalled(CategoryPage *parent)
 {
-    QStringList *pkgList = new QStringList;
     Transaction *transaction = Daemon::getPackages(Transaction::FilterInstalled | Transaction::FilterApplication);
 
     connect(transaction, &Transaction::errorCode, this, &PackageKitHelper::error);
@@ -32,12 +35,26 @@ void PackageKitHelper::getInstalled(CategoryPage *parent)
     qDebug() << "[ INSTALLED ] Getting installed applications...";
 
     connect(transaction, &Transaction::package, this, [ = ] (Transaction::Info, const QString &packageId) {
-        pkgList->append(Transaction::packageName(packageId));
-        qDebug() << "[ INSTALLED ] Found installed app" << Transaction::packageName(packageId);
+        if (AppStreamHelper::instance()->hasAppData(Transaction::packageName(packageId))) {
+            auto data = AppStreamHelper::instance()->getAppData(Transaction::packageName(packageId));
+            CategoryPage::App app;
+            app.name = data.name;
+            app.icon = data.icon;
+            app.id = data.id;
+            app.package = Transaction::packageName(packageId);
+            app.ratings = RatingsHelper::instance()->totalRatings(data.id);
+            app.source = CategoryPage::Backend::PackageKit;
+            parent->insertItem(app);
+            qDebug() << "[ INSTALLED ] Found installed app" << Transaction::packageName(packageId);
+        }
     });
 
     connect(transaction, &Transaction::finished, this, [ = ] {
-        parent->loadData(*pkgList);
+#ifdef SNAP
+        SnapHelper::instance()->installed(parent);
+#else
+        parent->load();
+#endif
         qDebug() << "[ INSTALLED ] Retrieved installed apps";
     });
 }
@@ -59,7 +76,6 @@ void PackageKitHelper::getUpdates(UpdatesPage *parent, bool refreshCache)
     connect(getupdates, &Transaction::errorCode, this, &PackageKitHelper::error);
     connect(getupdates, &Transaction::finished, this, [ = ] {
         QHash<QString, int> *apps = new QHash<QString, int>;
-        
         if (pkgList->length() > 0) {
             Transaction *getdetails = Daemon::getDetails(*pkgList);
             connect(getdetails, &Transaction::details, this, [ = ] (const Details &details) {

@@ -1,4 +1,5 @@
 #include "widgets/gallery.h"
+#include "backend/appstreamhelper.h"
 #include <QHBoxLayout>
 #include <QNetworkAccessManager>
 #include <QNetworkDiskCache>
@@ -183,7 +184,7 @@ void gallery::changeImage(int index)
 bool gallery::eventFilter(QObject *object, QEvent *event)
 {
     if (object == imageView && !banners.isEmpty() && event->type() == QEvent::MouseButtonRelease) {
-        mainwindow->openItem(banners[currentImage].second);
+        mainwindow->openItem(banners[currentImage].second, AppStreamHelper::instance()->IDFromPackage(banners[currentImage].second));
     }
     return QObject::eventFilter(object, event);
 }

@@ -15,8 +15,7 @@ class List : public QWidget
     Q_OBJECT
 public:
     List(QString title);
-    void addItem(QString package);
-    void addItem(QString name, QIcon icon);
+    void addItem(QString name, QIcon icon, QVariant data = QVariant());
     void addHeaderWidget(QWidget *widget);
     void setEmptyText(QString text);
     void editItemText(QString package, QString text);
@@ -31,7 +30,7 @@ private:
     DLabel *emptyLabel;
     QVBoxLayout *layout;
 signals:
-    void currentItemChanged(QString package);
+    void currentItemChanged(QVariant data);
 };
 
 #endif // LIST_H
