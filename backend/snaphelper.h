@@ -17,6 +17,7 @@ public:
     void uninstall(ItemPage *page, QString app);
     void search(CategoryPage *parent, QString query);
     void installed(CategoryPage *parent);
+    static void launch(QString app);
     CategoryPage::App categoryPageData(QSnapdSnap *snap);
 
 private:

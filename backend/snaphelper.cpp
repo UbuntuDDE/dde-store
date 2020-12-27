@@ -5,6 +5,7 @@
 #include <QLocale>
 #include <QBuffer>
 #include <QImageReader>
+#include <QProcess>
 #include <QDebug>
 #include <DNotifySender>
 #include <DDialog>
@@ -81,7 +82,11 @@ void SnapHelper::itemPageData(ItemPage *page, QString app)
     page->setData(data);
 
     if (installedSnaps.contains(snap->name())) {
-        page->setInstallButton(app, ItemPage::Installed);
+        if (snap->snapType() == QSnapdEnums::SnapTypeApp) {
+            page->setInstallButton(app, ItemPage::Launchable);
+        } else {
+            page->setInstallButton(app, ItemPage::Installed);
+        }
     } else {
         page->setInstallButton(app, ItemPage::NotInstalled, QLocale().formattedDataSize(snap->downloadSize()));
     }
@@ -220,6 +225,11 @@ void SnapHelper::installed(CategoryPage *parent)
         }
         parent->load();
     });
+}
+
+void SnapHelper::launch(QString app)
+{
+    QProcess::startDetached("snap", {"run", app});
 }
 
 int SnapHelper::requestClassic()
