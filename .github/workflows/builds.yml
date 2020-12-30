@@ -32,7 +32,9 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v2
       - name: Add UbuntuDDE PPA
-        run: add-apt-repository -y ppa:ubuntudde-dev/stable
+        run: |
+          apt-get -y install software-properties-common
+          add-apt-repository -y ppa:ubuntudde-dev/stable
       - name: Refresh repos
         run: apt-get update
       - name: Install build dependencies
