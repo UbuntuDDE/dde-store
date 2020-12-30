@@ -34,6 +34,7 @@ sudo pacman -S deepin-store
 - libdtkgui-dev
 - libpackagekitqt5-dev
 - libappstreamqt-dev
+- libsnapd-glib-dev (**Optional** - Snap support)
 
 **Building on Ubuntu**
 
