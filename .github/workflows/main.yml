@@ -19,13 +19,12 @@ jobs:
         run: pacman -Syy
       - name: Install build dependencies
         run: pacman -S --noconfirm base-devel cmake ninja qt5-tools dtkwidget appstream-qt packagekit-qt5
-      - name: CMake
+      - name: CMake and Make
         run: |
           mkdir build
           cd build
           cmake ../ -G Ninja
-      - name: Make
-        run: ninja
+          ninja
   ubuntudde:
     name: UbuntuDDE Build Check
     runs-on: ubuntu-20.10
@@ -38,10 +37,9 @@ jobs:
         run: apt-get update
       - name: Install build dependencies
         run: apt-get -y install build-essential cmake ninja-build qtbase5-dev libdtkwidget-dev libdtkcore-dev libdtkgui-dev libpackagekitqt5-dev libappstreamqt-dev libsnapd-glib-dev qttools5-dev
-      - name: CMake
+      - name: CMake and Make
         run: |
           mkdir build
           cd build
           cmake ../ -G Ninja
-      - name: Make
-        run: ninja
+          ninja
