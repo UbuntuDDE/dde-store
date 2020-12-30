@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
         app.setAboutDialog(&about);
         about.setProductIcon(QIcon::fromTheme("deepin-app-store"));
         about.setProductName("DDE Store");
-        about.setDescription(qApp->translate("main", "An app store for DDE built with DTK") + "<br/>" + qApp->translate("main", "Created by %1").arg("<a href='https://github.com/dekzi'>Dekzi</a>") + "<br/><br/><a href='https://github.com/dekzi/dde-store'>https://github.com/dekzi/dde-store</a>");
-        about.setVersion("1.1.0");
+        about.setDescription(qApp->translate("main", "An app store for DDE built with DTK") + "<br/>" + qApp->translate("main", "Created by %1").arg("<a href='https://github.com/dekzi'>dekzi</a>") + "<br/><br/><a href='https://github.com/dekzi/dde-store'>https://github.com/dekzi/dde-store</a>");
+        about.setVersion("1.2.0");
         MainWindow w;
         Dtk::Widget::moveToCenter(&w);
         w.show();

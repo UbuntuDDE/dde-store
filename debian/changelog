@@ -1,3 +1,10 @@
+dde-store (1.2.0) groovy; urgency=low
+
+  * Added Snap support
+  * Bug fixes
+
+ -- dekzi <dekzidev@protonmail.com>  Tue, 29 Dec 2020 22:32:20 -0800
+
 dde-store (1.1.0) groovy; urgency=low
 
   * Added automatic hourly background update checking

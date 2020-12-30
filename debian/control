@@ -8,6 +8,6 @@ Homepage: https://github.com/dekzi/dde-store
 
 Package: dde-store
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, libsnapd-glib1
 Description: DDE Store
  An app store for DDE built with DTK
