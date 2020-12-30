@@ -26,7 +26,8 @@ jobs:
           ninja
   ubuntudde:
     name: UbuntuDDE
-    runs-on: ubuntu-20.10
+    runs-on: ubuntu-latest
+    container: docker.io/library/ubuntu:20.10
     steps:
       - name: Checkout branch
         uses: actions/checkout@v2
