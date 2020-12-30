@@ -90,4 +90,4 @@ set(CMAKE_INSTALL_PREFIX /usr)
 
 install(TARGETS dde-store DESTINATION bin)
 install(FILES ${QM_FILES} DESTINATION share/dde-store/translations)
-install(FILES dde-store.desktop DESTINATION share/applications)
+install(FILES resources/dde-store.desktop DESTINATION share/applications)
