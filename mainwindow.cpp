@@ -201,7 +201,7 @@ void MainWindow::initNav()
             pageHistoryIndex += 1;
             // If the index isn't at the end of the history (the user pressed back)
             if (pageHistoryIndex != pageHistory.length() - 1) {
-                // Remove all entires after this current one
+                // Remove all entries after this current one
                 for (int i = 0; i < pageHistory.length() - pageHistoryIndex + 1; i++) {
                     pageHistory.removeLast();
                 }
