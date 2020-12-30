@@ -18,7 +18,7 @@ jobs:
       - name: Refresh repos
         run: pacman -Syy
       - name: Install build dependencies
-        run: pacman -S --noconfirm cmake ninja qt5-tools dtkwidget appstream-qt packagekit-qt5
+        run: pacman -S --noconfirm base-devel cmake ninja qt5-tools dtkwidget appstream-qt packagekit-qt5
       - name: CMake
         run: |
           mkdir build
@@ -37,7 +37,7 @@ jobs:
       - name: Refresh repos
         run: apt-get update
       - name: Install build dependencies
-        run: apt-get -y install cmake ninja-build qtbase5-dev libdtkwidget-dev libdtkcore-dev libdtkgui-dev libpackagekitqt5-dev libappstreamqt-dev libsnapd-glib-dev qttools5-dev
+        run: apt-get -y install build-essential cmake ninja-build qtbase5-dev libdtkwidget-dev libdtkcore-dev libdtkgui-dev libpackagekitqt5-dev libappstreamqt-dev libsnapd-glib-dev qttools5-dev
       - name: CMake
         run: |
           mkdir build
