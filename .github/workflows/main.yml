@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  arch:
+    name: Arch Linux Build Check
+    runs-on: ubuntu-latest
+    container: docker.io/library/archlinux:latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - name: Refresh repos
+        run: pacman -Syy
+      - name: Install build dependencies
+        run: pacman -S --noconfirm cmake ninja qt5-tools dtkwidget appstream-qt packagekit-qt5
+      - name: CMake
+        run: |
+          mkdir build
+          cd build
+          cmake ../ -G Ninja
+      - name: Make
+        run: ninja
+  ubuntudde:
+    name: UbuntuDDE Build Check
+    runs-on: ubuntu-20.10
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - name: Add UbuntuDDE PPA
+        run: add-apt-repository -y ppa:ubuntudde-dev/stable
+      - name: Refresh repos
+        run: apt-get update
+      - name: Install build dependencies
+        run: apt-get -y install cmake ninja-build qtbase5-dev libdtkwidget-dev libdtkcore-dev libdtkgui-dev libpackagekitqt5-dev libappstreamqt-dev libsnapd-glib-dev qttools5-dev
+      - name: CMake
+        run: |
+          mkdir build
+          cd build
+          cmake ../ -G Ninja
+      - name: Make
+        run: ninja
