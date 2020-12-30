@@ -1,5 +1,4 @@
-name: CI
-
+name: Build Check
 on:
   push:
     branches: [ master ]
@@ -9,7 +8,7 @@ on:
 
 jobs:
   arch:
-    name: Arch Linux Build Check
+    name: Arch Linux
     runs-on: ubuntu-latest
     container: docker.io/library/archlinux:latest
     steps:
@@ -18,7 +17,7 @@ jobs:
       - name: Refresh repos
         run: pacman -Syy
       - name: Install build dependencies
-        run: pacman -S --noconfirm base-devel cmake ninja qt5-tools dtkwidget appstream-qt packagekit-qt5
+        run: pacman -S --noconfirm base-devel cmake ninja qt5-base qt5-tools dtkwidget appstream-qt packagekit-qt5
       - name: CMake and Make
         run: |
           mkdir build
@@ -26,7 +25,7 @@ jobs:
           cmake ../ -G Ninja
           ninja
   ubuntudde:
-    name: UbuntuDDE Build Check
+    name: UbuntuDDE
     runs-on: ubuntu-20.10
     steps:
       - name: Checkout branch
