@@ -31,12 +31,13 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v2
+      - name: Refresh repos
+        run: apt-get update
       - name: Add UbuntuDDE PPA
         run: |
           apt-get -y install software-properties-common
           add-apt-repository -y ppa:ubuntudde-dev/stable
-      - name: Refresh repos
-        run: apt-get update
+          apt-get update
       - name: Install build dependencies
         run: apt-get -y install build-essential cmake ninja-build qtbase5-dev libdtkwidget-dev libdtkcore-dev libdtkgui-dev libpackagekitqt5-dev libappstreamqt-dev libsnapd-glib-dev qttools5-dev
       - name: CMake and Make
