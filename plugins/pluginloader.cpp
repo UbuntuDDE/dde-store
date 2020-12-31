@@ -13,7 +13,9 @@ PluginLoader *PluginLoader::instance()
 
 PluginLoader::PluginLoader()
 {
-    QPluginLoader *loader = new QPluginLoader("dde-store/snapplugin", this);
-    SnapInterface *interface = qobject_cast<SnapInterface*>(loader->instance());
-    snapPlugin = interface;
+    QPluginLoader *snapLoader = new QPluginLoader("dde-store/snapplugin", this);
+    snapPlugin = qobject_cast<SnapInterface*>(snapLoader->instance());
+
+    QPluginLoader *flatpakLoader = new QPluginLoader("dde-store/flatpakplugin", this);
+    flatpakPlugin = qobject_cast<FlatpakInterface*>(flatpakLoader->instance());
 }

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "plugins/snap/snapinterface.h"
+#include "plugins/flatpak/flatpakinterface.h"
 
 class PluginLoader : public QObject
 {
@@ -11,6 +12,7 @@ class PluginLoader : public QObject
 public:
     static PluginLoader *instance();
     SnapInterface *snapPlugin;
+    FlatpakInterface *flatpakPlugin;
 
 private:
     PluginLoader();
