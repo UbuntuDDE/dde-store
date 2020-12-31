@@ -6,7 +6,7 @@
 #include <QScrollArea>
 #include <DLabel>
 #ifdef SNAP
-#include "backend/snaphelper.h"
+#include "plugins/snap/snaphelper.h"
 #endif
 
 ItemPage::ItemPage(QString app, bool snap)

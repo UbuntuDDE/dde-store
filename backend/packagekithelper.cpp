@@ -11,7 +11,7 @@
 #include <DDialog>
 #include <DStyle>
 #ifdef SNAP
-#include "backend/snaphelper.h"
+#include "plugins/snap/snaphelper.h"
 #endif
 
 DWIDGET_USE_NAMESPACE

@@ -5,7 +5,7 @@
 #include <QComboBox>
 #include <QVBoxLayout>
 #ifdef SNAP
-#include "backend/snaphelper.h"
+#include "plugins/snap/snaphelper.h"
 #endif
 
 CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)

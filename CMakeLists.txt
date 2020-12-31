@@ -14,9 +14,9 @@ find_package(Qt5 REQUIRED Core Widgets Network DBus Gui LinguistTools)
 find_package(Dtk REQUIRED Widget Gui)
 find_package(PackageKitQt5 REQUIRED)
 find_package(AppStreamQt REQUIRED)
-find_package(Snapd)
 find_package(PkgConfig REQUIRED)
 include(FindPkgConfig)
+include(GNUInstallDirs)
 
 include_directories(
     ${PackageKitQt5_INCLUDE_DIR}
@@ -52,6 +52,9 @@ file(GLOB SRC
     widgets/stars.h
     widgets/list.cpp
     widgets/list.h
+    plugins/pluginloader.cpp
+    plugins/pluginloader.h
+    plugins/snap/snapinterface.h
     resources.qrc
 )
 
@@ -78,15 +81,33 @@ target_link_libraries(${PROJECT_NAME}
     AppStreamQt
 )
 
-if (Snapd_FOUND)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE SNAP)
-    target_sources(${PROJECT_NAME} PRIVATE
-        backend/snaphelper.cpp
-        backend/snaphelper.h
-    )
-endif()
+add_subdirectory(plugins)
 
 set(CMAKE_INSTALL_PREFIX /usr)
+
+file(GLOB libfiles
+    pages/itempage.cpp
+    pages/categorypage.cpp
+    pages/updatespage.cpp
+    plugins/snap/snapinterface.h
+)
+
+add_library(libddestore ${libfiles})
+
+target_link_libraries(libddestore PUBLIC
+    ${DtkWidget_LIBRARIES}
+    ${DtkCore_LIBRARIES}
+    ${DtkGui_LIBRARIES}
+    ${Qt5Widgets_LIBRARIES}
+    ${Qt5Network_LIBRARIES}
+    ${PackageKitQt5_LIBRARIES}
+    ${SNAPD_LIBRARIES}
+    AppStreamQt
+)
+
+target_include_directories(libddestore PUBLIC ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
+
+install(TARGETS libddestore DESTINATION ${CMAKE_INSTALL_LIBDIR}/libddestore)
 
 install(TARGETS dde-store DESTINATION bin)
 install(FILES ${QM_FILES} DESTINATION share/dde-store/translations)
