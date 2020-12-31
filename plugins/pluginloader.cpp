@@ -13,7 +13,7 @@ PluginLoader *PluginLoader::instance()
 
 PluginLoader::PluginLoader()
 {
-    QPluginLoader *loader = new QPluginLoader("dde-store/");
+    QPluginLoader *loader = new QPluginLoader("dde-store/snapplugin", this);
     SnapInterface *interface = qobject_cast<SnapInterface*>(loader->instance());
     snapPlugin = interface;
 }

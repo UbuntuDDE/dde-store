@@ -2,6 +2,7 @@
 #include "backend/appstreamhelper.h"
 #include "backend/ratingshelper.h"
 #include "backend/settings.h"
+#include "plugins/pluginloader.h"
 #include <Details>
 #include <QLocale>
 #include <QStandardPaths>
@@ -10,9 +11,6 @@
 #include <DNotifySender>
 #include <DDialog>
 #include <DStyle>
-#ifdef SNAP
-#include "plugins/snap/snaphelper.h"
-#endif
 
 DWIDGET_USE_NAMESPACE
 
@@ -50,11 +48,11 @@ void PackageKitHelper::getInstalled(CategoryPage *parent)
     });
 
     connect(transaction, &Transaction::finished, this, [ = ] {
-#ifdef SNAP
-        SnapHelper::instance()->installed(parent);
-#else
-        parent->load();
-#endif
+        if (PluginLoader::instance()->snapPlugin) {
+            PluginLoader::instance()->snapPlugin->installed(parent);
+        } else {
+            parent->load();
+        }
         qDebug() << "[ INSTALLED ] Retrieved installed apps";
     });
 }

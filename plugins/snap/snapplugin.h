@@ -7,18 +7,20 @@
 #include <pages/categorypage.h>
 #include <plugins/snap/snapinterface.h>
 
-class SnapHelper : public SnapInterface
+class SnapPlugin : public SnapInterface
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.dekzi.dde-store.SnapPlugin")
+    Q_INTERFACES(SnapInterface)
 
 public:
-    SnapHelper();
+    SnapPlugin();
     void itemPageData(ItemPage *page, QString app);
     void install(ItemPage *page, QString app, bool classic);
     void uninstall(ItemPage *page, QString app);
     void search(CategoryPage *parent, QString query);
     void installed(CategoryPage *parent);
-    static void launch(QString app);
+    void launch(QString app);
     CategoryPage::App categoryPageData(QSnapdSnap *snap);
 
 private:

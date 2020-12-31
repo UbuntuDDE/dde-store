@@ -2,11 +2,9 @@
 #include "backend/appstreamhelper.h"
 #include "backend/packagekithelper.h"
 #include "backend/ratingshelper.h"
+#include "plugins/pluginloader.h"
 #include <QComboBox>
 #include <QVBoxLayout>
-#ifdef SNAP
-#include "plugins/snap/snaphelper.h"
-#endif
 
 CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
 {
@@ -65,11 +63,11 @@ void CategoryPage::init(QString category, QString name)
             item.source = PackageKit;
             insertItem(item);
         }
-#ifdef SNAP
-        SnapHelper::instance()->search(this, category);
-#else
-        load();
-#endif
+        if (PluginLoader::instance()->snapPlugin) {
+            PluginLoader::instance()->snapPlugin->search(this, category);
+        } else {
+            load();
+        }
     } else {
         auto list = AppStreamHelper::instance()->category(category);
         for (QString entry : list) {

@@ -318,39 +318,39 @@
     </message>
 </context>
 <context>
-    <name>SnapHelper</name>
+    <name>SnapPlugin</name>
     <message>
-        <location filename="../backend/snaphelper.cpp" line="112"/>
+        <location filename="../backend/snapplugin.cpp" line="112"/>
         <source>Installed &quot;%1&quot;</source>
         <translation>Installed &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../backend/snaphelper.cpp" line="150"/>
+        <location filename="../backend/snapplugin.cpp" line="150"/>
         <source>Uninstalled &quot;%1&quot;</source>
         <translation>Uninstalled &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../backend/snaphelper.cpp" line="218"/>
+        <location filename="../backend/snapplugin.cpp" line="218"/>
         <source>Classic mode required</source>
         <translation>Classic mode required</translation>
     </message>
     <message>
-        <location filename="../backend/snaphelper.cpp" line="218"/>
+        <location filename="../backend/snapplugin.cpp" line="218"/>
         <source>This snap requires confinement to be disabled via classic mode</source>
         <translation>This snap requires confinement to be disabled via classic mode</translation>
     </message>
     <message>
-        <location filename="../backend/snaphelper.cpp" line="220"/>
+        <location filename="../backend/snapplugin.cpp" line="220"/>
         <source>Cancel</source>
         <translation>Cancel</translation>
     </message>
     <message>
-        <location filename="../backend/snaphelper.cpp" line="221"/>
+        <location filename="../backend/snapplugin.cpp" line="221"/>
         <source>Continue</source>
         <translation>Continue</translation>
     </message>
     <message>
-        <location filename="../backend/snaphelper.cpp" line="227"/>
+        <location filename="../backend/snapplugin.cpp" line="227"/>
         <source>Snap Error</source>
         <translation>Snap Error</translation>
     </message>

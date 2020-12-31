@@ -3,11 +3,9 @@
 #include "backend/ratingshelper.h"
 #include "widgets/gallery.h"
 #include "widgets/stars.h"
+#include "plugins/pluginloader.h"
 #include <QScrollArea>
 #include <DLabel>
-#ifdef SNAP
-#include "plugins/snap/snaphelper.h"
-#endif
 
 ItemPage::ItemPage(QString app, bool snap)
 {
@@ -30,9 +28,7 @@ ItemPage::ItemPage(QString app, bool snap)
 
     spinner = new DSpinner;
     if (isSnap) {
-#ifdef SNAP
-        SnapHelper::instance()->itemPageData(this, app);
-#endif
+        PluginLoader::instance()->snapPlugin->itemPageData(this, app);
         spinner->start();
         spinner->setFixedSize(50, 50);
         layout->addWidget(spinner, 1, Qt::AlignCenter);
@@ -120,9 +116,7 @@ void ItemPage::setInstallButton(QString packageId, Status type, QString param)
         installBtn->disconnect(this);
         connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
             if (isSnap) {
-#ifdef SNAP
-                SnapHelper::instance()->install(this, packageId, false);
-#endif
+                PluginLoader::instance()->snapPlugin->install(this, packageId, false);
             } else {
                 PackageKitHelper::instance()->install(this, packageId);
             }
@@ -136,9 +130,7 @@ void ItemPage::setInstallButton(QString packageId, Status type, QString param)
         installBtn->disconnect(this);
         connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
             if (isSnap) {
-#ifdef SNAP
-                SnapHelper::launch(packageId);
-#endif
+                PluginLoader::instance()->snapPlugin->launch(packageId);
             } else {
                 PackageKitHelper::instance()->launch(packageId);
             }
@@ -146,9 +138,7 @@ void ItemPage::setInstallButton(QString packageId, Status type, QString param)
         removeBtn->show();
         connect(removeBtn, &DWarningButton::clicked, this, [ = ] {
             if (isSnap) {
-#ifdef SNAP
-                SnapHelper::instance()->uninstall(this, packageId);
-#endif
+                PluginLoader::instance()->snapPlugin->uninstall(this, packageId);
             } else {
                 PackageKitHelper::instance()->uninstall(this, packageId);
             }
@@ -160,9 +150,7 @@ void ItemPage::setInstallButton(QString packageId, Status type, QString param)
         removeBtn->show();
         connect(removeBtn, &DWarningButton::clicked, this, [ = ] {
             if (isSnap) {
-#ifdef SNAP
-                SnapHelper::instance()->uninstall(this, packageId);
-#endif
+                PluginLoader::instance()->snapPlugin->uninstall(this, packageId);
             } else {
                 PackageKitHelper::instance()->uninstall(this, packageId);
             }

@@ -1,4 +1,4 @@
-#include "snaphelper.h"
+#include "snapplugin.h"
 #include "backend/packagekithelper.h"
 #include "backend/ratingshelper.h"
 #include "backend/settings.h"
@@ -13,12 +13,12 @@
 
 DWIDGET_USE_NAMESPACE
 
-SnapHelper::SnapHelper()
+SnapPlugin::SnapPlugin()
 {
     client = new QSnapdClient;
 }
 
-void SnapHelper::itemPageData(ItemPage *page, QString app)
+void SnapPlugin::itemPageData(ItemPage *page, QString app)
 {
     QSnapdSnap *snap;
     if (installedSnaps.contains(app)) {
@@ -82,7 +82,7 @@ void SnapHelper::itemPageData(ItemPage *page, QString app)
     }
 }
 
-void SnapHelper::install(ItemPage *page, QString app, bool classic)
+void SnapPlugin::install(ItemPage *page, QString app, bool classic)
 {
     QSnapdInstallRequest *request;
     if (classic) {
@@ -127,7 +127,7 @@ void SnapHelper::install(ItemPage *page, QString app, bool classic)
     });
 }
 
-void SnapHelper::uninstall(ItemPage *page, QString app)
+void SnapPlugin::uninstall(ItemPage *page, QString app)
 {
     auto request = client->remove(app);
     PackageKitHelper::instance()->preventClose = true;
@@ -157,7 +157,7 @@ void SnapHelper::uninstall(ItemPage *page, QString app)
     });
 }
 
-CategoryPage::App SnapHelper::categoryPageData(QSnapdSnap *snap)
+CategoryPage::App SnapPlugin::categoryPageData(QSnapdSnap *snap)
 {
     CategoryPage::App data;
     data.name = snap->title();
@@ -190,7 +190,7 @@ CategoryPage::App SnapHelper::categoryPageData(QSnapdSnap *snap)
     return data;
 }
 
-void SnapHelper::search(CategoryPage *parent, QString query)
+void SnapPlugin::search(CategoryPage *parent, QString query)
 {
     auto request = client->find(query);
     request->runAsync();
@@ -202,7 +202,7 @@ void SnapHelper::search(CategoryPage *parent, QString query)
     });
 }
 
-void SnapHelper::installed(CategoryPage *parent)
+void SnapPlugin::installed(CategoryPage *parent)
 {
     auto request = client->getSnaps();
     request->runAsync();
@@ -219,12 +219,12 @@ void SnapHelper::installed(CategoryPage *parent)
     });
 }
 
-void SnapHelper::launch(QString app)
+void SnapPlugin::launch(QString app)
 {
     QProcess::startDetached("snap", {"run", app});
 }
 
-int SnapHelper::requestClassic()
+int SnapPlugin::requestClassic()
 {
     DDialog dialog(tr("Classic mode required"), tr("This snap requires confinement to be disabled via classic mode"));
     dialog.setIcon(DStyle().standardIcon(QStyle::SP_MessageBoxWarning));
@@ -233,7 +233,7 @@ int SnapHelper::requestClassic()
     return dialog.exec();
 }
 
-void SnapHelper::error(QSnapdRequest::QSnapdError err, QString error)
+void SnapPlugin::error(QSnapdRequest::QSnapdError err, QString error)
 {
     QString errorText = tr("Snap Error");
     qDebug() << "[ ERROR ]" << errorText << err << error;
