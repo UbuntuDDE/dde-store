@@ -1,5 +1,5 @@
-#ifndef SNAPHELPER_H
-#define SNAPHELPER_H
+#ifndef SNAPPLUGIN_H
+#define SNAPPLUGIN_H
 
 #include <QObject>
 #include <Snapd/Client>
@@ -21,13 +21,13 @@ public:
     void search(CategoryPage *parent, QString query);
     void installed(CategoryPage *parent);
     void launch(QString app);
-    CategoryPage::App categoryPageData(QSnapdSnap *snap);
 
 private:
+    CategoryPage::App categoryPageData(QSnapdSnap *snap);
     QSnapdClient *client;
     int requestClassic();
     void error(QSnapdRequest::QSnapdError err, QString error);
     QStringList installedSnaps;
 };
 
-#endif // SNAPHELPER_H
+#endif // SNAPPLUGIN_H
