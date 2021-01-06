@@ -29,7 +29,7 @@
     <message>
         <location filename="../pages/categorypage.cpp" line="21"/>
         <source>Ratings</source>
-        <translation type="unfinished">评级</translation>
+        <translation>评分</translation>
     </message>
     <message>
         <location filename="../pages/categorypage.cpp" line="55"/>
@@ -429,7 +429,7 @@
     <message>
         <location filename="../widgets/stars.cpp" line="23"/>
         <source>(%1 ratings)</source>
-        <translation type="unfinished">（%1 个评级）</translation>
+        <translation>（%1 个评分）</translation>
     </message>
 </context>
 </TS>
