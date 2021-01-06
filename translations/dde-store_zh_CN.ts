@@ -332,12 +332,12 @@
     <message>
         <location filename="../backend/snapplugin.cpp" line="218"/>
         <source>Classic mode required</source>
-        <translation type="unfinished"></translation>
+        <translation>需要经典模式</translation>
     </message>
     <message>
         <location filename="../backend/snapplugin.cpp" line="218"/>
         <source>This snap requires confinement to be disabled via classic mode</source>
-        <translation type="unfinished"></translation>
+        <translation>此 Snap 软件需要通过经典模式解除限制</translation>
     </message>
     <message>
         <location filename="../backend/snapplugin.cpp" line="220"/>
@@ -352,7 +352,7 @@
     <message>
         <location filename="../backend/snapplugin.cpp" line="227"/>
         <source>Snap Error</source>
-        <translation type="unfinished">Snap 出错</translation>
+        <translation>Snap 出错</translation>
     </message>
 </context>
 <context>
