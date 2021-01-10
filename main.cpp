@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
         app.loadTranslator();
         app.setApplicationName("dde-store");
         app.setOrganizationName("dekzi");
+        app.setAttribute(Qt::AA_UseHighDpiPixmaps);
         DAboutDialog about;
         app.setAboutDialog(&about);
         about.setProductIcon(QIcon::fromTheme("deepin-app-store"));
