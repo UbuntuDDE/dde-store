@@ -12,7 +12,7 @@
 
 
 <h2 dir='rtl' align="right">التثبيت</h2>
-<h3 dir='rtl' align="right">Ubuntu</h3>
+<h3 dir='rtl' align="right">UbuntuDDE</h3>
 
 ```
 sudo add-apt-repository ppa:dekzi/ppa
@@ -20,7 +20,7 @@ sudo apt-get update
 sudo apt-get install dde-store
 ```
 
-<h3 dir='rtl' align="right">Arch/Manjaro</h3>
+<h3 dir='rtl' align="right">Arch</h3>
 
 ```
 sudo pacman -S deepin-store
@@ -39,17 +39,8 @@ sudo pacman -S deepin-store
   <li dir='rtl' align="right">libdtkgui-dev</li>
   <li dir='rtl' align="right">libpackagekitqt5-dev</li>
   <li dir='rtl' align="right">libappstreamqt-dev</li>
+  <li dir='rtl' align="right">libsnapd-qt-dev</li>
 </ul>
-
-
-<p dir='rtl' align="right"><b>البناء في Ubuntu</b></p>
-
-<p dir='rtl' align="right">للبناء في Ubuntu، يجب تثبيت مستودع البرمجيات UbuntuDDE وذلك لأن الحزمة <code>libdtkgui-dev</code> غير متوفرة في المستودعات الرسمية.</p>
-
-```
-sudo add-apt-repository ppa:ubuntudde-dev/stable
-sudo apt-get update
-```
 
 <p dir='rtl' align="right"><b>البناء</b></p>
 

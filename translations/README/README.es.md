@@ -11,7 +11,7 @@ Esta tienda de aplicaciones está diseñada para el uso con el Entorno de Escrit
 Esto solo aplica a la distribución oficial de Deepin, no DDE en general. Deepin no es compatible con AppStream, lo que provee a DDE Store de todos los datos necesarios.. **Esta tienda no es compatible con la distribución Deepin** De todas formas, DDE Store fue diseñada para otras distribuciones con DDE, así que no tengo planes de hacerla compatible con Deepin. Si Deepin empieza a usar AppStream, podría considerarlo. ¡Si estás usando Deepin y estás buscando una tienda de aplicaciones, prueba otros proyectos muy buenos como [Spark Store](https://www.spark-app.store) o [Deepines Store](https://deepines.com)!
 
 ## Instalación
-### Ubuntu
+### UbuntuDDE
 ```
 sudo add-apt-repository ppa:dekzi/ppa
 sudo apt-get update
@@ -33,14 +33,7 @@ sudo pacman -S deepin-store
 - libdtkgui-dev
 - libpackagekitqt5-dev
 - libappstreamqt-dev
-
-**Construyéndolo en Ubuntu**
-
-Para construirlo en Ubuntu, se necesita el PPA de UbuntuDDE porque `libdtkgui-dev` no está disponible en el repositorio principal.
-```
-sudo add-apt-repository ppa:ubuntudde-dev/stable
-sudo apt-get update
-```
+- libsnapd-qt-dev
 
 **Construyéndolo**
 ```
