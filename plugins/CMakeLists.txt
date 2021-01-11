@@ -1,4 +1,5 @@
 find_package(Snapd QUIET)
-if (Snapd_FOUND)
+option(BUILD_SNAP "Build with Snap support" "ON")
+if (BUILD_SNAP AND Snapd_FOUND)
     add_subdirectory(snap)
 endif()
