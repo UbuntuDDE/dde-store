@@ -3,11 +3,11 @@ Maintainer: dekzi <dekzidev@protonmail.com>
 Section: utils
 Priority: optional
 Standards-Version: 4.5.0
-Build-Depends: debhelper (>=9), cmake, qtbase5-dev, libdtkwidget-dev, libdtkcore-dev, libdtkgui-dev, libpackagekitqt5-dev, libappstreamqt-dev, libsnapd-glib-dev, qttools5-dev
+Build-Depends: debhelper (>=9), cmake, qtbase5-dev, libdtkwidget-dev, libdtkcore-dev, libdtkgui-dev, libpackagekitqt5-dev, libappstreamqt-dev, libsnapd-qt-dev, qttools5-dev
 Homepage: https://github.com/dekzi/dde-store
 
 Package: dde-store
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libsnapd-glib1
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: DDE Store
  An app store for DDE built with DTK
