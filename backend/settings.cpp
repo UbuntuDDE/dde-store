@@ -22,7 +22,7 @@ settings::settings() : QObject(qApp)
         .arg(qApp->applicationName());
 
     Dtk::Core::QSettingBackend *backend = new QSettingBackend(path);
-    appsettings = DSettings::fromJsonFile("://resources/settings.json");
+    appsettings = DSettings::fromJsonFile("://settings.json");
     appsettings->setBackend(backend);
 
     appsettings->option("basic.view.nonapps")->setData("items", QStringList({tr("\"System Updates\""), tr("Individual Packages")}));

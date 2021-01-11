@@ -55,7 +55,7 @@ file(GLOB SRC
     plugins/pluginloader.cpp
     plugins/pluginloader.h
     plugins/snap/snapinterface.h
-    resources.qrc
+    resources/resources.qrc
 )
 
 add_executable(${PROJECT_NAME}

@@ -30,7 +30,7 @@ HomePage::HomePage(MainWindow *parent)
     setLayout(mainLayout);
     mainLayout->addWidget(scroll);
 
-    QFile bannerFile("://resources/featuredbanners.json");
+    QFile bannerFile("://featuredbanners.json");
     bannerFile.open(QIODevice::ReadOnly | QIODevice::Text);
     QJsonObject bannerData = QJsonDocument::fromJson(bannerFile.readAll()).object();
     QList<QPair<QString, QString>> banners;

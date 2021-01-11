@@ -177,20 +177,20 @@ void MainWindow::initNav()
             // If theme is light, set the selected icon to active and the previous one to normal
             if (DGuiApplicationHelper::instance()->themeType() == DGuiApplicationHelper::LightType) {
                 auto currentItem = navModel->itemFromIndex(navView->currentIndex());
-                currentItem->setIcon(QIcon("://resources/icons/active/" + pageIcons.value(currentItem->text())));
+                currentItem->setIcon(QIcon("://icons/active/" + pageIcons.value(currentItem->text())));
                 if (previous.row() != -1) {
                     auto previousItem = navModel->itemFromIndex(previous);
-                    previousItem->setIcon(QIcon("://resources/icons/light/" + pageIcons.value(previousItem->text())));
+                    previousItem->setIcon(QIcon("://icons/light/" + pageIcons.value(previousItem->text())));
                 }
             }
-            // Open the entrie's widget
+            // Open the entry's widget
             stackedWidget->setCurrentIndex(navView->currentIndex().row());
         } else {
             // If it is -1 and there is an active sidebar entry, set it to normal
             if (previous.row() != -1) {
                 auto selectedItem = navModel->itemFromIndex(previous);
                 if (DGuiApplicationHelper::instance()->themeType() == DGuiApplicationHelper::LightType) {
-                    selectedItem->setIcon(QIcon("://resources/icons/light/" + pageIcons.value(selectedItem->text())));
+                    selectedItem->setIcon(QIcon("://icons/light/" + pageIcons.value(selectedItem->text())));
                 }
             }
         }
@@ -236,12 +236,12 @@ void MainWindow::initNav()
             auto theme = DGuiApplicationHelper::instance()->themeType();
             if (theme == DGuiApplicationHelper::LightType) {
                 if (navView->currentIndex().row() == i) {
-                    icon = QIcon("://resources/icons/active/" + iconname);
+                    icon = QIcon("://icons/active/" + iconname);
                 } else {
-                    icon = QIcon("://resources/icons/light/" + iconname);
+                    icon = QIcon("://icons/light/" + iconname);
                 }
             } else {
-                icon = QIcon("://resources/icons/dark/" + iconname);
+                icon = QIcon("://icons/dark/" + iconname);
             }
             navModel->item(i)->setIcon(icon);
         }
@@ -256,7 +256,7 @@ void MainWindow::addPage(QString name, QString iconname, QWidget *widget)
     stackedWidget->addWidget(widget);
     if (iconname == "updates.svg") {
         updateIndicator = new DViewItemAction(Qt::AlignVCenter, QSize(16, 16), QSize(16, 16), false);
-        updateIndicator->setIcon(QIcon("://resources/icons/indicator.svg"));
+        updateIndicator->setIcon(QIcon("://icons/indicator.svg"));
         updateIndicator->setVisible(false);
         item->setActionList(Qt::Edge::RightEdge, {updateIndicator});
     }
