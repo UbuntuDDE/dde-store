@@ -67,7 +67,6 @@ add_executable(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME} PUBLIC
     ${PackageKitQt5_INCLUDE_DIR}
     ${AppStreamQt_INCLUDE_DIRS}
-    ${SNAPD_INCLUDE_DIRS}
 )
 
 target_link_libraries(${PROJECT_NAME}
@@ -77,7 +76,6 @@ target_link_libraries(${PROJECT_NAME}
     ${Qt5Widgets_LIBRARIES}
     ${Qt5Network_LIBRARIES}
     ${PackageKitQt5_LIBRARIES}
-    ${SNAPD_LIBRARIES}
     AppStreamQt
 )
 
