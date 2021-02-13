@@ -23,6 +23,7 @@ public:
 private:
     QLabel *imageView;
     int currentImage;
+    void init();
     void changeImage(int index);
     void changeLocalImage(int index);
     QList<QUrl> images;

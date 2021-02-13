@@ -9,94 +9,36 @@
 
 gallery::gallery(QList<QUrl> imageList)
 {
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->setAlignment(Qt::AlignTop);
-    this->setLayout(layout);
-    QHBoxLayout *widgetLayout = new QHBoxLayout;
-    QWidget *widget = new QWidget;
-    layout->addWidget(widget);
-    widget->setLayout(widgetLayout);
+    init();
     images = imageList;
-    layout->setContentsMargins(0, 0, 0, 0);
+    changeImage(0);
+    pageIndicator->setPageCount(imageList.length());
 
-    widgetLayout->addStretch();
-
-    backButton = new DIconButton(DStyle::SP_ArrowBack);
     connect(backButton, &DIconButton::clicked, this, [ = ] {
         changeImage(currentImage - 1);
     });
-    backButton->setDisabled(true);
-    widgetLayout->addWidget(backButton, 0, Qt::AlignVCenter);
-    
-    imageView = new QLabel;
-    widgetLayout->addWidget(imageView);
 
-    spinner = new DSpinner;
-    widgetLayout->addWidget(spinner);
-    spinner->setFixedSize(50, 50);
-    spinner->hide();
-
-    forwardButton = new DIconButton(DStyle::SP_ArrowForward);
     connect(forwardButton, &DIconButton::clicked, this, [ = ] {
         changeImage(currentImage + 1);
     });
-    forwardButton->setDisabled(true);
-    widgetLayout->addWidget(forwardButton, 0, Qt::AlignVCenter);
-
-    widgetLayout->addStretch();
-
-    pageIndicator = new DPageIndicator;
-    pageIndicator->setPageCount(images.length());
-    layout->addWidget(pageIndicator);
-
-    changeImage(0);
 }
 
 gallery::gallery(QList<QPair<QString, QString>> imageList, MainWindow *parent)
 {
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->setAlignment(Qt::AlignTop);
-    this->setLayout(layout);
-    QHBoxLayout *widgetLayout = new QHBoxLayout;
-    QWidget *widget = new QWidget;
-    layout->addWidget(widget);
-    widget->setLayout(widgetLayout);
+    init();
+    imageView->installEventFilter(this);
     banners = imageList;
     mainwindow = parent;
-    layout->setContentsMargins(0, 0, 0, 0);
+    changeLocalImage(0);
+    pageIndicator->setPageCount(imageList.length());
 
-    widgetLayout->addStretch();
-
-    backButton = new DIconButton(DStyle::SP_ArrowBack);
     connect(backButton, &DIconButton::clicked, this, [ = ] {
         changeLocalImage(currentImage - 1);
     });
-    backButton->setDisabled(true);
-    widgetLayout->addWidget(backButton, 0, Qt::AlignVCenter);
-    
-    imageView = new QLabel;
-    widgetLayout->addWidget(imageView);
-    imageView->installEventFilter(this);
 
-    spinner = new DSpinner;
-    widgetLayout->addWidget(spinner);
-    spinner->setFixedSize(50, 50);
-    spinner->hide();
-
-    forwardButton = new DIconButton(DStyle::SP_ArrowForward);
     connect(forwardButton, &DIconButton::clicked, this, [ = ] {
         changeLocalImage(currentImage + 1);
     });
-    forwardButton->setDisabled(true);
-    widgetLayout->addWidget(forwardButton, 0, Qt::AlignVCenter);
-
-    widgetLayout->addStretch();
-
-    pageIndicator = new DPageIndicator;
-    pageIndicator->setPageCount(banners.length());
-    layout->addWidget(pageIndicator);
-
-    changeLocalImage(0);
 
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, [ = ] {
@@ -107,6 +49,39 @@ gallery::gallery(QList<QPair<QString, QString>> imageList, MainWindow *parent)
         }
     });
     timer->start(5000);
+}
+
+void gallery::init()
+{
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->setAlignment(Qt::AlignTop);
+    layout->setContentsMargins(0, 0, 0, 0);
+    setLayout(layout);
+    QHBoxLayout *container = new QHBoxLayout;
+    container->setAlignment(Qt::AlignTop);
+    layout->addLayout(container);
+    container->addStretch();
+
+    backButton = new DIconButton(DStyle::SP_ArrowBack);
+    backButton->setDisabled(true);
+    container->addWidget(backButton, 1, Qt::AlignVCenter);
+    
+    imageView = new QLabel;
+    container->addWidget(imageView);
+
+    spinner = new DSpinner;
+    spinner->setFixedSize(50, 50);
+    spinner->hide();
+    container->addWidget(spinner);
+
+    forwardButton = new DIconButton(DStyle::SP_ArrowForward);
+    forwardButton->setDisabled(true);
+    container->addWidget(forwardButton, 1, Qt::AlignVCenter);
+
+    container->addStretch();
+
+    pageIndicator = new DPageIndicator;
+    layout->addWidget(pageIndicator);
 }
 
 void gallery::changeLocalImage(int index)
