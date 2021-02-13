@@ -32,6 +32,7 @@ private:
     DProgressBar *progressBar;
     DSpinner *spinner = new DSpinner;
     bool isSnap;
+    QString m_app;
 };
 
 #endif // ITEMPAGE_H

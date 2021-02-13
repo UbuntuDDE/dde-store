@@ -25,13 +25,15 @@ ItemPage::ItemPage(QString app, bool snap)
     mainLayout->addWidget(scroll);
 
     isSnap = snap;
+    m_app = app;
 
     spinner = new DSpinner;
+    spinner->setFixedSize(50, 50);
+    
     if (isSnap) {
         PluginLoader::instance()->snapPlugin->itemPageData(this, app);
         spinner->start();
-        spinner->setFixedSize(50, 50);
-        layout->addWidget(spinner, 1, Qt::AlignCenter);
+        layout->addWidget(spinner, 0, Qt::AlignCenter);
     } else {
         PackageKitHelper::instance()->itemPageData(this, app);
         setData(AppStreamHelper::instance()->getAppData(app));
@@ -59,12 +61,10 @@ void ItemPage::setData(AppStreamHelper::appData data)
     name->setFont(nameFont);
     nameSection->addWidget(name);
     if (!data.developer.isNull()) {
-        DLabel *developer = new DLabel(data.developer);
-        nameSection->addWidget(developer);
+        nameSection->addWidget(new DLabel(data.developer));
     }
     if (RatingsHelper::instance()->averageRating(data.id) != 0) {
-        stars *starsView = new stars(data.id);
-        nameSection->addWidget(starsView);
+        nameSection->addWidget(new stars(data.id));
     }
     header->addLayout(nameSection);
 
@@ -74,6 +74,14 @@ void ItemPage::setData(AppStreamHelper::appData data)
     removeBtn->setText(tr("Uninstall"));
     removeBtn->hide();
     header->addWidget(removeBtn, 0, Qt::AlignVCenter);
+    connect(removeBtn, &DWarningButton::clicked, this, [ = ] {
+        if (isSnap) {
+            PluginLoader::instance()->snapPlugin->uninstall(this, m_app);
+        } else {
+            PackageKitHelper::instance()->uninstall(this, m_app);
+        }
+    });
+
     header->addSpacing(10);
     installBtn = new DSuggestButton;
     installBtn->hide();
@@ -86,8 +94,7 @@ void ItemPage::setData(AppStreamHelper::appData data)
     layout->addWidget(progressBar, 0, Qt::AlignTop);
     
     if (!data.screenshots.isEmpty()) {
-        gallery *screenshotView = new gallery(data.screenshots);
-        layout->addWidget(screenshotView);
+        layout->addWidget(new gallery(data.screenshots));
     }
 
     DLabel *description = new DLabel;
@@ -136,31 +143,19 @@ void ItemPage::setInstallButton(QString packageId, Status type, QString param)
             }
         });
         removeBtn->show();
-        connect(removeBtn, &DWarningButton::clicked, this, [ = ] {
-            if (isSnap) {
-                PluginLoader::instance()->snapPlugin->uninstall(this, packageId);
-            } else {
-                PackageKitHelper::instance()->uninstall(this, packageId);
-            }
-        });
         break;
     case Installed:
         progressBar->hide();
         installBtn->hide();
         removeBtn->show();
-        connect(removeBtn, &DWarningButton::clicked, this, [ = ] {
-            if (isSnap) {
-                PluginLoader::instance()->snapPlugin->uninstall(this, packageId);
-            } else {
-                PackageKitHelper::instance()->uninstall(this, packageId);
-            }
-        });
         break;
     case Installing:
         progressBar->show();
         progressBar->setValue(param.toInt());
         removeBtn->hide();
         installBtn->setDisabled(true);
+        break;
+    default:
         break;
     }
 }
