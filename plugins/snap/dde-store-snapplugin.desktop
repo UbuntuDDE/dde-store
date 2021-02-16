@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=DDE Store
+Icon=deepin-app-store
+Exec=/usr/bin/dde-store %U
+Type=Application
+Categories=System;PackageManager;
+MimeType=x-scheme-handler/snap;
+NoDisplay=true

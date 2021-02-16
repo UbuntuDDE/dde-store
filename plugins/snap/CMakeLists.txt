@@ -5,3 +5,4 @@ execute_process(COMMAND ${QT_QMAKE_EXECUTABLE} -query QT_INSTALL_PLUGINS
     OUTPUT_VARIABLE QT_INSTALL_PLUGINS OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 install(TARGETS snapplugin DESTINATION ${QT_INSTALL_PLUGINS}/dde-store)
+install(FILES dde-store-snapplugin.desktop DESTINATION usr/share/applications)
