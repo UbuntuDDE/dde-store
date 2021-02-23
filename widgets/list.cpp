@@ -29,6 +29,7 @@ List::List(QString title)
     listView->setEditTriggers(QListView::NoEditTriggers);
     listView->setResizeMode(QListView::Adjust);
     listView->setOrientation(QListView::LeftToRight, true);
+    listView->setFocusPolicy(Qt::NoFocus);
     DStyle::setFrameRadius(listView, 18);
     model = new QStandardItemModel;
     listView->setModel(model);
