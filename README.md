@@ -14,8 +14,6 @@ This only applies to the official Deepin distro, not DDE in general. Deepin does
 ## Installation
 ### UbuntuDDE
 ```
-sudo add-apt-repository ppa:dekzi/ppa
-sudo apt-get update
 sudo apt-get install dde-store
 ```
 
