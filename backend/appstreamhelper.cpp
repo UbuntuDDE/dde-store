@@ -38,8 +38,7 @@ AppStreamHelper::AppStreamHelper()
     const QList<AppStream::Component> data = pool->componentsByKind(AppStream::Component::KindDesktopApp);
 
     for (const AppStream::Component &app : data) {
-        const QStringList pkgNames = app.packageNames();
-        for (const QString &pkgName : pkgNames) {
+        for (const QString &pkgName : app.packageNames()) {
             appList.insert(pkgName, app);
         }
     }
@@ -50,29 +49,27 @@ AppStreamHelper::AppStreamHelper()
 AppStreamHelper::appData AppStreamHelper::getAppData(QString package)
 {
     appData data;
-    const QList<AppStream::Component> apps = appList.values(package);
-    for (const AppStream::Component &app : apps) {
+    if (hasAppData(package)) {
+        const AppStream::Component app = appList.value(package);
+
         data.name = app.name();
         data.developer = app.developerName();
         data.description = app.description();
-        data.summary = app.summary();
         data.id = app.id();
         
         for (const AppStream::Screenshot &screenshot : app.screenshots()) {
             const auto images = screenshot.images();
             for (const AppStream::Image &image : images) {
-                if (image.kind() == AppStream::Image::KindSource) {
+                if (image.kind() == AppStream::Image::KindSource)
                     data.screenshots << image.url();
-                }
             }
         }
 
         for (AppStream::Icon icon : app.icons()) {
             if (icon.kind() == AppStream::Icon::KindStock) {
                 data.icon = QIcon::fromTheme(icon.name());
-                if (!data.icon.isNull()) {
+                if (!data.icon.isNull())
                     break;
-                }
             }
         }
 
@@ -82,12 +79,11 @@ AppStreamHelper::appData AppStreamHelper::getAppData(QString package)
         }
     }
 
-    if (data.name.isNull()) {
+    if (data.name.isNull())
         data.name = package;
-    }
-    if (data.icon.isNull()) {
+
+    if (data.icon.isNull())
         data.icon = QIcon::fromTheme("application-x-executable");
-    }
 
     return data;
 }
@@ -96,12 +92,10 @@ QStringList AppStreamHelper::category(QString category)
 {
     QStringList pkgNames;
     for (const QString &key : appList.keys()) {
-        if (pkgNames.length() < settings::instance()->maxItems()) {
-            AppStream::Component component = appList.value(key);
-            if (component.categories().contains(category)) {
-                pkgNames << key;
-            }
-        }
+        if (pkgNames.length() >= settings::instance()->maxItems())
+            break;
+        if (appList.value(key).categories().contains(category))
+            pkgNames << key;
     }
     return pkgNames;
 }
@@ -110,43 +104,33 @@ QStringList AppStreamHelper::search(QString query)
 {
     QStringList pkgNames;
     for (const QString &key : appList.keys()) {
-        if (pkgNames.length() < settings::instance()->maxItems()) {
-            AppStream::Component component = appList.value(key);
-            const QStringList queryList = query.split(QRegExp("\\s"), QString::SkipEmptyParts);
-            bool noMatch = false;
-            for (const QString &item : queryList) {
-                if (!component.name().contains(item, Qt::CaseInsensitive) && !component.description().contains(item, Qt::CaseInsensitive)) {
-                    noMatch = true;
-                };
-            }
-            if (!noMatch) {
-                pkgNames << key;
-            }
+        if (pkgNames.length() >= settings::instance()->maxItems())
+            break;
+        
+        AppStream::Component component = appList.value(key);
+        bool noMatch = false;
+        for (const QString &item : query.split(QRegExp("\\s"), Qt::SkipEmptyParts)) {
+            if (!component.name().contains(item, Qt::CaseInsensitive) && !component.description().contains(item, Qt::CaseInsensitive))
+                noMatch = true;
         }
+        if (!noMatch)
+            pkgNames << key;
     }
     return pkgNames;
 }
 
 bool AppStreamHelper::hasAppData(QString package)
 {
-    const QList<AppStream::Component> apps = appList.values(package);
-    if (apps.length() > 0) {
-        return true;
-    } else {
-        return false;
-    }
+    return appList.contains(package);
 }
 
 QString AppStreamHelper::packageFromID(QString ID)
 {
-    QString package = QString();
     for (const QString &key : appList.keys()) {
-        AppStream::Component component = appList.value(key);
-        if (component.id() == ID) {
-            package = key;
-        }
+        if (appList.value(key).id() == ID)
+            return key;
     }
-    return package;
+    return QString();
 }
 
 QString AppStreamHelper::IDFromPackage(QString package)

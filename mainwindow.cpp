@@ -28,9 +28,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     UpdatesPage *updates = new UpdatesPage(this);
     updatesPage = updates;
+    updateIndicator = new DViewItemAction(Qt::AlignVCenter, QSize(16, 16), QSize(16, 16), false);
+    updateIndicator->setIcon(QIcon("://icons/indicator.svg"));
+    updateIndicator->setVisible(false);
 
     // Initialize tray item and buttons
 
+    trayIcon = new QSystemTrayIcon(QIcon::fromTheme("deepin-app-store"));
     DMenu *trayIconMenu = new DMenu;
     QAction *checkUpdatesAction = new QAction(tr("Check for updates"));
     QAction *quitAction = new QAction(tr("Quit"));
@@ -57,6 +61,8 @@ MainWindow::MainWindow(QWidget *parent)
         trayIcon->hide();
     });
 
+    stackedWidget = new QStackedWidget(this);
+
     // Initialize sidebar (navView) and titlebar
 
     initTitlebar();
@@ -81,9 +87,8 @@ void MainWindow::initTitlebar()
         buttonNavigated = true;
         stackedWidget->setCurrentWidget(pageHistory[pageHistoryIndex]);
         // If the new current page has an entry in the sidebar then select that entry
-        if (pageHistoryIndex < navModel->rowCount()) {
+        if (pageHistoryIndex < navModel->rowCount())
             navView->setCurrentIndex(navModel->index(stackedWidget->indexOf(pageHistory[pageHistoryIndex]), 0));
-        }
     });
 
     // Create forward button
@@ -96,21 +101,20 @@ void MainWindow::initTitlebar()
         pageHistoryIndex += 1;
         buttonNavigated = true;
         stackedWidget->setCurrentWidget(pageHistory[pageHistoryIndex]);
-        if (pageHistoryIndex < navModel->rowCount()) {
+        if (pageHistoryIndex < navModel->rowCount())
             navView->setCurrentIndex(navModel->index(stackedWidget->indexOf(pageHistory[pageHistoryIndex]), 0));
-        }
     });
 
     // Initialize the button box and add the buttons
 
-    DButtonBox *buttonBox = new DButtonBox();
+    DButtonBox *buttonBox = new DButtonBox(this);
     buttonBox->setButtonList({backButton, forwardButton}, false);
     buttonBox->setFocusPolicy(Qt::NoFocus);
     titlebar->addWidget(buttonBox, Qt::AlignLeft);
 
     // Create search box
 
-    DSearchEdit *searchBox = new DSearchEdit();
+    DSearchEdit *searchBox = new DSearchEdit(this);
     searchBox->setFixedWidth(300);
     titlebar->addWidget(searchBox);
     connect(searchBox, &DSearchEdit::returnPressed, this, [ = ] {
@@ -145,6 +149,7 @@ void MainWindow::initTitlebar()
 void MainWindow::initNav()
 {
     // Set up list
+
     navView->setViewportMargins(QMargins(10, 10, 10, 10));
     navView->setMinimumWidth(188);
     navView->setSpacing(0);
@@ -168,32 +173,15 @@ void MainWindow::initNav()
     addPage(tr("Music"), "music.svg", new CategoryPage(this, tr("Music"), "Music"));
     addPage(tr("System"), "system.svg", new CategoryPage(this, tr("System"), "System"));
     addPage(tr("Installed"), "installed.svg", new CategoryPage(this, tr("Installed"), "Installed"));
-    addPage("Updates", "updates.svg", updatesPage);
+    addPage(tr("Updates"), "updates.svg", updatesPage);
+    updateIcons();
 
     // When the current entry is changed
     connect(navView, qOverload<const QModelIndex &>(&DListView::currentChanged), this, [ = ] (const QModelIndex &previous) {
-        // If it isn't -1 (-1 means no sidebar entries are selected)
-        if (navView->currentIndex().row() != -1) {
-            // If theme is light, set the selected icon to active and the previous one to normal
-            if (DGuiApplicationHelper::instance()->themeType() == DGuiApplicationHelper::LightType) {
-                auto currentItem = navModel->itemFromIndex(navView->currentIndex());
-                currentItem->setIcon(QIcon("://icons/active/" + pageIcons.value(currentItem->text())));
-                if (previous.row() != -1) {
-                    auto previousItem = navModel->itemFromIndex(previous);
-                    previousItem->setIcon(QIcon("://icons/light/" + pageIcons.value(previousItem->text())));
-                }
-            }
-            // Open the entry's widget
+        updateIcons();
+
+        if (navView->currentIndex().row() != -1)
             stackedWidget->setCurrentIndex(navView->currentIndex().row());
-        } else {
-            // If it is -1 and there is an active sidebar entry, set it to normal
-            if (previous.row() != -1) {
-                auto selectedItem = navModel->itemFromIndex(previous);
-                if (DGuiApplicationHelper::instance()->themeType() == DGuiApplicationHelper::LightType) {
-                    selectedItem->setIcon(QIcon("://icons/light/" + pageIcons.value(selectedItem->text())));
-                }
-            }
-        }
                 
         if (!buttonNavigated) {
             // Add the page to history and increase index by 1
@@ -212,40 +200,13 @@ void MainWindow::initNav()
             buttonNavigated = false;
         }
 
-        if (pageHistoryIndex < 1) {
-            backButton->setDisabled(true);
-        } else {
-            backButton->setDisabled(false);
-        }
-
-        if (pageHistoryIndex != pageHistory.length() - 1) {
-            forwardButton->setDisabled(false);
-        } else {
-            forwardButton->setDisabled(true);
-        }
+        backButton->setDisabled(pageHistoryIndex < 1);
+        forwardButton->setDisabled(pageHistoryIndex != pageHistory.length() - 1);
     });
 
     // Select homepage by default
     navView->setCurrentIndex(navModel->index(0, 0));
-
-    // Set icon type based on current theme
-    connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ] {
-        for (int i = 0; i < navModel->rowCount(); i++) {
-            QIcon icon;
-            QString iconname = pageIcons.value(navModel->item(i)->text());
-            auto theme = DGuiApplicationHelper::instance()->themeType();
-            if (theme == DGuiApplicationHelper::LightType) {
-                if (navView->currentIndex().row() == i) {
-                    icon = QIcon("://icons/active/" + iconname);
-                } else {
-                    icon = QIcon("://icons/light/" + iconname);
-                }
-            } else {
-                icon = QIcon("://icons/dark/" + iconname);
-            }
-            navModel->item(i)->setIcon(icon);
-        }
-    });
+    connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, &MainWindow::updateIcons);
 }
 
 void MainWindow::addPage(QString name, QString iconname, QWidget *widget)
@@ -254,18 +215,14 @@ void MainWindow::addPage(QString name, QString iconname, QWidget *widget)
     navModel->appendRow(item);
     pageIcons[name] = iconname;
     stackedWidget->addWidget(widget);
-    if (iconname == "updates.svg") {
-        updateIndicator = new DViewItemAction(Qt::AlignVCenter, QSize(16, 16), QSize(16, 16), false);
-        updateIndicator->setIcon(QIcon("://icons/indicator.svg"));
-        updateIndicator->setVisible(false);
+    if (qobject_cast<UpdatesPage*>(widget))
         item->setActionList(Qt::Edge::RightEdge, {updateIndicator});
-    }
 }
 
 void MainWindow::openItem(QString app, QString id, bool snap)
 {
     // If the item page is in the list
-    if (itemPageList.values(id).length() > 0) {
+    if (itemPageList.contains(id)) {
         // Open it
         stackedWidget->setCurrentWidget(itemPageList.value(id));
     } else {
@@ -278,7 +235,6 @@ void MainWindow::openItem(QString app, QString id, bool snap)
     navView->setCurrentIndex(QModelIndex());
     navView->clearSelection();
 }
-
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
@@ -304,7 +260,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
                 if (rememberBox->isChecked()) {
                     settings::instance()->setValue("basic.behaviour.remember", true);
                 }
-
                 if (exitButton->isChecked()) {
                     settings::instance()->setValue("basic.behaviour.tray", false);
                 } else if (minimizeButton->isChecked()) {
@@ -332,6 +287,20 @@ void MainWindow::closeEvent(QCloseEvent *event)
         dialog.addButton(tr("OK"));
         dialog.exec();
         event->ignore();
+    }
+}
+
+void MainWindow::updateIcons()
+{
+    auto type = DGuiApplicationHelper::instance()->themeType();
+    for (int i = 0; i < navModel->rowCount(); i++) {
+        QString icon = pageIcons.value(navModel->item(i)->text());
+        if (type == DGuiApplicationHelper::LightType)
+            icon = "://icons/" + QString(navView->currentIndex().row() == i ? "active/" : "light/") + icon;
+        else
+            icon = "://icons/dark/" + icon;
+        if (navModel->item(i)->icon().name() != icon)
+            navModel->item(i)->setIcon(QIcon(icon));
     }
 }
 

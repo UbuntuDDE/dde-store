@@ -26,7 +26,8 @@ private:
     void initNav();
     void initTitlebar();
     void addPage(QString name, QString icon, QWidget *widget);
-    QStackedWidget *stackedWidget = new QStackedWidget;
+    void updateIcons();
+    QStackedWidget *stackedWidget;
     QHash<QString, QString> pageIcons;
     QHash<QString, ItemPage*> itemPageList;
     DViewItemAction *updateIndicator;
@@ -35,7 +36,7 @@ private:
     DButtonBoxButton *backButton;
     DButtonBoxButton *forwardButton;
     bool buttonNavigated = false;
-    QSystemTrayIcon *trayIcon = new QSystemTrayIcon(QIcon::fromTheme("deepin-app-store"));
+    QSystemTrayIcon *trayIcon;
     QWidget *updatesPage;
     
 protected Q_SLOTS:
