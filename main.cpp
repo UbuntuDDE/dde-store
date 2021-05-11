@@ -1,6 +1,5 @@
 #include "mainwindow.h"
-#include "backend/appstreamhelper.h"
-#include "plugins/pluginloader.h"
+#include "backend/sourcemanager.h"
 #include <DApplication>
 #include <DAboutDialog>
 #include <DWidgetUtil>
@@ -38,26 +37,9 @@ int main(int argc, char *argv[])
 
         if (!parser.positionalArguments().isEmpty()) {
             QUrl url(parser.positionalArguments()[0]);
-            // Converting to "local file" so double backslashes in the url work properly
-            QString id(QUrl::fromLocalFile(url.toString()).fileName());
-
-            if (url.scheme() == "appstream") {
-                QString shortId;
-                if (id.endsWith(".desktop")) {
-                    shortId = id.left(id.lastIndexOf("."));
-                }
-
-                if (!AppStreamHelper::instance()->packageFromID(id).isEmpty()) {
-                    w.openItem(AppStreamHelper::instance()->packageFromID(id), id);
-                } else if (!AppStreamHelper::instance()->packageFromID(shortId).isEmpty()) {
-                    w.openItem(AppStreamHelper::instance()->packageFromID(shortId), shortId);
-                } else {
-                    qDebug() << "[ ERROR ] Unable to open app from url" << parser.positionalArguments()[0];
-                }
-            } else if (url.scheme() == "snap") {
-                if (PluginLoader::instance()->snapPlugin) {
-                    w.openItem(id, id, true);
-                }
+            for (Source *source : SourceManager::instance()->sources()) {
+                if (source->urlSchemes().contains(url.scheme()) && source->appFromUrl(url))
+                    w.openItem(source->appFromUrl(url));
             }
         }
 

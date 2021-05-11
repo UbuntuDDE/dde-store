@@ -1,8 +1,5 @@
 #include "pages/categorypage.h"
-#include "backend/appstreamhelper.h"
-#include "backend/packagekithelper.h"
-#include "backend/ratingshelper.h"
-#include "plugins/pluginloader.h"
+#include "backend/sources/packagekit/packagekitsource.h"
 #include <QComboBox>
 #include <QVBoxLayout>
 
@@ -28,93 +25,97 @@ CategoryPage::CategoryPage(MainWindow *parent, QString name, QString category)
     list->addHeaderWidget(sortBox);
 
     connect(list, &List::currentItemChanged, this, [ = ] (QVariant data) {
-        for (App app : apps) {
-            if (app.id == data.toString()) {
-                parent->openItem(app.package, app.id, (app.source == Snap));
+        for (App *app : apps) {
+            if (app->id == data.toString()) {
+                parent->openItem(app);
+                break;
             }
         }
     });
 
-    if (RatingsHelper::instance()->available) {
-        init(category, name);
-    } else {
-        connect(RatingsHelper::instance(), &RatingsHelper::fetched, this, [ = ] {
-            init(category, name);
-        });
-    }
     layout->addWidget(list);
+
+    init(category, name);
 }
 
 void CategoryPage::init(QString category, QString name)
 {
     if (category == "Installed") {
-        PackageKitHelper::instance()->getInstalled(this);
+        for (Source *source : SourceManager::instance()->sources()) {
+            connect(source, &Source::gotInstalled, this, [ = ] (QList<App*> installed) {
+                for (App *app : installed) {
+                    insertItem(app);
+                }
+                if (SourceManager::instance()->sources().endsWith(source))
+                    load();
+                else
+                    SourceManager::instance()->sources()[SourceManager::instance()->sources().indexOf(source) + 1]->getInstalled();
+            });
+            source->getInstalled();
+        }
+        SourceManager::instance()->sources().first()->getInstalled();
     } else if (name.startsWith("\"")) {
         list->setEmptyText(tr("No results for %1").arg(name));
-        auto list = AppStreamHelper::instance()->search(category);
-        for (QString entry : list) {
-            auto app = AppStreamHelper::instance()->getAppData(entry);
-            App item;
-            item.name = app.name;
-            item.icon = app.icon;
-            item.id = app.id;
-            item.package = entry;
-            item.ratings = RatingsHelper::instance()->totalRatings(app.id);
-            item.source = PackageKit;
-            insertItem(item);
+        for (Source *source : SourceManager::instance()->sources()) {
+            connect(source, &Source::searchFinished, this, [ = ] (QList<App*> results) {
+                if (SourceManager::instance()->sources().startsWith(source)) {
+                    list->clear();
+                    apps.clear();
+                }
+                for (App *app : results) {
+                    insertItem(app);
+                }
+                if (SourceManager::instance()->sources().endsWith(source))
+                    load();
+                else
+                    SourceManager::instance()->sources()[SourceManager::instance()->sources().indexOf(source) + 1]->search(category);
+            });
         }
-        if (PluginLoader::instance()->snapPlugin) {
-            PluginLoader::instance()->snapPlugin->search(this, category);
-        } else {
-            load();
-        }
+        SourceManager::instance()->sources().first()->search(category);
     } else {
-        auto list = AppStreamHelper::instance()->category(category);
-        for (QString entry : list) {
-            auto app = AppStreamHelper::instance()->getAppData(entry);
-            App item;
-            item.name = app.name;
-            item.icon = app.icon;
-            item.id = app.id;
-            item.package = entry;
-            item.ratings = RatingsHelper::instance()->totalRatings(app.id);
-            item.source = PackageKit;
-            insertItem(item);
-        }
-        load();
+        PackageKitSource *pk = static_cast<PackageKitSource*>(SourceManager::instance()->getSource("PackageKit"));
+        connect(pk, &PackageKitSource::gotCategory, this, [ = ] (QString cat, QList<App*> items) {
+            if (cat == category) {
+                for (App *app : items) {
+                    insertItem(app);
+                }
+                load();
+            }
+        });
+        pk->getCategory(category);
     }
 }
 
-void CategoryPage::insertItem(App item)
+void CategoryPage::insertItem(App *app)
 {
-    list->addItem(item.name, item.icon, item.id);
-    apps << item;
+    list->addItem(app->name, app->icon, app->id);
+    apps << app;
 }
 
 void CategoryPage::load(SortType sort)
 {
     list->clear();
     if (sort == Alphabetical) {
-        QMap<QString, App> map;
-        for (App item : apps) {
-            map.insert(item.name.toLower(), item);
+        QMap<QString, App*> map;
+        for (App *app : apps) {
+            map.insert(app->name.toLower(), app);
         }
         apps.clear();
-        for (App item : map.values()) {
-            insertItem(item);
+        for (App *app : map.values()) {
+            insertItem(app);
         }
     } else {
-        QMultiMap<int, App> map;
-        for (App item : apps) {
-            map.insert(item.ratings, item);
+        QMultiMap<int, App*> map;
+        for (App *app : apps) {
+            map.insert(app->ratings, app);
         }
-        QList<App> list;
-        for (App item : map.values()) {
-            list.insert(0, item);
+        QList<App*> appList;
+        for (App *app : map.values()) {
+            appList.insert(0, app);
         }
         apps.clear();
-        for (App item : list) {
-            insertItem(item);
+        for (App *app : appList) {
+            insertItem(app);
         }
     }
     list->load();

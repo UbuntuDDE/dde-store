@@ -1,6 +1,7 @@
 #include "pages/homepage.h"
 #include "backend/settings.h"
-#include "backend/appstreamhelper.h"
+#include "backend/sourcemanager.h"
+#include "backend/sources/packagekit/packagekitsource.h"
 #include "backend/ratingshelper.h"
 #include "widgets/gallery.h"
 #include "widgets/list.h"
@@ -33,14 +34,11 @@ HomePage::HomePage(MainWindow *parent)
     QFile bannerFile("://featuredbanners.json");
     bannerFile.open(QIODevice::ReadOnly | QIODevice::Text);
     QJsonObject bannerData = QJsonDocument::fromJson(bannerFile.readAll()).object();
-    QList<QPair<QString, QString>> banners;
+    QList<QPair<QString, App*>> banners;
     for (const QString &key : bannerData.keys()) {
-        if (!AppStreamHelper::instance()->packageFromID(key).isEmpty()) {
-            QPair<QString, QString> banner;
-            banner.first = bannerData.value(key).toString();
-            banner.second = AppStreamHelper::instance()->packageFromID(key);
-            banners << banner;
-        }
+        App *app = static_cast<PackageKitSource*>(SourceManager::instance()->getSource("PackageKit"))->getDataFromID(key);
+        if (app->hasMetadata)
+            banners << qMakePair(bannerData.value(key).toString(), app);
     }
     gallery *featuredGallery = new gallery(banners, parent);
     layout->addWidget(featuredGallery);
@@ -66,26 +64,27 @@ void HomePage::addCategory(QString name, QString category, MainWindow *parent)
     list->listView->verticalScrollBar()->setEnabled(false);
     list->listView->verticalScrollBar()->setVisible(false);
     list->listView->setOrientation(QListView::LeftToRight, true);
-    
-    connect(RatingsHelper::instance(), &RatingsHelper::fetched, this, [ = ] {
-        QStringList appList = AppStreamHelper::instance()->category(category);
-        QMultiMap<double, QString> map;
-        appList.sort();
-        for (const QString &app : appList) {
-            AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(app);
-            map.insert(RatingsHelper::instance()->totalRatings(data.id), app);
+
+    PackageKitSource *pk = static_cast<PackageKitSource*>(SourceManager::instance()->getSource("PackageKit"));
+    QList<App*> *apps = new QList<App*>();
+    connect(pk, &PackageKitSource::gotCategory, this, [ = ] (QString cat, QList<App*> items) {
+        if (cat == category) {
+            QMultiMap<int, App*> map;
+            for (App *app : items) {
+                map.insert(app->ratings, app);
+            }
+            items.clear();
+            for (App *app : map.values()) {
+                items.insert(0, app);
+            }
+            for (int i = 0; i < 10; i++) {
+                list->addItem(items[i]->name, items[i]->icon, i);
+                apps->append(items[i]);
+            }
+            list->load();
         }
-        appList.clear();
-        for (const QString &app : map.values()) {
-            appList.insert(0, app);
-        }
-        for (int i = 0; i < 10; i++) {
-            AppStreamHelper::appData data = AppStreamHelper::instance()->getAppData(appList[i]);
-            list->addItem(data.name, data.icon, appList[i]);
-        }
-    
-        list->load();
     });
+    pk->getCategory(category);
     
     DSuggestButton *moreBtn = new DSuggestButton(tr("View More"));
     connect(moreBtn, &DSuggestButton::clicked, this, [ = ] {
@@ -96,6 +95,6 @@ void HomePage::addCategory(QString name, QString category, MainWindow *parent)
     layout->addWidget(list);
 
     connect(list, &List::currentItemChanged, this, [ = ] (QVariant data) {
-        parent->openItem(data.toString(), AppStreamHelper::instance()->IDFromPackage(data.toString()));
+        parent->openItem(apps->value(data.toInt()));
     });
 }

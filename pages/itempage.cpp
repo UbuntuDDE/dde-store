@@ -1,13 +1,13 @@
 #include "pages/itempage.h"
-#include "backend/packagekithelper.h"
 #include "backend/ratingshelper.h"
+#include "backend/settings.h"
 #include "widgets/gallery.h"
 #include "widgets/stars.h"
-#include "plugins/pluginloader.h"
 #include <QScrollArea>
 #include <DLabel>
+#include <DNotifySender>
 
-ItemPage::ItemPage(QString app, bool snap)
+ItemPage::ItemPage(App *app)
 {
     QScrollArea *scroll = new QScrollArea(this);
     QWidget *widget = new QWidget;
@@ -18,53 +18,55 @@ ItemPage::ItemPage(QString app, bool snap)
     layout->setAlignment(Qt::AlignTop);
     widget->setLayout(layout);
 
+    this->app = app;
+
     QHBoxLayout *mainLayout = new QHBoxLayout;
     mainLayout->setMargin(0);
     mainLayout->setSpacing(0);
     setLayout(mainLayout);
     mainLayout->addWidget(scroll);
 
-    isSnap = snap;
-    m_app = app;
-
-    spinner = new DSpinner;
     spinner->setFixedSize(50, 50);
     
-    if (isSnap) {
-        PluginLoader::instance()->snapPlugin->itemPageData(this, app);
+    if (!app->fullData) {
+        app->getFullData();
         spinner->start();
-        layout->addWidget(spinner, 0, Qt::AlignCenter);
+        layout->addWidget(spinner, 1, Qt::AlignCenter);
+        connect(app->source, &Source::gotFullData, this, [ = ] (App *data) {
+            if (data->id == app->id)
+                load();
+        });
     } else {
-        PackageKitHelper::instance()->itemPageData(this, app);
-        setData(AppStreamHelper::instance()->getAppData(app));
+        load();
     }
 }
 
-void ItemPage::setData(AppStreamHelper::appData data)
+void ItemPage::load()
 {
     spinner->hide();
+    layout->removeWidget(spinner);
     QHBoxLayout *header = new QHBoxLayout;
     header->setMargin(10);
     header->setAlignment(Qt::AlignVCenter);
 
     QLabel *icon = new QLabel;
-    icon->setPixmap(data.icon.pixmap(data.icon.actualSize(QSize(64, 64))));
+    icon->setPixmap(app->icon.pixmap(app->icon.actualSize(QSize(64, 64))));
     header->addWidget(icon);
 
     QVBoxLayout *nameSection = new QVBoxLayout;
     nameSection->setMargin(0);
     nameSection->setAlignment(Qt::AlignTop);
 
-    DLabel *name = new DLabel(data.name);
+    DLabel *name = new DLabel(app->name);
     QFont nameFont;
     nameFont.setPixelSize(22);
     name->setFont(nameFont);
     nameSection->addWidget(name);
-    if (!data.developer.isNull()) {
-        nameSection->addWidget(new DLabel(data.developer));
+    if (!app->developer.isNull()) {
+        nameSection->addWidget(new DLabel(app->developer));
     }
-    if (RatingsHelper::instance()->averageRating(data.id) != 0) {
-        nameSection->addWidget(new stars(data.id));
+    if (RatingsHelper::instance()->averageRating(app->id) != 0) {
+        nameSection->addWidget(new stars(app->id));
     }
     header->addLayout(nameSection);
 
@@ -75,17 +77,19 @@ void ItemPage::setData(AppStreamHelper::appData data)
     removeBtn->hide();
     header->addWidget(removeBtn, 0, Qt::AlignVCenter);
     connect(removeBtn, &DWarningButton::clicked, this, [ = ] {
-        if (isSnap) {
-            PluginLoader::instance()->snapPlugin->uninstall(this, m_app);
-        } else {
-            PackageKitHelper::instance()->uninstall(this, m_app);
-        }
+        app->uninstall();
     });
 
     header->addSpacing(10);
     installBtn = new DSuggestButton;
     installBtn->hide();
     header->addWidget(installBtn, 0, Qt::AlignVCenter);
+    connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
+        if (app->state == App::Launchable)
+            app->launch();
+        else
+            app->install();
+    });
 
     layout->addLayout(header);
 
@@ -93,65 +97,68 @@ void ItemPage::setData(AppStreamHelper::appData data)
     progressBar->hide();
     layout->addWidget(progressBar, 0, Qt::AlignTop);
     
-    if (!data.screenshots.isEmpty()) {
-        layout->addWidget(new gallery(data.screenshots));
+    if (!app->screenshots.isEmpty()) {
+        layout->addWidget(new gallery(app->screenshots));
     }
 
     DLabel *description = new DLabel;
     description->setWordWrap(true);
     description->setAlignment(Qt::AlignHCenter);
     description->setMargin(15);
-    if (data.description.isNull()) {
+    if (app->description.isNull()) {
         description->setText(QString("<i>%1</i>").arg(tr("No description provided.")));
     } else {
-        description->setText(data.description);
+        description->setText(app->description);
     }
 
     layout->addWidget(description);
+
+    connect(app->source, &Source::percentageChanged, this, [ = ] (App *data, int percentage) {
+        if (data->id == app->id)
+            progressBar->setValue(percentage);
+    });
+    connect(app->source, &Source::stateChanged, this, [ = ] (App *data) {
+        if (data->id == app->id)
+            updateButtons();
+    });
+    connect(app->source, &Source::installFinished, this, [ = ] (App *data) {
+        if (data->id == app->id && settings::instance()->notifyInstall())
+            DUtil::DNotifySender(tr("Installed \"%1\"").arg(app->name)).appIcon("dialog-ok").appName("DDE Store").timeOut(5000).call();
+    });
+    connect(app->source, &Source::uninstallFinished, this, [ = ] (App *data) {
+        if (data->id == app->id && settings::instance()->notifyUninstall())
+            DUtil::DNotifySender(tr("Uninstalled \"%1\"").arg(app->name)).appIcon("dialog-ok").appName("DDE Store").timeOut(5000).call();
+    });
+
+    updateButtons();
 }
 
-void ItemPage::setInstallButton(QString packageId, Status type, QString param)
+void ItemPage::updateButtons()
 {
-    switch (type)
+    switch (app->state)
     {
-    case NotInstalled:
+    case App::NotInstalled:
         removeBtn->hide();
         progressBar->hide();
         installBtn->show();
         installBtn->setDisabled(false);
-        installBtn->setText(tr("Install (%1)").arg(param));
-        installBtn->disconnect(this);
-        connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
-            if (isSnap) {
-                PluginLoader::instance()->snapPlugin->install(this, packageId, false);
-            } else {
-                PackageKitHelper::instance()->install(this, packageId);
-            }
-        });
+        installBtn->setText(tr("Install (%1)").arg(QLocale().formattedDataSize(app->downloadSize)));
         break;
-    case Launchable:
+    case App::Launchable:
         progressBar->hide();
         installBtn->show();
         installBtn->setDisabled(false);
         installBtn->setText(tr("Open"));
-        installBtn->disconnect(this);
-        connect(installBtn, &DSuggestButton::clicked, this, [ = ] {
-            if (isSnap) {
-                PluginLoader::instance()->snapPlugin->launch(packageId);
-            } else {
-                PackageKitHelper::instance()->launch(packageId);
-            }
-        });
         removeBtn->show();
         break;
-    case Installed:
+    case App::Installed:
         progressBar->hide();
         installBtn->hide();
         removeBtn->show();
         break;
-    case Installing:
+    case App::Installing:
         progressBar->show();
-        progressBar->setValue(param.toInt());
+        progressBar->setValue(0);
         removeBtn->hide();
         installBtn->setDisabled(true);
         break;

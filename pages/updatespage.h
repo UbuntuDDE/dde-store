@@ -3,6 +3,7 @@
 
 #include "mainwindow.h"
 #include "widgets/list.h"
+#include "backend/sourcemanager.h"
 #include <QWidget>
 #include <DDialog>
 #include <DSuggestButton>
@@ -15,14 +16,12 @@ class UpdatesPage : public QWidget
     Q_OBJECT
 public:
     UpdatesPage(MainWindow *parent);
-    void loadData(QHash<QString, int> apps);
-    void updatePercent(QString package, uint percent);
     void refresh(bool refreshCache = false);
 private:
     List *list;
     DDialog *systemUpdatesPopup;
-    QStringList appUpdates;
-    QStringList systemUpdates;
+    QList<App*> appUpdates;
+    QList<App*> systemUpdates;
     DSuggestButton *updateButton;
     MainWindow *mainwindow;
     QString systemUpdatesItem;

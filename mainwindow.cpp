@@ -2,7 +2,6 @@
 #include "pages/homepage.h"
 #include "pages/updatespage.h"
 #include "backend/settings.h"
-#include "backend/packagekithelper.h"
 #include "pages/categorypage.h"
 #include <DTitlebar>
 #include <DSearchEdit>
@@ -219,18 +218,18 @@ void MainWindow::addPage(QString name, QString iconname, QWidget *widget)
         item->setActionList(Qt::Edge::RightEdge, {updateIndicator});
 }
 
-void MainWindow::openItem(QString app, QString id, bool snap)
+void MainWindow::openItem(App *app)
 {
     // If the item page is in the list
-    if (itemPageList.contains(id)) {
+    if (itemPageList.contains(app->id)) {
         // Open it
-        stackedWidget->setCurrentWidget(itemPageList.value(id));
+        stackedWidget->setCurrentWidget(itemPageList.value(app->id));
     } else {
         // If not, create the page and add it to the list
-        ItemPage *widget = new ItemPage(app, snap);
+        ItemPage *widget = new ItemPage(app);
         stackedWidget->addWidget(widget);
         stackedWidget->setCurrentWidget(widget);
-        itemPageList.insert(id, widget);
+        itemPageList.insert(app->id, widget);
     }
     navView->setCurrentIndex(QModelIndex());
     navView->clearSelection();
@@ -280,7 +279,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
         }
     }
 
-    if (PackageKitHelper::instance()->preventClose) {
+    if (SourceManager::instance()->preventingClose()) {
         DDialog dialog;
         dialog.setIcon(style()->standardIcon(QStyle::SP_MessageBoxCritical));
         dialog.setTitle(tr("Cannot close while app is being installed"));

@@ -38,10 +38,10 @@ file(GLOB SRC
     pages/categorypage.h
     pages/updatespage.cpp
     pages/updatespage.h
-    backend/appstreamhelper.cpp
-    backend/appstreamhelper.h
-    backend/packagekithelper.cpp
-    backend/packagekithelper.h 
+    backend/sourcemanager.cpp
+    backend/sourcemanager.h
+    backend/sources/packagekit/packagekitsource.cpp
+    backend/sources/packagekit/packagekitsource.h
     backend/ratingshelper.cpp
     backend/ratingshelper.h
     backend/settings.cpp
@@ -52,9 +52,6 @@ file(GLOB SRC
     widgets/stars.h
     widgets/list.cpp
     widgets/list.h
-    plugins/pluginloader.cpp
-    plugins/pluginloader.h
-    plugins/snap/snapinterface.h
     resources/resources.qrc
 )
 
@@ -81,7 +78,7 @@ target_link_libraries(${PROJECT_NAME}
     AppStreamQt
 )
 
-add_subdirectory(plugins)
+add_subdirectory(backend/sources)
 
 set(CMAKE_INSTALL_PREFIX /usr)
 

@@ -8,6 +8,7 @@
 #include <QKeyEvent>
 #include <QSystemTrayIcon>
 #include "pages/itempage.h"
+#include "backend/sourcemanager.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -17,7 +18,7 @@ class MainWindow : public DMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void openItem(QString app, QString id, bool snap = false);
+    void openItem(App *app);
     void setUpdateIndicatorVisible(bool value);
     DListView *navView = new DListView;
     QStandardItemModel *navModel = new QStandardItemModel;

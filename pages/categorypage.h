@@ -13,25 +13,12 @@ public:
         Alphabetical,
         Ratings
     };
-    enum Backend {
-        PackageKit,
-        Snap
-    };
-    struct App
-    {
-        QString name;
-        QIcon icon;
-        QString id;
-        QString package;
-        int ratings;
-        Backend source;
-    };
     CategoryPage(MainWindow *parent, QString name, QString category);
-    void insertItem(App item);
+    void insertItem(App *app);
     void load(SortType sort = Alphabetical);
 private:
     void init(QString category, QString name);
-    QList<CategoryPage::App> apps;
+    QList<App*> apps;
     List *list;
 };
 
