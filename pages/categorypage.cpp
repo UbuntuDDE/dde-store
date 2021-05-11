@@ -50,6 +50,7 @@ void CategoryPage::init(QString category, QString name)
                     load();
                 else
                     SourceManager::instance()->sources()[SourceManager::instance()->sources().indexOf(source) + 1]->getInstalled();
+                disconnect(source, &Source::gotInstalled, this, nullptr);
             });
             source->getInstalled();
         }
@@ -69,6 +70,7 @@ void CategoryPage::init(QString category, QString name)
                     load();
                 else
                     SourceManager::instance()->sources()[SourceManager::instance()->sources().indexOf(source) + 1]->search(category);
+                disconnect(source, &Source::searchFinished, this, nullptr);
             });
         }
         SourceManager::instance()->sources().first()->search(category);
@@ -80,6 +82,7 @@ void CategoryPage::init(QString category, QString name)
                     insertItem(app);
                 }
                 load();
+                disconnect(pk, &PackageKitSource::gotCategory, this, nullptr);
             }
         });
         pk->getCategory(category);

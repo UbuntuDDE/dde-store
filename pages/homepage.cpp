@@ -82,6 +82,7 @@ void HomePage::addCategory(QString name, QString category, MainWindow *parent)
                 apps->append(items[i]);
             }
             list->load();
+            disconnect(pk, &PackageKitSource::gotCategory, this, nullptr);
         }
     });
     pk->getCategory(category);

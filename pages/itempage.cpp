@@ -33,8 +33,10 @@ ItemPage::ItemPage(App *app)
         spinner->start();
         layout->addWidget(spinner, 1, Qt::AlignCenter);
         connect(app->source, &Source::gotFullData, this, [ = ] (App *data) {
-            if (data->id == app->id)
+            if (data->id == app->id) {
                 load();
+                disconnect(app->source, &Source::gotFullData, this, nullptr);
+            }
         });
     } else {
         load();
