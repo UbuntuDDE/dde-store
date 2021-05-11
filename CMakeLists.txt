@@ -64,7 +64,6 @@ add_executable(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME} PUBLIC
     ${PackageKitQt5_INCLUDE_DIR}
     ${AppStreamQt_INCLUDE_DIRS}
-    ${SNAPD_INCLUDE_DIRS}
 )
 
 target_link_libraries(${PROJECT_NAME}
@@ -74,37 +73,12 @@ target_link_libraries(${PROJECT_NAME}
     ${Qt5Widgets_LIBRARIES}
     ${Qt5Network_LIBRARIES}
     ${PackageKitQt5_LIBRARIES}
-    ${SNAPD_LIBRARIES}
     AppStreamQt
 )
 
 add_subdirectory(backend/sources)
 
 set(CMAKE_INSTALL_PREFIX /usr)
-
-file(GLOB libfiles
-    pages/itempage.cpp
-    pages/categorypage.cpp
-    pages/updatespage.cpp
-    plugins/snap/snapinterface.h
-)
-
-add_library(libddestore ${libfiles})
-
-target_link_libraries(libddestore PUBLIC
-    ${DtkWidget_LIBRARIES}
-    ${DtkCore_LIBRARIES}
-    ${DtkGui_LIBRARIES}
-    ${Qt5Widgets_LIBRARIES}
-    ${Qt5Network_LIBRARIES}
-    ${PackageKitQt5_LIBRARIES}
-    ${SNAPD_LIBRARIES}
-    AppStreamQt
-)
-
-target_include_directories(libddestore PUBLIC ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
-
-install(TARGETS libddestore DESTINATION ${CMAKE_INSTALL_LIBDIR}/libddestore)
 
 install(TARGETS dde-store DESTINATION bin)
 install(FILES ${QM_FILES} DESTINATION share/dde-store/translations)
