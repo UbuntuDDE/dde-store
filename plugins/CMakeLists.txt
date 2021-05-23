@@ -1,0 +1,10 @@
+find_package(Snapd QUIET)
+if (Snapd_FOUND)
+    add_subdirectory(snap)
+endif()
+
+option(BUILD_FLATPAK "Build with Flatpak support" "ON")
+pkg_check_modules(Flatpak IMPORTED_TARGET flatpak>=0.11.8)
+if (BUILD_SNAP AND Flatpak_FOUND)
+    add_subdirectory(flatpak)
+endif()

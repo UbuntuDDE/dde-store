@@ -14,7 +14,6 @@ find_package(Qt5 REQUIRED Core Widgets Network DBus Gui LinguistTools)
 find_package(Dtk REQUIRED Widget Gui)
 find_package(PackageKitQt5 REQUIRED)
 find_package(AppStreamQt REQUIRED)
-find_package(PkgConfig REQUIRED)
 include(FindPkgConfig)
 include(GNUInstallDirs)
 
