@@ -19,9 +19,13 @@ SourceManager::SourceManager()
 {
     m_sources << new PackageKitSource;
 
-    QPluginLoader *loader = new QPluginLoader("dde-store/snapplugin");
-    if (loader->load())
-        m_sources << qobject_cast<Source*>(loader->instance());
+    QPluginLoader *snapLoader = new QPluginLoader("dde-store/snapplugin");
+    if (snapLoader->load())
+        m_sources << qobject_cast<Source*>(snapLoader->instance());
+    
+    QPluginLoader *flatpakLoader = new QPluginLoader("dde-store/flatpakplugin");
+    if (flatpakLoader->load())
+        m_sources << qobject_cast<Source*>(flatpakLoader->instance());
 }
 
 QList<Source*> SourceManager::sources()
