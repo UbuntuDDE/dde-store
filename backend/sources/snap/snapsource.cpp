@@ -1,4 +1,5 @@
 #include "snapsource.h"
+#include "../../ratingshelper.h"
 #include <QUrl>
 #include <QProcess>
 #include <QBuffer>
@@ -28,7 +29,10 @@ void SnapSource::getInstalled()
             apps->append(getData(request->snap(i)));
             installed << request->snap(i)->id();
         }
-        emit(gotInstalled(*apps));
+        if (RatingsHelper::instance()->available)
+            emit(gotInstalled(*apps));
+        else
+            connect(RatingsHelper::instance(), &RatingsHelper::fetched, this, [ = ] { emit(gotInstalled(*apps)); });
     });
 }
 
@@ -145,7 +149,10 @@ void SnapSource::search(QString query)
         for (int i = 0; i < request->snapCount(); i++) {
             results->append(getData(request->snap(i)));
         }
-        emit(searchFinished(*results));
+        if (RatingsHelper::instance()->available)
+            emit(searchFinished(*results));
+        else
+            connect(RatingsHelper::instance(), &RatingsHelper::fetched, this, [ = ] { emit(searchFinished(*results)); });
     });
 }
 
@@ -171,6 +178,10 @@ App *SnapSource::getData(QSnapdSnap *snap)
     App *app = new App();
     app->name = snap->title();
     app->id = snap->id();
+    if (RatingsHelper::instance()->available)
+        app->ratings = RatingsHelper::instance()->totalRatings(commonId(snap));
+    else
+        ratingsQueue.insert(app, snap);
 
     if (snap->icon().startsWith("/")) {
         app->icon = QIcon(QPixmap(snap->icon()));
@@ -195,6 +206,13 @@ App *SnapSource::getData(QSnapdSnap *snap)
     app->hasMetadata = snap->snapType() == QSnapdEnums::SnapTypeApp;
 
     return app;
+}
+
+QString SnapSource::commonId(QSnapdSnap *snap)
+{
+    if (snap->commonIds().length() > 0)
+        return snap->commonIds()[0];
+    return QString("io.snapcraft.%1-%2").arg(snap->name()).arg(snap->id());
 }
 
 int SnapSource::requestClassic()

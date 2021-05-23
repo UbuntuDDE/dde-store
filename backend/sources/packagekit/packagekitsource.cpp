@@ -1,5 +1,6 @@
 #include "packagekitsource.h"
 #include "backend/settings.h"
+#include "backend/ratingshelper.h"
 #include <Details>
 #include <AppStreamQt/pool.h>
 #include <AppStreamQt/icon.h>
@@ -20,6 +21,12 @@ PackageKitSource::PackageKitSource()
             metadata.insert(pkgName, app);
         }
     }
+
+    connect(RatingsHelper::instance(), &RatingsHelper::fetched, this, [ = ] {
+        for (App *app : ratingsQueue)
+            app->ratings = RatingsHelper::instance()->totalRatings(app->id);
+        ratingsQueue.clear();
+    });
 }
 
 QString PackageKitSource::name()
@@ -36,11 +43,14 @@ void PackageKitSource::getInstalled()
     
     connect(transaction, &Transaction::package, this, [ = ] (Transaction::Info info, const QString &packageID) {
         if (metadata.contains(Daemon::packageName(packageID)))
-            installed->append(getData(Daemon::packageName(packageID)));
+            installed->append(getData(Daemon::packageName(packageID), true));
     });
 
     connect(transaction, &Transaction::finished, this, [ = ] {
-        emit(gotInstalled(*installed));
+        if (RatingsHelper::instance()->available)
+            emit(gotInstalled(*installed));
+        else
+            connect(RatingsHelper::instance(), &RatingsHelper::fetched, this, [ = ] { emit(gotInstalled(*installed)); });
     });
 }
 
@@ -78,9 +88,12 @@ void PackageKitSource::getCategory(QString category)
         if (items.length() >= settings::instance()->maxItems())
             break;
         if (metadata.value(key).categories().contains(category))
-            items << getData(key);
+            items << getData(key, true);
     }
-    emit(gotCategory(category, items));
+    if (RatingsHelper::instance()->available)
+        emit(gotCategory(category, items));
+    else
+        connect(RatingsHelper::instance(), &RatingsHelper::fetched, this, [ = ] { emit(gotCategory(category, items)); });
 }
 
 void PackageKitSource::getFullData(App *app)
@@ -97,6 +110,9 @@ void PackageKitSource::getFullData(App *app)
                     app->screenshots << image.url();
             }
         }
+
+        if (app->ratings == 0)
+            app->ratings = RatingsHelper::instance()->totalRatings(app->id);
     }
 
     Transaction *resolve = Daemon::resolve(app->package);
@@ -178,7 +194,10 @@ void PackageKitSource::search(QString query)
         if (!noMatch)
             results << getData(key);
     }
-    emit(searchFinished(results));
+    if (RatingsHelper::instance()->available)
+        emit(searchFinished(results));
+    else
+        connect(RatingsHelper::instance(), &RatingsHelper::fetched, this, [ = ] { emit(searchFinished(results)); });
 }
 
 void PackageKitSource::launch(App *app)
@@ -229,7 +248,7 @@ void PackageKitSource::error(Transaction::Error code, const QString &text)
     Source::error(QVariant::fromValue(code).toString() + " - " + text);
 }
 
-App *PackageKitSource::getData(QString package)
+App *PackageKitSource::getData(QString package, bool fetchRatings)
 {
     App *app = new App();
 
@@ -238,6 +257,12 @@ App *PackageKitSource::getData(QString package)
 
         app->name = data.name();
         app->id = data.id();
+        if (fetchRatings) {
+            if (RatingsHelper::instance()->available)
+                app->ratings = RatingsHelper::instance()->totalRatings(app->id);
+            else
+                ratingsQueue << app;
+        }
 
         for (Icon icon : data.icons()) {
             if (icon.kind() == Icon::KindStock) {

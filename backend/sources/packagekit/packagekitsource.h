@@ -15,7 +15,7 @@ public:
     void getInstalled() override;
     void getUpdates(bool refreshCache) override;
     void getCategory(QString category);
-    App *getData(QString package);
+    App *getData(QString package, bool fetchRatings = false);
     App *getDataFromID(QString ID);
     void getFullData(App *app) override;
     void install(App *app) override;
@@ -33,7 +33,7 @@ private:
     void error(PackageKit::Transaction::Error code, const QString &text);
     QHash<QString, App*> updates;
     QHash<QString, AppStream::Component> metadata;
-
+    QList<App*> ratingsQueue;
 };
 
 #endif // PACKAGEKITSOURCE_H

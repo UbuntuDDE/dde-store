@@ -26,10 +26,12 @@ public:
 
 private:
     App *getData(QSnapdSnap *snap);
+    QString commonId(QSnapdSnap *snap);
     int requestClassic();
     QSnapdClient *client;
     bool useClassic = false;
     QStringList installed;
+    QMap<App*, QSnapdSnap*> ratingsQueue;
 
 };
 

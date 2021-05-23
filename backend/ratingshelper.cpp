@@ -31,6 +31,7 @@ RatingsHelper::RatingsHelper()
         emit(fetched());
         available = true;
         qDebug() << "[ RATINGS ] Ratings fetched";
+        disconnect(this, &RatingsHelper::fetched, nullptr, nullptr);
     });
 }
 
