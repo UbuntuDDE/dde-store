@@ -8,6 +8,7 @@
 #include <QKeyEvent>
 #include <QSystemTrayIcon>
 #include "pages/itempage.h"
+#include "backend/sourcemanager.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -17,7 +18,7 @@ class MainWindow : public DMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void openItem(QString app, QString id, bool snap = false);
+    void openItem(App *app);
     void setUpdateIndicatorVisible(bool value);
     DListView *navView = new DListView;
     QStandardItemModel *navModel = new QStandardItemModel;
@@ -26,7 +27,8 @@ private:
     void initNav();
     void initTitlebar();
     void addPage(QString name, QString icon, QWidget *widget);
-    QStackedWidget *stackedWidget = new QStackedWidget;
+    void updateIcons();
+    QStackedWidget *stackedWidget;
     QHash<QString, QString> pageIcons;
     QHash<QString, ItemPage*> itemPageList;
     DViewItemAction *updateIndicator;
@@ -35,7 +37,7 @@ private:
     DButtonBoxButton *backButton;
     DButtonBoxButton *forwardButton;
     bool buttonNavigated = false;
-    QSystemTrayIcon *trayIcon = new QSystemTrayIcon(QIcon::fromTheme("deepin-app-store"));
+    QSystemTrayIcon *trayIcon;
     QWidget *updatesPage;
     
 protected Q_SLOTS:

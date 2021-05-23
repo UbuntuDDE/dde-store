@@ -7,7 +7,7 @@
 #include <DWarningButton>
 #include <DProgressBar>
 #include <DSpinner>
-#include "backend/appstreamhelper.h"
+#include "backend/sourcemanager.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -16,22 +16,17 @@ class ItemPage : public QWidget
     Q_OBJECT
 
 public:
-    ItemPage(QString app, bool snap);
-    enum Status {
-        Installed,
-        NotInstalled,
-        Installing,
-        Launchable
-    };
-    void setInstallButton(QString packageId, Status type, QString param = nullptr);
-    void setData(AppStreamHelper::appData data);
+    ItemPage(App *app);
+    void load();
+
 private:
     QVBoxLayout *layout;
     DWarningButton *removeBtn;
     DSuggestButton *installBtn;
     DProgressBar *progressBar;
     DSpinner *spinner = new DSpinner;
-    bool isSnap;
+    App *app;
+    void updateButtons();
 };
 
 #endif // ITEMPAGE_H

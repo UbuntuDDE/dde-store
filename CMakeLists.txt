@@ -37,10 +37,10 @@ file(GLOB SRC
     pages/categorypage.h
     pages/updatespage.cpp
     pages/updatespage.h
-    backend/appstreamhelper.cpp
-    backend/appstreamhelper.h
-    backend/packagekithelper.cpp
-    backend/packagekithelper.h 
+    backend/sourcemanager.cpp
+    backend/sourcemanager.h
+    backend/sources/packagekit/packagekitsource.cpp
+    backend/sources/packagekit/packagekitsource.h
     backend/ratingshelper.cpp
     backend/ratingshelper.h
     backend/settings.cpp
@@ -51,11 +51,7 @@ file(GLOB SRC
     widgets/stars.h
     widgets/list.cpp
     widgets/list.h
-    plugins/pluginloader.cpp
-    plugins/pluginloader.h
-    plugins/snap/snapinterface.h
-    plugins/snap/flatpakinterface.h
-    resources.qrc
+    resources/resources.qrc
 )
 
 add_executable(${PROJECT_NAME}
@@ -79,33 +75,9 @@ target_link_libraries(${PROJECT_NAME}
     AppStreamQt
 )
 
-add_subdirectory(plugins)
+add_subdirectory(backend/sources)
 
 set(CMAKE_INSTALL_PREFIX /usr)
-
-file(GLOB libfiles
-    pages/itempage.cpp
-    pages/categorypage.cpp
-    pages/updatespage.cpp
-    plugins/snap/snapinterface.h
-)
-
-add_library(libddestore ${libfiles})
-
-target_link_libraries(libddestore PUBLIC
-    ${DtkWidget_LIBRARIES}
-    ${DtkCore_LIBRARIES}
-    ${DtkGui_LIBRARIES}
-    ${Qt5Widgets_LIBRARIES}
-    ${Qt5Network_LIBRARIES}
-    ${PackageKitQt5_LIBRARIES}
-    ${SNAPD_LIBRARIES}
-    AppStreamQt
-)
-
-target_include_directories(libddestore PUBLIC ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
-
-install(TARGETS libddestore DESTINATION ${CMAKE_INSTALL_LIBDIR}/libddestore)
 
 install(TARGETS dde-store DESTINATION bin)
 install(FILES ${QM_FILES} DESTINATION share/dde-store/translations)

@@ -1,3 +1,18 @@
+dde-store (1.2.2) groovy; urgency=medium
+
+  * Added "appstream://" and "snap://" url handling
+  * Bug fixes
+
+ -- dekzi <dekzidev@protonmail.com>  Mon, 22 Feb 2021 23:42:48 -0800
+
+dde-store (1.2.1) groovy; urgency=low
+
+  * Added Chinese translation (by @ShuiHuo)
+  * Improved integration with additional backends (Snap)
+  * Bug fixes
+
+ -- dekzi <dekzidev@protonmail.com>  Sun, 17 Jan 2021 13:58:09 -0800
+
 dde-store (1.2.0) groovy; urgency=low
 
   * Added Snap support

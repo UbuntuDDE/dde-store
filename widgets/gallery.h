@@ -9,6 +9,7 @@
 #include <QNetworkAccessManager>
 #include <QEvent>
 #include "mainwindow.h"
+#include "backend/sourcemanager.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -18,15 +19,16 @@ class gallery : public QWidget
 
 public:
     gallery(QList<QUrl> imageList);
-    gallery(QList<QPair<QString, QString>> imageList, MainWindow *parent);
+    gallery(QList<QPair<QString, App*>> imageList, MainWindow *parent);
 
 private:
     QLabel *imageView;
     int currentImage;
+    void init();
     void changeImage(int index);
     void changeLocalImage(int index);
     QList<QUrl> images;
-    QList<QPair<QString, QString>> banners;
+    QList<QPair<QString, App*>> banners;
     DIconButton *backButton;
     DIconButton *forwardButton;
     DSpinner *spinner;

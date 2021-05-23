@@ -12,12 +12,12 @@ stars::stars(QString app)
     double rating = RatingsHelper::instance()->averageRating(app);
     for (int i = 0; i < int(rating); i++) {
         QLabel *star = new QLabel;
-        star->setPixmap(QPixmap("://resources/icons/star.png"));
+        star->setPixmap(QPixmap("://icons/star.png"));
         layout->addWidget(star);
     }
     if (QString::number(rating).endsWith(".5")) {
         QLabel *halfstar = new QLabel;
-        halfstar->setPixmap(QPixmap("://resources/icons/starhalf.png"));
+        halfstar->setPixmap(QPixmap("://icons/starhalf.png"));
         layout->addWidget(halfstar);
     }
     QLabel *total = new QLabel(tr("(%1 ratings)").arg(RatingsHelper::instance()->totalRatings(app)));

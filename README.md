@@ -1,7 +1,7 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/56656996/99621835-b2d8dc80-29dd-11eb-8183-987e80f8b3a7.png"></p>
 <h1 align="center">DDE Store</h1>
 <h3 align="center">An app store for DDE built with DTK</h3>
-<p align="center"><a href="/translations/README/README.es.md">🇪🇸 Español</a> | <a href="/translations/README/README.de.md">🇩🇪 Deutsche</a> | <a href="/translations/README/README.tr.md">🇹🇷 Türkçe</a> | <a href="/translations/README/README.ar.md">🇸🇦 العربية</a></p>
+<p align="center"><a href="/translations/README/README.es.md">🇪🇸 Español</a> | <a href="/translations/README/README.de.md">🇩🇪 Deutsch</a> | <a href="/translations/README/README.tr.md">🇹🇷 Türkçe</a> | <a href="/translations/README/README.ar.md">🇸🇦 العربية</a></p>
 
 ## What is this?
 
@@ -12,14 +12,12 @@ This app store is designed for use with the Deepin Desktop Environment on other 
 This only applies to the official Deepin distro, not DDE in general. Deepin does not support AppStream, which provides this app with all the needed data. **This store is not supported on the Deepin distribution.** This was intended for other distros running DDE anyways, so I have no plans on ever supporting it. If Deepin starts using AppStream, I may consider it. If you're running Deepin and looking for an alternative app store, check out some other awesome projects like [Spark Store](https://www.spark-app.store) or [Deepines Store](https://deepines.com)!
 
 ## Installation
-### Ubuntu
+### UbuntuDDE
 ```
-sudo add-apt-repository ppa:dekzi/ppa
-sudo apt-get update
 sudo apt-get install dde-store
 ```
 
-### Arch/Manjaro
+### Arch
 ```
 sudo pacman -S deepin-store
 ```
@@ -34,15 +32,7 @@ sudo pacman -S deepin-store
 - libdtkgui-dev
 - libpackagekitqt5-dev
 - libappstreamqt-dev
-- libsnapd-glib-dev (**Optional** - Snap support)
-
-**Building on Ubuntu**
-
-To build on Ubuntu, the UbuntuDDE PPA is needed because `libdtkgui-dev` is unavailable on the main repos.
-```
-sudo add-apt-repository ppa:ubuntudde-dev/stable
-sudo apt-get update
-```
+- libsnapd-qt-dev
 
 **Building**
 ```
