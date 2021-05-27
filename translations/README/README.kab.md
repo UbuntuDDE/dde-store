@@ -11,7 +11,7 @@ This app store is designed for use with the Deepin Desktop Environment on other 
 
 This only applies to the official Deepin distro, not DDE in general. Deepin does not support AppStream, which provides this app with all the needed data. **This store is not supported on the Deepin distribution.** This was intended for other distros running DDE anyways, so I have no plans on ever supporting it. If Deepin starts using AppStream, I may consider it. If you're running Deepin and looking for an alternative app store, check out some other awesome projects like [Spark Store](https://www.spark-app.store) or [Deepines Store](https://deepines.com)!
 
-## Installation
+## Asebded
 ### UbuntuDDE
 ```
 sudo apt-get install dde-store
@@ -42,8 +42,8 @@ cmake .
 sudo make install
 ```
 
-## Contributions
+## Attekki
 Pull requests are always welcome for bug fixes, improvements, translations, or anything else!
 
-## License
+## Turagt
 [GPLv3](LICENSE)
