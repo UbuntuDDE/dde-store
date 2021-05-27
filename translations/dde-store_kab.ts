@@ -6,7 +6,7 @@
     <message>
         <location filename="../pages/categorypage.cpp" line="12"/>
         <source>Sort by</source>
-        <translation type="unfinished"></translation>
+        <translation>Smizwar s</translation>
     </message>
     <message>
         <location filename="../pages/categorypage.cpp" line="15"/>
