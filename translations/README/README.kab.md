@@ -12,7 +12,9 @@ deg [tuget](#deepin-distro) isedggiren meṛṛa!
 ## Tussa Deepin
 
 Aya ad iddu kan i tussa tunṣibt n Deepin, mačči i DDE. Deepin ur isefrak ara AppStream, iseddun asnas-a akked isefka yesra.
- **This store is not supported on the Deepin distribution.** This was intended for other distros running DDE anyways, so I have no plans on ever supporting it. If Deepin starts using AppStream, I may consider it. If you're running Deepin and looking for an alternative app store, check out some other awesome projects like [Spark Store](https://www.spark-app.store) or [Deepines Store](https://deepines.com)!
+**Alzuz-a ur imṣaḍa ara akked tussa Deepin.** Aya ur ittwasra ara i isedggiren-nniḍen iseddayen DDE,ɣef waya ǧǧiɣ-t. 
+Ma yebda Deepin iseqdac AppStream, ahat ad n-uɣaleɣ ɣer-s. Ma yella tseqdaceḍ Deepin tettnadiḍ alzuz-nniḍen, nadi asenfaṛ-nniḍen am 
+[Spark Store](https://www.spark-app.store) neɣ [Deepines Store](https://deepines.com)!
 
 ## Asebded
 ### UbuntuDDE
@@ -25,8 +27,8 @@ sudo apt-get install dde-store
 sudo pacman -S deepin-store
 ```
 
-### Building from source
-**Dependencies (Ubuntu)**
+### Lebni seg teɣbalut
+**Tigilin (Ubuntu)**
 - cmake
 - qtbase5-dev
 - qttools5-dev
@@ -37,7 +39,7 @@ sudo pacman -S deepin-store
 - libappstreamqt-dev
 - libsnapd-qt-dev
 
-**Building**
+**Lebni**
 ```
 git clone https://github.com/dekzi/dde-store.git
 cd dde-store
@@ -46,7 +48,7 @@ sudo make install
 ```
 
 ## Attekki
-Pull requests are always welcome for bug fixes, improvements, translations, or anything else!
+Ansuf yal tikkelt s usuter n uttekki d uqaɛed, asenqed, asuqel, neɣ ayen-nniḍen!
 
 ## Turagt
 [GPLv3]
