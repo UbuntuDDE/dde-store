@@ -1,9 +1,9 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/56656996/99621835-b2d8dc80-29dd-11eb-8183-987e80f8b3a7.png"></p>
 <h1 align="center">DDE Store</h1>
-<h3 align="center">An app store for DDE built with DTK</h3>
+<h3 align="center">Alzuz n yisnasen i DDE yebnan s DTK</h3>
 
 
-## What is this?
+## Acu-t waya?
 
 This app store is designed for use with the Deepin Desktop Environment on other distributions. The official Deepin store is built around Debian and a web view with the Deepin repos on it, making it incompatible with other distros. This store is built with PackageKit and AppStream, so it should work perfect on [almost](#deepin-distro) any distro!
 
