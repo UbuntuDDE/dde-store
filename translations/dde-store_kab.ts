@@ -11,12 +11,12 @@
     <message>
         <location filename="../pages/categorypage.cpp" line="15"/>
         <source>Alphabetical</source>
-        <translation type="unfinished"></translation>
+        <translation>S ugemmay</translation>
     </message>
     <message>
         <location filename="../pages/categorypage.cpp" line="16"/>
         <source>Ratings</source>
-        <translation type="unfinished"></translation>
+        <translation>Efk-d ṛṛay-ik·im</translation>
     </message>
     <message>
         <location filename="../pages/categorypage.cpp" line="58"/>
@@ -54,7 +54,7 @@
     <message>
         <location filename="../pages/homepage.cpp" line="51"/>
         <source>Graphics</source>
-        <translation type="unfinished"></translation>
+        <translation>Uldifen</translation>
     </message>
     <message>
         <location filename="../pages/homepage.cpp" line="52"/>
@@ -87,22 +87,22 @@
     <message>
         <location filename="../pages/itempage.cpp" line="109"/>
         <source>No description provided.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ulac aglam.</translation>
     </message>
     <message>
         <location filename="../pages/itempage.cpp" line="126"/>
         <source>Installed &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>ibdded &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../pages/itempage.cpp" line="130"/>
         <source>Uninstalled &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Ittwakkes &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../pages/itempage.cpp" line="145"/>
         <source>Install (%1)</source>
-        <translation>Sebded l (%1)</translation>
+        <translation>Sebded (%1)</translation>
     </message>
     <message>
         <location filename="../pages/itempage.cpp" line="151"/>
@@ -160,7 +160,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="170"/>
         <source>Graphics</source>
-        <translation type="unfinished"></translation>
+        <translation>Uldifen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="171"/>
@@ -195,7 +195,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="245"/>
         <source>Minimize to system tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Semẓi ɣer tfeggagt n twura</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="247"/>
@@ -220,7 +220,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="285"/>
         <source>Cannot close while app is being installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ur yizmir ara ad imdel deg lawan n usebded n usnas</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="286"/>
@@ -233,7 +233,7 @@
     <message>
         <location filename="../backend/sources/packagekit/packagekitsource.cpp" line="16"/>
         <source>ERROR: Unable to open AppStream metadata pool</source>
-        <translation type="unfinished"></translation>
+        <translation>TUCCḌƐ: Ur yizmir ara ad yeldi AppStream metadata pool</translation>
     </message>
 </context>
 <context>
@@ -241,62 +241,62 @@
     <message>
         <location filename="../backend/settings.cpp" line="85"/>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>Azadur</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="86"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Sken</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="87"/>
         <source>Behaviour</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiddin</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="88"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Ilɣa</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="89"/>
         <source>Show non-app updates as</source>
-        <translation type="unfinished"></translation>
+        <translation>Sken ileqman am</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="90"/>
         <source>Max apps per list</source>
-        <translation type="unfinished"></translation>
+        <translation>Amḍan afellay n yisnasen i tebdert</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="91"/>
         <source>Minimize to tray on exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Semẓi ɣer twura ticki yemdel</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="92"/>
         <source>Check for updates</source>
-        <translation type="unfinished">Check for updates</translation>
+        <translation>Senqed aleqqem</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="93"/>
         <source>App installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Inasen ibedden</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="94"/>
         <source>App uninstalled</source>
-        <translation type="unfinished"></translation>
+        <translation>Isnasne ittwaksen</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="95"/>
         <source>Available updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Ileqman yellan</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="96"/>
         <source>Finished updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Ileqman ifukken</translation>
     </message>
 </context>
 <context>
@@ -304,22 +304,22 @@
     <message>
         <location filename="../backend/sources/snap/snapsource.cpp" line="202"/>
         <source>Classic mode required</source>
-        <translation type="unfinished"></translation>
+        <translation>Yesra askar aklasiki</translation>
     </message>
     <message>
         <location filename="../backend/sources/snap/snapsource.cpp" line="202"/>
         <source>This snap requires confinement to be disabled via classic mode</source>
-        <translation type="unfinished"></translation>
+        <translation>snap-agi yesra aɛzal akken ad yens s uskar aklasiki</translation>
     </message>
     <message>
         <location filename="../backend/sources/snap/snapsource.cpp" line="204"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Sefsex</translation>
     </message>
     <message>
         <location filename="../backend/sources/snap/snapsource.cpp" line="205"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Kemmel</translation>
     </message>
 </context>
 <context>
@@ -327,42 +327,42 @@
     <message>
         <location filename="../pages/updatespage.cpp" line="13"/>
         <source>Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Leqqem</translation>
     </message>
     <message>
         <location filename="../pages/updatespage.cpp" line="14"/>
         <source>Up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>D imaynuten</translation>
     </message>
     <message>
         <location filename="../pages/updatespage.cpp" line="16"/>
         <source>System Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Ileqman n unagraw</translation>
     </message>
     <message>
         <location filename="../pages/updatespage.cpp" line="50"/>
         <source>Update All</source>
-        <translation type="unfinished"></translation>
+        <translation>Leqqem meṛṛa</translation>
     </message>
     <message>
         <location filename="../pages/updatespage.cpp" line="54"/>
         <source>Updating...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aleqqem...</translation>
     </message>
     <message>
         <location filename="../pages/updatespage.cpp" line="84"/>
         <source>Update All (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Leqqem meṛṛa (%1)</translation>
     </message>
     <message>
         <location filename="../pages/updatespage.cpp" line="86"/>
         <source>Updates Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Llan ileqman</translation>
     </message>
     <message>
         <location filename="../pages/updatespage.cpp" line="96"/>
         <source>Updates Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedden ileqman</translation>
     </message>
 </context>
 <context>
@@ -370,12 +370,12 @@
     <message>
         <location filename="../main.cpp" line="31"/>
         <source>An app store for DDE built with DTK</source>
-        <translation type="unfinished"></translation>
+        <translation>Alzuz n yisnasen i DDE yebnan s DTK</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="31"/>
         <source>Created by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sɣur %1</translation>
     </message>
 </context>
 <context>
@@ -383,22 +383,22 @@
     <message>
         <location filename="../backend/settings.cpp" line="28"/>
         <source>&quot;System Updates&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;Ileqman n unagraw&quot;</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="28"/>
         <source>Individual Packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikemmusen yiwen yiwen</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="29"/>
         <source>Hourly</source>
-        <translation type="unfinished"></translation>
+        <translation>Yal asrag</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="29"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Werǧin</translation>
     </message>
 </context>
 <context>
@@ -406,7 +406,7 @@
     <message>
         <location filename="../widgets/stars.cpp" line="23"/>
         <source>(%1 ratings)</source>
-        <translation type="unfinished"></translation>
+        <translation>(%1 n tefranin)</translation>
     </message>
 </context>
 </TS>
