@@ -14,8 +14,6 @@ Bu sadece resmi Deepin dağıtımı için geçerlidir, genel olarak DDE için ge
 ## Kurulum
 ### UbuntuDDE
 ```
-sudo add-apt-repository ppa:dekzi/ppa
-sudo apt-get update
 sudo apt-get install dde-store
 ```
 

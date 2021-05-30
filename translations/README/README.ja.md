@@ -45,4 +45,4 @@ sudo make install
 バグ修正、改善、翻訳など、プルリクエストはいつでも歓迎です！
 
 ## ライセンス
-[GPLv3](LICENSE)
+[GPLv3](../../LICENSE)
