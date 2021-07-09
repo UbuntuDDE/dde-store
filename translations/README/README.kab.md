@@ -7,7 +7,7 @@
 
 Asnas-a n ulzuz ittwafeṣel i useqdec akked tnarit Deepin deg isedggiren-nniḍen. Asnas unṣib n Deepin store ittwabna i Debian akked web view
 s ukemmus Deepin, aya yerra-t d aramṣaḍan akked ikemmusen-nniḍen. Alzuz-a ittwabna s PackageKit akked AppStream, ihi issefk ad yeddu akken iwata
-deg [tuget](#deepin-distro) isedggiren meṛṛa!
+deg [tuget](#tussa-deepin) isedggiren meṛṛa!
 
 ## Tussa Deepin
 
@@ -51,4 +51,4 @@ sudo make install
 Ansuf yal tikkelt s usuter n uttekki d uqaɛed, asenqed, asuqel, neɣ ayen-nniḍen!
 
 ## Turagt
-[GPLv3]
+[GPLv3](../../LICENSE)
