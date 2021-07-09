@@ -15,8 +15,6 @@
 <h3 dir='rtl' align="right">UbuntuDDE</h3>
 
 ```
-sudo add-apt-repository ppa:dekzi/ppa
-sudo apt-get update
 sudo apt-get install dde-store
 ```
 

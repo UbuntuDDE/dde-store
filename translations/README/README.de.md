@@ -13,8 +13,6 @@ Dies gilt nur für die offizielle Deepin-Distro, nicht für DDE im Allgemeinen. 
 ## Installation
 ### UbuntuDDE
 ```
-sudo add-apt-repository ppa:dekzi/ppa
-sudo apt-get update
 sudo apt-get install dde-store
 ```
 
