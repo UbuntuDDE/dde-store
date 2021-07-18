@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru">
+<TS version="2.1" language="en">
 <context>
     <name>CategoryPage</name>
     <message>
@@ -130,7 +130,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="164"/>
         <source>Home</source>
-        <translation>На домашнюю страницу</translation>
+        <translation>На главную</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="165"/>
@@ -180,7 +180,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="174"/>
         <source>Installed</source>
-        <translation>Установленное</translation>
+        <translation>Установленные</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="175"/>
@@ -190,7 +190,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="243"/>
         <source>Exit</source>
-        <translation>Выход</translation>
+        <translation>Выйти</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="245"/>
@@ -205,7 +205,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="249"/>
         <source>Please choose your action</source>
-        <translation>Пожалуйста, выберите действие</translation>
+        <translation>Выберите действие</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="254"/>
@@ -241,12 +241,12 @@
     <message>
         <location filename="../backend/settings.cpp" line="85"/>
         <source>Basic</source>
-        <translation>Базовый</translation>
+        <translation>Базовые</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="86"/>
         <source>View</source>
-        <translation>Отобразить</translation>
+        <translation>Отображение</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="87"/>
@@ -276,7 +276,7 @@
     <message>
         <location filename="../backend/settings.cpp" line="92"/>
         <source>Check for updates</source>
-        <translation>Проверить обновления</translation>
+        <translation>Проверять обновления</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="93"/>
@@ -291,12 +291,12 @@
     <message>
         <location filename="../backend/settings.cpp" line="95"/>
         <source>Available updates</source>
-        <translation>Доступные обновления</translation>
+        <translation>Доступны обновления</translation>
     </message>
     <message>
         <location filename="../backend/settings.cpp" line="96"/>
         <source>Finished updates</source>
-        <translation>Завершенные обновления</translation>
+        <translation>Завершение обновлений</translation>
     </message>
 </context>
 <context>
@@ -352,12 +352,12 @@
     <message>
         <location filename="../pages/updatespage.cpp" line="84"/>
         <source>Update All (%1)</source>
-        <translation>Обновить все(%1)</translation>
+        <translation>Обновить все (%1)</translation>
     </message>
     <message>
         <location filename="../pages/updatespage.cpp" line="86"/>
         <source>Updates Available</source>
-        <translation>Доступные обновления</translation>
+        <translation>Доступны обновления</translation>
     </message>
     <message>
         <location filename="../pages/updatespage.cpp" line="96"/>
