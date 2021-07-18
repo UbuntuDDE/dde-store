@@ -406,7 +406,7 @@
     <message>
         <location filename="../widgets/stars.cpp" line="23"/>
         <source>(%1 ratings)</source>
-        <translation>(Оценки %1)</translation>
+        <translation>(Оценок: %1)</translation>
     </message>
 </context>
 </TS>
