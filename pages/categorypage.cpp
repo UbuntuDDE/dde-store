@@ -52,7 +52,6 @@ void CategoryPage::init(QString category, QString name)
                     SourceManager::instance()->sources()[SourceManager::instance()->sources().indexOf(source) + 1]->getInstalled();
                 disconnect(source, &Source::gotInstalled, this, nullptr);
             });
-            source->getInstalled();
         }
         SourceManager::instance()->sources().first()->getInstalled();
     } else if (name.startsWith("\"")) {

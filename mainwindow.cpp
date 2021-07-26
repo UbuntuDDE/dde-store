@@ -200,7 +200,7 @@ void MainWindow::initNav()
         }
 
         backButton->setDisabled(pageHistoryIndex < 1);
-        forwardButton->setDisabled(pageHistoryIndex != pageHistory.length() - 1);
+        forwardButton->setDisabled(pageHistoryIndex == pageHistory.length() - 1);
     });
 
     // Select homepage by default

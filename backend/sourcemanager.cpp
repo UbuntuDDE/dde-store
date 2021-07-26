@@ -17,11 +17,11 @@ SourceManager *SourceManager::instance()
 
 SourceManager::SourceManager()
 {
-    m_sources << new PackageKitSource;
-
     QPluginLoader *loader = new QPluginLoader("dde-store/snapplugin");
     if (loader->load())
         m_sources << qobject_cast<Source*>(loader->instance());
+    
+    m_sources << new PackageKitSource;
 }
 
 QList<Source*> SourceManager::sources()
