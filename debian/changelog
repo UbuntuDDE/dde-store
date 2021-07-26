@@ -1,3 +1,13 @@
+dde-store (1.2.3) groovy; urgency=low
+
+  * Added Japanese translation (by @MMP0)
+  * Added Dutch translation (by @dutchdevil83)
+  * Added Russian translation (by @thellage)
+  * Added Kabyle translation (by @SelyanKab)
+  * Bug fixes
+
+ -- dekzi <dekzidev@protonmail.com>  Sun, 26 Jul 2021 00:47:12 -0800
+
 dde-store (1.2.2) groovy; urgency=medium
 
   * Added "appstream://" and "snap://" url handling
