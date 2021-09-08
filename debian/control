@@ -3,7 +3,7 @@ Maintainer: dekzi <dekzidev@protonmail.com>
 Section: utils
 Priority: optional
 Standards-Version: 4.5.0
-Build-Depends: debhelper (>=9), cmake, qtbase5-dev, libdtkwidget-dev, libdtkcore-dev, libdtkgui-dev, libpackagekitqt5-dev, libappstreamqt-dev, libsnapd-qt-dev, qttools5-dev
+Build-Depends: debhelper (>=9), cmake, qtbase5-dev, libdtkwidget-dev, libdtkcore-dev, libdtkgui-dev, libpackagekitqt5-dev, libappstreamqt-dev, libsnapd-qt-dev, qttools5-dev, pkg-config, cmake-data,
 Homepage: https://github.com/dekzi/dde-store
 
 Package: dde-store
