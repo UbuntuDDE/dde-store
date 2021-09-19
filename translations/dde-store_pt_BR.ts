@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="br">
+<TS version="2.1" language="pt_BR"/>
 <context>
     <name>CategoryPage</name>
     <message>
@@ -385,7 +385,7 @@
         <source>&quot;System Updates&quot;</source>
         <translation>&quot;Atualizações do Sistema&quot;</translation>
     </message>
-    <message>Individual Packages
+    <message>
         <location filename="../backend/settings.cpp" line="28"/>
         <source>Individual Packages</source>
         <translation>Pacotes Individuais</translation>
