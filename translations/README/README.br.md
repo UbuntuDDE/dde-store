@@ -8,7 +8,7 @@ Esta loja foi projetada para uso com o Deepin Desktop Environment em outras dist
 
 ## Deepin Distro
 
-Isso se aplica apenas à distribuição oficial da Deepin, não ao DDE em geral. Deepin não oferece suporte a AppStream, que fornece a este aplicativo todos os dados necessários. **Esta loja não é compatível com a distribuição Deepin.** Esta loja foi projetada para outras distros executando DDE, então não tenho planos de oferecer suporte. Se o Deepin começar a usar AppStream, posso considerar isso. Se você estiver executando o Deepin e procurando uma loja de aplicativos alternativa, verifique alguns outros projetos incríveis como [Spark Store] (https://www.spark-app.store) ou [Deepines Store] (https://deepines.com)!
+Isso se aplica apenas à distribuição oficial da Deepin, não ao DDE em geral. Deepin não oferece suporte a AppStream, que fornece a este aplicativo todos os dados necessários. **Esta loja não é compatível com a distribuição Deepin.** Esta loja foi projetada para outras distros executando DDE, então não tenho planos de oferecer suporte. Se o Deepin começar a usar AppStream, posso considerar isso. Se você estiver executando o Deepin e procurando uma loja de aplicativos alternativa, verifique alguns outros projetos incríveis como [Spark Store](https://www.spark-app.store) ou [Deepines Store](https://deepines.com)!
 
 ## Instalação
 ### UbuntuDDE
@@ -45,4 +45,4 @@ sudo make install
 Pull requests são sempre bem-vindas para correções de bugs, melhorias, traduções ou qualquer outra coisa!
 
 ## Licença
-[GPLv3](LICENSE)
+[GPLv3](../../LICENSE)
