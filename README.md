@@ -2,6 +2,7 @@
 <h1 align="center">DDE Store</h1>
 <h3 align="center">An app store for DDE built with DTK</h3>
 <p align="center"><a href="/translations/README/README.es.md">🇪🇸 Español</a> | <a href="/translations/README/README.de.md">🇩🇪 Deutsch</a> | <a href="/translations/README/README.nl.md">🇳🇱 Nederlands</a> | <a href="/translations/README/README.ja.md">🇯🇵 日本語</a> | <a href="/translations/README/README.kab.md">🇩🇿 Taqbaylit</a> | <a href="/translations/README/README.tr.md">🇹🇷 Türkçe</a> | <a href="/translations/README/README.ar.md">🇸🇦 العربية</a></p>
+<p align="center"><a href="/translations/README/README.br.md">🇧🇷 Português</a></p>
 
 ## What is this?
 

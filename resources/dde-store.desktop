@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=App Store
 Name[ar]=متجر التطبيقات
+Name[br]=Loja de aplicativos
 Name[es]=Tienda de Aplicaciones
 Name[de]=App Store
 Name[ja]=アプリストア
@@ -11,6 +12,7 @@ Name[zh_CN]=应用商店
 Name[ru]=Магазин приложений
 Comment=An app store for DDE built with DTK
 Comment[ar]=متجر تطبيقات لـ DDE مبني على DTK
+Comment[br]=Uma loja de aplicativos para DDE contruída com DTK
 Comment[es]=Una tienda de aplicaciones para DDE hecha con DTK
 Comment[de]=Ein App Store für DDE erstellt mit DTK
 Comment[ja]=DTK で構築された DDE 用アプリストア
