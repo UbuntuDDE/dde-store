@@ -99,7 +99,10 @@ void gallery::changeLocalImage(int index)
     currentImage = index;
     pageIndicator->setCurrentPage(index);
 
-    imageView->setPixmap(QPixmap::fromImage(QImage(banners[index].first)).scaled(imageView->width(), imageView->width() * 9/16, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    const int width = imageView->width() * devicePixelRatioF();
+    QPixmap && pixmap = QPixmap::fromImage(QImage(banners[index].first)).scaled(width, width * 9/16, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    pixmap.setDevicePixelRatio(devicePixelRatioF());
+    imageView->setPixmap(pixmap);
 }
 
 void gallery::changeImage(int index)
