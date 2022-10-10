@@ -27,6 +27,8 @@ PackageKitSource::PackageKitSource()
             app->ratings = RatingsHelper::instance()->totalRatings(app->id);
         ratingsQueue.clear();
     });
+    
+    Daemon::global()->setHints(QStringList() << QStringLiteral("interactive=true"));
 }
 
 QString PackageKitSource::name()
