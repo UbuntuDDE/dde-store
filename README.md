@@ -36,7 +36,7 @@ sudo pacman -S deepin-store
 
 **Building**
 ```
-git clone https://github.com/dekzi/dde-store.git
+git clone https://github.com/UbuntuDDE/dde-store.git
 cd dde-store
 cmake .
 sudo make install
