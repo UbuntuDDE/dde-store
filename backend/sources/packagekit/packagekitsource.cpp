@@ -172,10 +172,15 @@ void PackageKitSource::uninstall(App *app)
                 emit(percentageChanged(app, transaction->percentage()));
         });
 
-        connect(transaction, &Transaction::finished, this, [ = ] {
-            app->state = App::NotInstalled;
-            emit(stateChanged(app));
-            emit(uninstallFinished(app));
+        connect(transaction, &Transaction::finished, this, [ = ](PackageKit::Transaction::Exit status, uint) {
+            if (status == Transaction::ExitSuccess) {
+                app->state = App::NotInstalled;
+                emit(stateChanged(app));
+                emit(uninstallFinished(app));
+            } else {
+                app->state = App::Installed;
+                emit(stateChanged(app));
+            }
             preventingClose = false;
         });
     });
