@@ -13,14 +13,14 @@ find_package(PkgConfig REQUIRED)
 find_package(Qt5 REQUIRED Core Widgets Network DBus Gui LinguistTools)
 find_package(Dtk REQUIRED Widget Gui)
 find_package(PackageKitQt5 REQUIRED)
-find_package(AppStreamQt REQUIRED)
+find_package(AppStreamQt5 1.0 REQUIRED)
 find_package(PkgConfig REQUIRED)
 include(FindPkgConfig)
 include(GNUInstallDirs)
 
 include_directories(
     ${PackageKitQt5_INCLUDE_DIR}
-    ${AppStreamQt_INCLUDE_DIRS}
+    ${AppStreamQt5_INCLUDE_DIRS}
 )
 
 file(GLOB TS_FILES ./translations/*.ts)
@@ -63,7 +63,7 @@ add_executable(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} PUBLIC
     ${PackageKitQt5_INCLUDE_DIR}
-    ${AppStreamQt_INCLUDE_DIRS}
+    ${AppStreamQt5_INCLUDE_DIRS}
 )
 
 target_link_libraries(${PROJECT_NAME}
@@ -73,7 +73,7 @@ target_link_libraries(${PROJECT_NAME}
     ${Qt5Widgets_LIBRARIES}
     ${Qt5Network_LIBRARIES}
     ${PackageKitQt5_LIBRARIES}
-    AppStreamQt
+    AppStreamQt5
 )
 
 add_subdirectory(backend/sources)

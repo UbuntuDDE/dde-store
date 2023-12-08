@@ -18,7 +18,7 @@ jobs:
       - name: Update packages
         run: pacman -Syu --noconfirm
       - name: Install build dependencies
-        run: pacman -S --noconfirm base-devel cmake ninja qt5-base qt5-tools dtkwidget appstream-qt packagekit-qt5
+        run: pacman -S --noconfirm base-devel cmake ninja qt5-base qt5-tools dtkwidget appstream-qt5 packagekit-qt5
       - name: CMake and Make
         run: |
           mkdir build
