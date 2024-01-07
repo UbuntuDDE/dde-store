@@ -35,7 +35,7 @@ jobs:
       - name: Refresh repos
         run: apt-get update
       - name: Install build dependencies
-        run: DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential cmake ninja-build pkg-config qtbase5-dev libdtkwidget-dev libdtkcore-dev libdtkgui-dev libpackagekitqt5-dev libappstreamqt5-dev (>= 1.0.0~) libsnapd-qt-dev qttools5-dev
+        run: DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential cmake ninja-build pkg-config qtbase5-dev libdtkwidget-dev libdtkcore-dev libdtkgui-dev libpackagekitqt5-dev libappstreamqt5-dev libsnapd-qt-dev qttools5-dev
       - name: CMake and Make
         run: |
           mkdir build
