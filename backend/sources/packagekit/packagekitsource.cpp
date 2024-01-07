@@ -2,22 +2,23 @@
 #include "backend/settings.h"
 #include "backend/ratingshelper.h"
 #include <Details>
-#include <AppStreamQt/pool.h>
-#include <AppStreamQt/icon.h>
-#include <AppStreamQt/screenshot.h>
-#include <AppStreamQt/image.h>
+#include <AppStreamQt5/pool.h>
+#include <AppStreamQt5/icon.h>
+#include <AppStreamQt5/screenshot.h>
+#include <AppStreamQt5/image.h>
+#include <AppStreamQt5/developer.h>
 
 using namespace PackageKit;
 using namespace AppStream;
 
 PackageKitSource::PackageKitSource()
 {
-    Pool *pool = new Pool;
-    if (!pool->load())
-        Source::error(tr("ERROR: Unable to open AppStream metadata pool") + " - " + pool->lastError());
+    AppStream::Pool pool;
+    if (!pool.load())
+        Source::error(tr("ERROR: Unable to open AppStream metadata pool") + " - " + pool.lastError());
 
-    for (Component app : pool->componentsByKind(AppStream::Component::KindDesktopApp)) {
-        for (QString pkgName : app.packageNames()) {
+    for (const Component & app : pool.componentsByKind(AppStream::Component::KindDesktopApp)) {
+        for (const QString & pkgName : app.packageNames()) {
             metadata.insert(pkgName, app);
         }
     }
@@ -103,10 +104,10 @@ void PackageKitSource::getFullData(App *app)
     if (metadata.contains(app->package)) {
         const Component data = metadata.value(app->package);
 
-        app->developer = data.developerName();
+        app->developer = data.developer().name();
         app->description = data.description();
         
-        for (Screenshot screenshot : data.screenshots()) {
+        for (Screenshot screenshot : data.screenshotsAll()) {
             for (Image image : screenshot.images()) {
                 if (image.kind() == Image::KindSource)
                     app->screenshots << image.url();
