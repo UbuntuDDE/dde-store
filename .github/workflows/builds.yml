@@ -27,7 +27,7 @@ jobs:
           ninja
   debian:
     name: Debian
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
     container: docker.io/library/debian:unstable
     steps:
       - name: Checkout branch
