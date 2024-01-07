@@ -31,18 +31,6 @@ HomePage::HomePage(MainWindow *parent)
     setLayout(mainLayout);
     mainLayout->addWidget(scroll);
 
-    QFile bannerFile("://featuredbanners.json");
-    bannerFile.open(QIODevice::ReadOnly | QIODevice::Text);
-    QJsonObject bannerData = QJsonDocument::fromJson(bannerFile.readAll()).object();
-    QList<QPair<QString, App*>> banners;
-    for (const QString &key : bannerData.keys()) {
-        App *app = static_cast<PackageKitSource*>(SourceManager::instance()->getSource("PackageKit"))->getDataFromID(key);
-        if (app->hasMetadata)
-            banners << qMakePair(bannerData.value(key).toString(), app);
-    }
-    gallery *featuredGallery = new gallery(banners, parent);
-    layout->addWidget(featuredGallery);
-
     addCategory(tr("Messaging"), "InstantMessaging", parent);
     addCategory(tr("Internet"), "Network", parent);
     addCategory(tr("Games"), "Game", parent);
@@ -85,7 +73,7 @@ void HomePage::addCategory(QString name, QString category, MainWindow *parent)
         }
     });
     pk->getCategory(category);
-    
+
     DSuggestButton *moreBtn = new DSuggestButton(tr("View More"));
     connect(moreBtn, &DSuggestButton::clicked, this, [ = ] {
         parent->navView->setCurrentIndex(parent->navModel->index(categories.indexOf(category) + 1, 0));

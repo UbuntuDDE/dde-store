@@ -1,19 +1,11 @@
 <RCC>
     <qresource prefix="/">
         <file>settings.json</file>
-        <file>featuredbanners.json</file>
-        <file>banners/firefox.jpg</file>
-        <file>banners/kdenlive.jpg</file>
-        <file>banners/gimp.jpg</file>
-        <file>banners/inkscape.jpg</file>
-        <file>banners/krita.jpg</file>
-        <file>banners/vlc.jpg</file>
-        <file>banners/audacity.jpg</file>
         <file>icons/star.png</file>
         <file>icons/starhalf.png</file>
         <file>icons/indicator.svg</file>
         <file>icons/light/home.svg</file>
-        <file>icons/light/internet.svg</file> 
+        <file>icons/light/internet.svg</file>
         <file>icons/light/games.svg</file>
         <file>icons/light/office.svg</file>
         <file>icons/light/development.svg</file>
